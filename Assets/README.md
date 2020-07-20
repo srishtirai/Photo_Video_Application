@@ -1,1 +1,0 @@
-Contains the sample images and videos required during application development.
