@@ -21,7 +21,6 @@ export const listDevices = () => () => {
 			subscribe: true
 		},
 		onSuccess: (res) => {
-            AppLog(res);
         }
     })
 }
