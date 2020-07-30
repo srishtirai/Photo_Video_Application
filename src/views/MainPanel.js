@@ -1,6 +1,6 @@
-import Button from '@enact/moonstone/Button';
+import Button from '@enact/goldstone/Button';
 import kind from '@enact/core/kind';
-import {Panel, Header} from '@enact/moonstone/Panels';
+import {Panel, Header} from '@enact/goldstone/Panels';
 import React from 'react';
 
 const MainPanel = kind({

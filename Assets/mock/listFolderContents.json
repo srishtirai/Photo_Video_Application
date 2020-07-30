@@ -1,0 +1,719 @@
+{
+    "returnValue": true,
+    "fullPath": "/tmp/usb/sda/sda1",
+    "totalCount": 113,
+    "contents": [
+        {
+            "itemName": "cryptofs",
+            "itemPath": "/tmp/usb/sda/sda1/cryptofs",
+            "itemType": "folder",
+            "size": 0
+        },
+        {
+            "itemName": "Korea",
+            "itemPath": "/tmp/usb/sda/sda1/Korea",
+            "itemType": "folder",
+            "size": 0
+        },
+        {
+            "itemName": "This is a verrrrrrry loooooong folder name",
+            "itemPath": "/tmp/usb/sda/sda1/LG Smart TV",
+            "itemType": "folder",
+            "size": 0
+        },
+        {
+            "itemName": "bunny_movie.mp4",
+            "itemPath": "http:\/\/media.w3.org\/2010\/05\/bunny\/movie.mp4",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "trailer.mp4",
+            "itemPath": "/usr/palm/applications/com.webos.app.photovideo/assets/sampleVideo/trailer.mp4",
+            "itemType": "video",
+            "size": 4372373
+        },
+        {
+            "itemName": "movie_300.mp4",
+            "itemPath": "/usr/palm/applications/com.webos.app.photovideo/assets/sampleVideo/movie_300.mp4",
+            "itemType": "video",
+            "videoProperty": {
+                "subtitleUri": "/usr/palm/applications/com.webos.app.photovideo/assets/sampleVideo/movie_300.smi"
+            },
+            "size": 2757913
+        },
+        {
+            "itemName": "800x600_looooooooooooooooooooooong_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename2.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename2.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "xitemName": "MVI_1807.MOV",
+            "xitemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemName": "sintel_trailer.mp4",
+            "itemPath": "http:\/\/media.w3.org\/2010\/05\/sintel\/trailer.mp4",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "400x600_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "._MVI_1807.MOV",
+            "itemPath": "/tmp/usb/sda/sda1/._MVI_1807.MOV",
+            "itemType": "video",
+            "size": 4096
+        },
+        {
+            "itemName": "MVI_1807.MOV",
+            "itemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "40x40_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename1.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename1.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename2.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename22.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename3.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename3.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename4.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename4.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename5.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename5.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename6.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename6.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename7.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename7.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename8.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename8.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename9.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename9.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename10.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename10.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename11.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename11.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename12.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename12.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename13.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename13.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename14.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename14.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "xitemName": "MVI_1807.MOV",
+            "xitemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemName": "bunny_movie.mp4",
+            "itemPath": "http:\/\/media.w3.org\/2010\/05\/bunny\/movie.mp4",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "800x600_looooooooooooooooooooooong_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename2.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "xitemName": "MVI_1807.MOV",
+            "xitemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemName": "sintel_trailer.mp4",
+            "itemPath": "http:\/\/media.w3.org\/2010\/05\/sintel\/trailer.mp4",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "400x600_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "._MVI_1807.MOV",
+            "itemPath": "/tmp/usb/sda/sda1/._MVI_1807.MOV",
+            "itemType": "video",
+            "size": 4096
+        },
+        {
+            "itemName": "MVI_1807.MOV",
+            "itemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "40x40_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename1.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename1.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename2.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename22.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename3.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename3.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename4.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename4.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename5.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename5.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename6.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename6.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename7.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename7.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename8.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename8.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename9.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename9.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename10.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename10.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename11.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename11.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename12.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename12.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename13.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename13.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename14.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename14.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "xitemName": "MVI_1807.MOV",
+            "xitemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemName": "bunny_movie.mp4",
+            "itemPath": "http:\/\/media.w3.org\/2010\/05\/bunny\/movie.mp4",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "800x600_looooooooooooooooooooooong_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename2.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "xitemName": "MVI_1807.MOV",
+            "xitemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemName": "sintel_trailer.mp4",
+            "itemPath": "http:\/\/media.w3.org\/2010\/05\/sintel\/trailer.mp4",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "400x600_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "._MVI_1807.MOV",
+            "itemPath": "/tmp/usb/sda/sda1/._MVI_1807.MOV",
+            "itemType": "video",
+            "size": 4096
+        },
+        {
+            "itemName": "MVI_1807.MOV",
+            "itemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "40x40_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename1.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename1.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename2.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename22.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename3.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename3.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename4.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename4.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename5.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename5.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename6.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename6.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename7.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename7.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename8.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename8.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename9.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename9.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename10.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename10.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename11.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename11.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename12.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename12.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename13.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename13.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename14.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename14.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "xitemName": "MVI_1807.MOV",
+            "xitemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemName": "bunny_movie.mp4",
+            "itemPath": "http:\/\/media.w3.org\/2010\/05\/bunny\/movie.mp4",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "800x600_looooooooooooooooooooooong_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename2.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "xitemName": "MVI_1807.MOV",
+            "xitemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemName": "sintel_trailer.mp4",
+            "itemPath": "http:\/\/media.w3.org\/2010\/05\/sintel\/trailer.mp4",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "400x600_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "._MVI_1807.MOV",
+            "itemPath": "/tmp/usb/sda/sda1/._MVI_1807.MOV",
+            "itemType": "video",
+            "size": 4096
+        },
+        {
+            "itemName": "MVI_1807.MOV",
+            "itemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "40x40_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename1.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename1.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename2.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename22.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename3.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename3.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename4.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename4.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename5.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename5.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename6.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename6.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename7.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename7.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename8.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename8.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename9.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename9.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename10.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename10.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename11.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename11.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename12.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename12.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename13.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename13.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename14.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename14.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "xitemName": "MVI_1807.MOV",
+            "xitemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemName": "bunny_movie.mp4",
+            "itemPath": "http:\/\/media.w3.org\/2010\/05\/bunny\/movie.mp4",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "800x600_looooooooooooooooooooooong_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename2.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "xitemName": "MVI_1807.MOV",
+            "xitemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemName": "sintel_trailer.mp4",
+            "itemPath": "http:\/\/media.w3.org\/2010\/05\/sintel\/trailer.mp4",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "400x600_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "._MVI_1807.MOV",
+            "itemPath": "/tmp/usb/sda/sda1/._MVI_1807.MOV",
+            "itemType": "video",
+            "size": 4096
+        },
+        {
+            "itemName": "MVI_1807.MOV",
+            "itemPath": "/tmp/usb/sda/sda1/MVI_1807.MOV",
+            "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "40x40_filename.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename1.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename1.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename2.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename22.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename3.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename3.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename4.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename4.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename5.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename5.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename6.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename6.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename7.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename7.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename8.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename8.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename9.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename9.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename10.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename10.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename11.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename11.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename12.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename12.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename13.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename13.jpg",
+            "itemType": "image",
+            "size": 2096
+        },
+        {
+            "itemName": "700x700_filename14.jpg",
+            "xitemPath": "/tmp/usb/sda/sda1/filename14.jpg",
+            "itemType": "image",
+            "size": 2096
+        }
+
+    ]
+}

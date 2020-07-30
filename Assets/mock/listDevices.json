@@ -1,0 +1,60 @@
+{
+    "subscribed":true,
+    "returnValue":true,
+    "devices":[
+        {
+            "deviceUri":"/tmp/usb/sda",
+            "deviceName":"Cruzer Force",
+            "subDevices":[
+                {
+                    "deviceId":"3443353331303031353830313237313133303034_1",
+                    "performanceTest":[
+                        {
+                            "requestType":"",
+                            "result":"unchecked"
+                        }
+                    ],
+                    "deviceUri":"/tmp/usb/sda/sda1",
+                    "fileSystem":"tfat",
+                    "lgSmartTvUri":"/tmp/usb/sda/sda1/LG Smart TV",
+                    "deviceName":"A:"
+                }
+            ],
+            "deviceId":"USB_3443353331303031353830313237313133303034",
+            "deviceStatus":"NORMAL",
+            "physicalType":"FLASH",
+            "deviceNum":2,
+            "transferProtocol":"USB_STORAGE",
+            "vendorName":"SanDisk Corp.",
+            "deviceType":"usb",
+            "productName":"Cruzer Force",
+            "devSpeed":"HIGH",
+            "portNum":3
+        },
+        {
+            "deviceId":"INTERNAL_STORAGE_CAPTURE_TV",
+            "deviceUri":"/mnt/lg/appstore/captureTV",
+            "deviceType":"internal capture tv",
+            "deviceName":"CAPTURE TV_INTERNAL STORAGE"
+        },
+        {
+            "deviceId":"INTERNAL_STORAGE_SAMPLE_MUSIC",
+            "deviceUri":"/usr/palm/applications/com.webos.app.systemmusic/assets/sampleMusic",
+            "deviceType":"internal sample music",
+            "deviceName":"SAMPLE MUSIC_INTERNAL STORAGE"
+        },
+        {
+            "deviceId":"INTERNAL_STORAGE_SAMPLE_PHOTO",
+            "deviceUri":"/usr/palm/applications/com.webos.app.photovideo/assets/samplePhoto",
+            "deviceType":"internal sample photo",
+            "deviceName":"SAMPLE PHOTO_INTERNAL STORAGE"
+        },
+        {
+            "deviceId":"INTERNAL_STORAGE_IGALLERY",
+            "deviceUri":"/mnt/lg/appstore/myphoto",
+            "deviceType":"internal igallery",
+            "deviceName":"IGALLERY_INTERNAL STORAGE"
+        }
+    ]
+}
+
