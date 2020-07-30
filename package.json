@@ -1,7 +1,7 @@
 {
-  "name": "photovideo_application",
-  "version": "1.0.0",
-  "description": "A general template for an Enact Moonstone application.",
+  "name": "com.webos.app.photovideo",
+	"version": "1.0.0",
+	"description": "Photovideo Application with Enact Goldstone.",
   "author": "",
   "main": "src/index.js",
   "scripts": {
