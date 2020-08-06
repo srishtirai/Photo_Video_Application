@@ -1,7 +1,7 @@
 {
   "name": "com.webos.app.photovideo",
-	"version": "1.0.0",
-	"description": "Photovideo Application with Enact Goldstone.",
+  "version": "1.0.0",
+  "description": "Photovideo Application with Enact Goldstone.",
   "author": "",
   "main": "src/index.js",
   "scripts": {
@@ -14,7 +14,6 @@
     "license": "enact license",
     "test": "enact test",
     "test-watch": "enact test --watch"
- 
   },
   "license": "UNLICENSED",
   "private": true,
@@ -40,7 +39,12 @@
     "ilib": "^14.2.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "redux-devtools": "^3.6.0"
+  }
 }
