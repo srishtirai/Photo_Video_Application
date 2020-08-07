@@ -40,7 +40,7 @@ class MainPanel extends React.Component
 	render(){
 	return(
 		<Panel>
-			{/* <Header slots={'title'} title={"Media discovery"} type={'compact'}
+			<Header slots={'title'} title={"Media discovery"} type={'compact'}
 				subtitle={this.props.lastDevice} 
 				slotAfter={
 					<div>
@@ -49,7 +49,7 @@ class MainPanel extends React.Component
 						<IconButton onClick={onAppClose} size={'tiny'}>closex</IconButton>
 					</div>
 				} 
-			/> */}
+			/>
 			 
 			<TabLayout anchorTo={'start'} onSelect={this.onSelectDevice} dimensions={{tabs: {collapsed: null, normal: 1000}, content: {expanded: 50, normal: 50}}} css={css}>
 				{this.props.devices.map((item)=>
