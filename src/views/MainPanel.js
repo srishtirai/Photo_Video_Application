@@ -2,12 +2,10 @@ import IconButton from '@enact/goldstone/IconButton';
 import {Panel,Header} from '@enact/goldstone/Panels';
 import ThemeDecorator from '@enact/goldstone/ThemeDecorator';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {TabLayout,Tab} from '@enact/sandstone/TabLayout'
-import Item from '@enact/sandstone/Item'
 import {connect} from 'react-redux'
 import {listDevices} from '../actions/listActions';
-// import DeviceTabs from '../components/DeviceTabs'
+import css from './MainPanel.module.less';
 
 const onAppClose=()=>{
 
@@ -16,7 +14,9 @@ const onAppClose=()=>{
 const onLaunchSearchApp=() => {
 	
 }
-
+const deviceTabs=(name)=>{
+	 return <Tab title={name.trim()} className={css.tab}></Tab>
+ }
 
 
 class MainPanel extends React.Component 
@@ -24,16 +24,9 @@ class MainPanel extends React.Component
 	constructor (props) {
 		super(props);
 	}
-	DeviceTabs=(devices)=>{
-		{devices.map((item, i) => {
-			console.log(item.deviceName)
-		  })}
-	}
 	
 	render(){
 		this.props.listDevices();
-		const deviceList= this.props.devices
-		console.table(deviceList)
 	return(
 		<Panel>
 			<Header slots={'title'} title={"Media discovery"} type={'compact'}
@@ -46,11 +39,11 @@ class MainPanel extends React.Component
 					</div>
 				} 
 			/>
-			<TabLayout dimensions={{tabs: {collapsed: null, normal: 500}, content: {expanded: null, normal: null}}}>
-			
-			{deviceList.map((item)=>{
-                <button>{item.deviceName}</button>
-             })}
+			 
+			<TabLayout anchorTo={'start'} dimensions={{tabs: {collapsed: null, normal: 1000}, content: {expanded: 50, normal: 50}}} css={css}>
+				{this.props.devices.map((item)=>
+					deviceTabs(item.deviceName)
+				)}
 			</TabLayout>
 			
 		</Panel>
