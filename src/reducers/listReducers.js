@@ -1,7 +1,8 @@
 import {types} from '../actions/actionTypes';
 
 const initialstate={
-devices:[]
+devices:[],
+id:0
 }
 
 const deviceList = (state =initialstate, action) => {
@@ -11,6 +12,11 @@ const deviceList = (state =initialstate, action) => {
 			const newState = {devices: returnObject, deviceIndex: void 0};
 			return Object.assign({}, state, newState);
 		}
+
+		case types.SET_LAST_DEVICE: {
+			return Object.assign({}, state, {lastDevice: action.name});
+		}
+
 		default: 
       		return state
 	}

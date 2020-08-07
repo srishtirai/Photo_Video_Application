@@ -21,3 +21,8 @@ export const listDevices = () => (dispatch) => {
 	// 	}
 	// })
 }
+
+export const setLastDevice = (name) => ({
+	type: types.SET_LAST_DEVICE,
+	name
+});

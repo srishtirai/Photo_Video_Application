@@ -6,6 +6,7 @@ import {TabLayout,Tab} from '@enact/sandstone/TabLayout'
 import {connect} from 'react-redux'
 import {listDevices} from '../actions/listActions';
 import css from './MainPanel.module.less';
+import {setLastDevice} from '../actions/listActions';
 
 const onAppClose=()=>{
 
@@ -14,23 +15,33 @@ const onAppClose=()=>{
 const onLaunchSearchApp=() => {
 	
 }
+
 const deviceTabs=(name)=>{
 	 return <Tab title={name.trim()} className={css.tab}></Tab>
  }
 
-
 class MainPanel extends React.Component 
 {
+	
 	constructor (props) {
 		super(props);
 	}
 	
+	onSelectDevice=(ev)=>{
+		this.props.saveLastDevice(this.props.devices[ev.index].deviceName);
+	}
+
+	componentDidMount () {
+		if (this.props.devices && this.props.devices.length === 0) {
+			this.props.listDevices();
+		}
+	}
+
 	render(){
-		this.props.listDevices();
 	return(
 		<Panel>
-			<Header slots={'title'} title={"Media discovery"} type={'compact'}
-				subtitle={'Tab Name'} 
+			{/* <Header slots={'title'} title={"Media discovery"} type={'compact'}
+				subtitle={this.props.lastDevice} 
 				slotAfter={
 					<div>
 						<IconButton onClick={onLaunchSearchApp} size={'tiny'}>search</IconButton>
@@ -38,9 +49,9 @@ class MainPanel extends React.Component
 						<IconButton onClick={onAppClose} size={'tiny'}>closex</IconButton>
 					</div>
 				} 
-			/>
+			/> */}
 			 
-			<TabLayout anchorTo={'start'} dimensions={{tabs: {collapsed: null, normal: 1000}, content: {expanded: 50, normal: 50}}} css={css}>
+			<TabLayout anchorTo={'start'} onSelect={this.onSelectDevice} dimensions={{tabs: {collapsed: null, normal: 1000}, content: {expanded: 50, normal: 50}}} css={css}>
 				{this.props.devices.map((item)=>
 					deviceTabs(item.deviceName)
 				)}
@@ -52,11 +63,13 @@ class MainPanel extends React.Component
 }
 
 const mapStateToProps = ({deviceList}) => ({
-	devices: deviceList.devices
+	devices: deviceList.devices,
+	lastDevice: deviceList.lastDevice
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	listDevices: () => dispatch(listDevices())
+	listDevices: () => dispatch(listDevices()),
+	saveLastDevice: (name) => dispatch(setLastDevice(name))
 });
 
 const Main = connect(mapStateToProps, mapDispatchToProps)(MainPanel);
