@@ -1,5 +1,5 @@
 import {types} from './actionTypes';
-// import LS2Request from '@enact/webos/LS2Request';
+import LS2Request from '@enact/webos/LS2Request';
 import listDevicesData from '../../Assets/mock/listDevices.json';
 
 export const getListDevicesAction=(devices)=>{
@@ -13,13 +13,13 @@ export const listDevices = () => (dispatch) => {
 		dispatch(getListDevicesAction(listDevicesData.devices));
 		return;
 	}
-	// return new LS2Request().send({
-	// 	service: 'luna://com.webos.service.attachedstoragemanager/',
-	// 	method: 'listDevices',
-	// 	parameters: {
-	// 		subscribe: true
-	// 	}
-	// })
+	return new LS2Request().send({
+		service: 'luna://com.webos.service.attachedstoragemanager/',
+		method: 'listDevices',
+		parameters: {
+			subscribe: true
+		}
+	})
 }
 
 export const setLastDevice = (name) => ({

@@ -1,23 +1,15 @@
 import IconButton from '@enact/goldstone/IconButton';
 import {Panel,Header} from '@enact/goldstone/Panels';
 import ThemeDecorator from '@enact/goldstone/ThemeDecorator';
+
+import {TabLayout,Tab} from '@enact/sandstone/TabLayout';
+import {listDevices,setLastDevice} from '../actions/listActions';
+
 import React from 'react';
-import {TabLayout,Tab} from '@enact/sandstone/TabLayout'
-import {connect} from 'react-redux'
-import {listDevices} from '../actions/listActions';
-import css from './MainPanel.module.less';
-import {setLastDevice} from '../actions/listActions';
-
-const onAppClose=()=>{
-
-}
-
-const onLaunchSearchApp=() => {
-	
-}
+import {connect} from 'react-redux';
 
 const deviceTabs=(name)=>{
-	 return <Tab title={name.trim()} className={css.tab}></Tab>
+	 return <Tab title={name.trim()} ></Tab>
  }
 
 class MainPanel extends React.Component 
@@ -44,14 +36,14 @@ class MainPanel extends React.Component
 				subtitle={this.props.lastDevice} 
 				slotAfter={
 					<div>
-						<IconButton onClick={onLaunchSearchApp} size={'tiny'}>search</IconButton>
+						<IconButton size={'tiny'}>search</IconButton>
 						<IconButton size={'tiny'}>verticalellipsis</IconButton>
-						<IconButton onClick={onAppClose} size={'tiny'}>closex</IconButton>
+						<IconButton size={'tiny'}>closex</IconButton>
 					</div>
 				} 
 			/>
 			 
-			<TabLayout anchorTo={'start'} onSelect={this.onSelectDevice} dimensions={{tabs: {collapsed: null, normal: 1000}, content: {expanded: 50, normal: 50}}} css={css}>
+			<TabLayout anchorTo={'start'} onSelect={this.onSelectDevice} dimensions={{tabs: {collapsed: null, normal: 1000}, content: {expanded: 50, normal: 50}}}>
 				{this.props.devices.map((item)=>
 					deviceTabs(item.deviceName)
 				)}
