@@ -1,15 +1,15 @@
 import {types} from '../actions/actionTypes';
 
-const initialstate={
-devices:[],
-id:0
+const initialstate = {
+	devices: [],
+	id: 0
 }
 
-const deviceList = (state =initialstate, action) => {
+const deviceList = (state = initialstate, action) => {
 	switch (action.type) {
 		case types.GET_LIST_DEVICES: {
 			let returnObject = action.devices;
-			const newState = {devices: returnObject, deviceIndex: void 0};
+			const newState = {devices: returnObject, deviceIndex: 0};
 			return Object.assign({}, state, newState);
 		}
 

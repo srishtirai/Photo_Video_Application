@@ -8,8 +8,8 @@ import {Provider} from 'react-redux';
 const store = configureStore();
 
 let appElement = (
-	<Provider store={store}>
-		<App highContrast />
+	<Provider store = {store}>
+		<App />
 	</Provider>
 );
 

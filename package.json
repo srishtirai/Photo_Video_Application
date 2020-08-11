@@ -35,6 +35,7 @@
     "@enact/moonstone": "^3.0.0",
     "@enact/spotlight": "^3.0.0",
     "@enact/ui": "^3.0.0",
+    "@enact/webos": "^3.2.6",
     "goldstone": "file:goldstone",
     "ilib": "^14.2.0",
     "prop-types": "^15.6.2",
