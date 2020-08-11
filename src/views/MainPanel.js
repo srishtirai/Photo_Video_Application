@@ -10,7 +10,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 const deviceTabs = (name) => {
-	 return <Tab title={name.trim()} ></Tab>
+	return <Tab title={name.trim()} />
 }
 
 class MainPanel extends React.Component
@@ -34,6 +34,7 @@ class MainPanel extends React.Component
 	}
 
 	render () {
+	
 	return (
 		<Panel>
 			<Header slots={'title'} title={"Media discovery"} type={'compact'}
@@ -45,15 +46,15 @@ class MainPanel extends React.Component
 						<IconButton size={'tiny'} onClick={this.onCloseApp}>closex</IconButton>
 					</div>
 				}
-				/>
+			/>
+				
+			<TabLayout anchorTo={'start'} onSelect={this.onSelectDevice} dimensions={{tabs: {collapsed: null, normal: 1000}, content: {expanded: 50, normal: 50}}}>
+				{this.props.devices.map((item) =>
+					deviceTabs(item.deviceName)
+				)}
+			</TabLayout>
 	
-				<TabLayout anchorTo={'start'} onSelect={this.onSelectDevice} dimensions={{tabs: {collapsed: null, normal: 1000}, content: {expanded: 50, normal: 50}}}>
-					{this.props.devices.map((item) =>
-						deviceTabs(item.deviceName)
-					)}
-				</TabLayout>
-	
-			</Panel>	
+		</Panel>	
 
 	)}
 }
