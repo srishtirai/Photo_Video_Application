@@ -9,14 +9,14 @@ import {closeApp} from '../actions/commonActions';
 import React from 'react';
 import {connect} from 'react-redux';
 
-const deviceTabs = (name) => {
-	return <Tab title={name.trim()} />
-}
-
 class MainPanel extends React.Component
 {
 	constructor (props) {
 		super(props);
+	}
+
+	deviceTabs = (name) => {
+		return <Tab title={name.trim()} />
 	}
 
 	onSelectDevice = (ev) => {
@@ -34,8 +34,7 @@ class MainPanel extends React.Component
 	}
 
 	render () {
-	
-	return (
+		return (
 		<Panel>
 			<Header slots={'title'} title={"Media discovery"} type={'compact'}
 				subtitle={this.props.lastDevice} marqueeOn={'render'}
@@ -47,15 +46,14 @@ class MainPanel extends React.Component
 					</div>
 				}
 			/>
-				
+
 			<TabLayout anchorTo={'start'} onSelect={this.onSelectDevice} dimensions={{tabs: {collapsed: null, normal: 1000}, content: {expanded: 50, normal: 50}}}>
 				{this.props.devices.map((item) =>
-					deviceTabs(item.deviceName)
+					this.deviceTabs(item.deviceName)
 				)}
 			</TabLayout>
-	
-		</Panel>	
 
+		</Panel>
 	)}
 }
 
