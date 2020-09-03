@@ -22,11 +22,24 @@
             "thumbnailUri": ""
         },
         {
+            "size": 58252568,
+            "itemName": "bunny_movie.mp4",
+            "itemType": "video",
+            "itemPath": "/tmp/usb/sda/sda1/movie.mp4",
+            "thumbnailUri": ""
+        },
+        {
             "size": 4096,
             "itemName": "._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3",
             "itemType": "audio",
             "itemPath": "/tmp/usb/sda/sda1/._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3",
             "thumbnailUri": "/tmp/usb/sda/sda1/._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3"
+        },
+        {
+            "size": 2096,
+            "itemName": "800x600_looooooooooooooooooooooong_filename.jpg",
+            "itemType": "image",
+            "itemPath": "/tmp/usb/sda/sda1/filename2.jpg"
         },
         {
             "size": 4096,
@@ -43,7 +56,7 @@
             "thumbnailUri": "/tmp/usb/sda/sda1/._Be Free (Original)  Pallivaalu Bhadravattakam (Vidya Mashup Cover) (ft. Vandana Iyer).mp3"
         }
     ],
-    "totalCount": 6,
+    "totalCount": 8,
     "fullPath": "/tmp/usb/sda/sda1",
     "returnValue": true
 }
