@@ -18,12 +18,13 @@ const items = [];
 const defaultDataSize = 1000;
 const longContent = 'Lorem ipsum dolor sit amet';
 
-function MainPanel(props)
+const MainPanel= (props) =>
 {
 	const [collapse,setCollapse]=useState(false);
+	const { saveLastDevice, closeApp, setFilterType, devices, lastDevice, listDevices, filterType } = props;
 
 	const onCloseApp = () => {
-		props.closeApp({id: "com.webos.app.photovideo"});
+		closeApp({id: "com.webos.app.photovideo"});
 	}
 
 	const deviceTabs = (name) => {
@@ -31,12 +32,12 @@ function MainPanel(props)
 	}
 
 	const onSelectDevice = (ev) => {
-		props.saveLastDevice(props.devices[ev.index].deviceName);
+		saveLastDevice(devices[ev.index].deviceName);
 		setCollapse(true);
 	}
 
 	const onFilter = (ev) =>{
-		props.setFilterType([ev.index]);
+		setFilterType([ev.index]);
 	}
 
 	const uiRenderItem = ({ index, ...rest }) => {
@@ -73,8 +74,8 @@ function MainPanel(props)
 	};
 
 	useEffect(()=>{
-		if (props.devices && props.devices.length === 0) {
-			props.listDevices();
+		if (devices && devices.length === 0) {
+			listDevices();
 		}
 	})
 
@@ -86,7 +87,7 @@ function MainPanel(props)
 				slots={'title'}
 				title={"Media discovery"}
 				type={'compact'}
-				subtitle={props.lastDevice}
+				subtitle={lastDevice}
 				marqueeOn={'render'}
 				slotAfter={
 					<div>
@@ -99,7 +100,7 @@ function MainPanel(props)
 
 			<Dropdown
 				className={css.drop}
-				defaultSelected={props.filterType}
+				defaultSelected={filterType}
 				onSelect={onFilter}
 			>
 				{['Photos', 'Videos', 'Music', 'All']}
@@ -112,7 +113,7 @@ function MainPanel(props)
 				dimensions={{tabs: {collapsed: 20, normal: 700}, content: {expanded: 50, normal: 50}}}
 				collapsed={collapse}
 			>
-				{props.devices.map((item) =>
+				{devices.map((item) =>
 					deviceTabs(item.deviceName)
 				)}
 			</TabLayout>
@@ -133,18 +134,22 @@ function MainPanel(props)
 	)
 }
 
-const mapStateToProps = ({deviceList,currentContentsInfo}) => ({
-	devices: deviceList.devices,
-	lastDevice: deviceList.lastDevice,
-	filterType: currentContentsInfo.filterType
-});
+const mapStateToProps = ({deviceList,currentContentsInfo}) => {
+	return{
+		devices: deviceList.devices,
+		lastDevice: deviceList.lastDevice,
+		filterType: currentContentsInfo.filterType
+	}
+}
 
-const mapDispatchToProps = (dispatch) => ({
-	listDevices: () => dispatch(listDevices()),
-	saveLastDevice: (name) => dispatch(setLastDevice(name)),
-	setFilterType:(filterType)=> dispatch(setFilterType(filterType)),
-	closeApp: (params) => dispatch(closeApp(params))
-});
+const mapDispatchToProps = (dispatch) => {
+	return{
+		listDevices: () => dispatch(listDevices()),
+		saveLastDevice: (name) => dispatch(setLastDevice(name)),
+		setFilterType: (filterType)=> dispatch(setFilterType(filterType)),
+		closeApp: (params) => dispatch(closeApp(params))
+	}
+}
 
 const Main = connect(mapStateToProps, mapDispatchToProps)(MainPanel);
 export default ThemeDecorator(Main);
