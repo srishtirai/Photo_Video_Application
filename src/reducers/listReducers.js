@@ -2,8 +2,12 @@ import {types} from '../actions/actionTypes';
 
 const initialstate = {
 	devices: [],
-	id: 0,
-	contents: []
+	id: 0
+}
+
+const initialCurrentContentsInfoState = {
+	contents: [],
+	filterType: 3 //"ALL"
 }
 
 const deviceList = (state = initialstate, action) => {
@@ -21,12 +25,12 @@ const deviceList = (state = initialstate, action) => {
 			return Object.assign({}, state, {lastDevice: action.name});
 		}
 
-		default: 
-      		return state
+		default:
+			return state
 	}
 };
 
-const currentContentsInfo = (state = initialstate, action) => {
+const currentContentsInfo = (state = initialCurrentContentsInfoState, action) => {
 	switch (action.type) {
 		case types.GET_LIST_CONTENTS: {
 			let newContents = action.contents;
@@ -34,7 +38,16 @@ const currentContentsInfo = (state = initialstate, action) => {
 			return Object.assign({}, state, newState);
 		}
 
-		default: 
+		case types.SET_FILTER_TYPE: {
+			if (state.filterType === action.filterType) {
+				return state;
+			}
+			else {
+				return Object.assign({}, state, {filterType: action.filterType});
+			}
+		}
+
+		default:
 			return state
 	}
 };

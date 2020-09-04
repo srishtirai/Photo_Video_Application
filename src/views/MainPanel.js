@@ -7,12 +7,14 @@ import { ImageItem as UiImageItem } from '@enact/ui/ImageItem';
 import { VirtualGridList } from '@enact/ui/VirtualList';
 import ri from '@enact/ui/resolution';
 import {TabLayout, Tab} from '@enact/sandstone/TabLayout';
+import Dropdown from '@enact/sandstone/Dropdown';
 
-import {listDevices, setLastDevice} from '../actions/listActions';
+import {listDevices, setLastDevice, setFilterType} from '../actions/listActions';
 import {closeApp} from '../actions/commonActions';
-import USB_img from '../../Assets/mock/USB.png'
+import USB_img from '../../Assets/mock/USB.png';
+import css from './MainPanel.module.less';
 
-const	items = [];
+const items = [];
 const defaultDataSize = 1000;
 const longContent = 'Lorem ipsum dolor sit amet';
 
@@ -38,6 +40,9 @@ class MainPanel extends React.Component
 		this.setState({collapse:true});
 	}
 
+	onFilter = (ev) =>{
+		this.props.setFilterType([ev.index]);
+	}
 
 	uiRenderItem = ({ index, ...rest }) => {
 		const { source } = items[index];
@@ -71,7 +76,7 @@ class MainPanel extends React.Component
 		}
 		return dataSize;
 	};
-	
+
 	componentDidMount () {
 		if (this.props.devices && this.props.devices.length === 0) {
 			this.props.listDevices();
@@ -82,11 +87,11 @@ class MainPanel extends React.Component
 	this.updateDataSize(defaultDataSize);
 	return (
 		<Panel>
-			<Header 
-				slots={'title'} 
-				title={"Media discovery"} 
+			<Header
+				slots={'title'}
+				title={"Media discovery"}
 				type={'compact'}
-				subtitle={this.props.lastDevice} 
+				subtitle={this.props.lastDevice}
 				marqueeOn={'render'}
 				slotAfter={
 					<div>
@@ -97,10 +102,19 @@ class MainPanel extends React.Component
 				}
 			/>
 
-			<TabLayout 
-				anchorTo={'start'} 
-				onSelect={this.onSelectDevice} 
-				dimensions={{tabs: {collapsed: null, normal: 700}, content: {expanded: 50, normal: 50}}}
+			<Dropdown
+				className={css.drop}
+				defaultSelected={this.props.filterType}
+				onSelect={this.onFilter}
+			>
+				{['Photos', 'Videos', 'Music', 'All']}
+			</Dropdown>
+
+			<TabLayout
+				className={css.tab}
+				anchorTo={'start'}
+				onSelect={this.onSelectDevice}
+				dimensions={{tabs: {collapsed: 20, normal: 700}, content: {expanded: 50, normal: 50}}}
 				collapsed={this.state.collapse}
 			>
 				{this.props.devices.map((item) =>
@@ -109,6 +123,7 @@ class MainPanel extends React.Component
 			</TabLayout>
 
 			<VirtualGridList
+				className={css.grid}
 				dataSize={this.updateDataSize(defaultDataSize)}
 				direction='vertical'
 				itemRenderer={this.uiRenderItem}
@@ -124,14 +139,16 @@ class MainPanel extends React.Component
 }
 }
 
-const mapStateToProps = ({deviceList}) => ({
+const mapStateToProps = ({deviceList,currentContentsInfo}) => ({
 	devices: deviceList.devices,
-	lastDevice: deviceList.lastDevice
+	lastDevice: deviceList.lastDevice,
+	filterType: currentContentsInfo.filterType
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	listDevices: () => dispatch(listDevices()),
 	saveLastDevice: (name) => dispatch(setLastDevice(name)),
+	setFilterType:(filterType)=> dispatch(setFilterType(filterType)),
 	closeApp: (params) => dispatch(closeApp(params))
 });
 
