@@ -66,10 +66,12 @@ export const listFolderContents = (data) => (dispatch) => {
 	});
 };
 
-export const setLastDevice = (name) => ({
-	type: types.SET_LAST_DEVICE,
-	name
-});
+export const setLastDevice = (name) => {
+	return{
+		type: types.SET_LAST_DEVICE,
+		name
+	}
+};
 
 export const setFilterType = (filterType) => {
 	return {
