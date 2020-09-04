@@ -18,9 +18,9 @@ const items = [];
 const defaultDataSize = 1000;
 const longContent = 'Lorem ipsum dolor sit amet';
 
-const MainPanel= (props) =>
+const MainPanel = (props) =>
 {
-	const [collapse,setCollapse]=useState(false);
+	const [collapse,setCollapse] = useState(false);
 	const { saveLastDevice, closeApp, setFilterType, devices, lastDevice, listDevices, filterType } = props;
 
 	const onCloseApp = () => {
