@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux';
 import IconButton from '@enact/goldstone/IconButton';
 import {Panel, Header} from '@enact/goldstone/Panels';
@@ -18,33 +18,28 @@ const items = [];
 const defaultDataSize = 1000;
 const longContent = 'Lorem ipsum dolor sit amet';
 
-class MainPanel extends React.Component
+function MainPanel(props)
 {
-	constructor (props) {
-		super(props);
-		this.state={
-			collapse:false
-		}
+	const [collapse,setCollapse]=useState(false);
+
+	const onCloseApp = () => {
+		props.closeApp({id: "com.webos.app.photovideo"});
 	}
 
-	onCloseApp = () => {
-		this.props.closeApp({id: "com.webos.app.photovideo"});
-	}
-
-	deviceTabs = (name) => {
+	const deviceTabs = (name) => {
 		return <Tab title={name.trim()} icon={USB_img} />
 	}
 
-	onSelectDevice = (ev) => {
-		this.props.saveLastDevice(this.props.devices[ev.index].deviceName);
-		this.setState({collapse:true});
+	const onSelectDevice = (ev) => {
+		props.saveLastDevice(props.devices[ev.index].deviceName);
+		setCollapse(true);
 	}
 
-	onFilter = (ev) =>{
-		this.props.setFilterType([ev.index]);
+	const onFilter = (ev) =>{
+		props.setFilterType([ev.index]);
 	}
 
-	uiRenderItem = ({ index, ...rest }) => {
+	const uiRenderItem = ({ index, ...rest }) => {
 		const { source } = items[index];
 
 		return (
@@ -56,11 +51,11 @@ class MainPanel extends React.Component
 		);
 	};
 
-	shouldAddLongContent = ({ index, modIndex }) => (
+	const shouldAddLongContent = ({ index, modIndex }) => (
 		index % modIndex === 0 ? ` ${longContent}` : ''
 	);
 
-	updateDataSize = (dataSize) => {
+	const updateDataSize = (dataSize) => {
 		const	itemNumberDigits = dataSize > 0 ? ((dataSize - 1) + '').length : 0,
 			    headingZeros = Array(itemNumberDigits).join('0');
 					items.length = 0;
@@ -68,7 +63,7 @@ class MainPanel extends React.Component
 		for (let i = 0; i < dataSize; i++) {
 			const
 				count = (headingZeros + i).slice(-itemNumberDigits),
-				text = `Item ${count}${this.shouldAddLongContent({ index: i, modIndex: 2 })}`,
+				text = `Item ${count}${shouldAddLongContent({ index: i, modIndex: 2 })}`,
 				color = Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16),
 				source = `http://placehold.it/300x300/${color}/ffffff&text=Image ${i}`;
 
@@ -77,35 +72,35 @@ class MainPanel extends React.Component
 		return dataSize;
 	};
 
-	componentDidMount () {
-		if (this.props.devices && this.props.devices.length === 0) {
-			this.props.listDevices();
+	useEffect(()=>{
+		if (props.devices && props.devices.length === 0) {
+			props.listDevices();
 		}
-	}
+	})
 
-	render(){
-	this.updateDataSize(defaultDataSize);
+	updateDataSize(defaultDataSize);
+
 	return (
 		<Panel>
 			<Header
 				slots={'title'}
 				title={"Media discovery"}
 				type={'compact'}
-				subtitle={this.props.lastDevice}
+				subtitle={props.lastDevice}
 				marqueeOn={'render'}
 				slotAfter={
 					<div>
 						<IconButton size={'small'}>search</IconButton>
 						<IconButton size={'small'}>verticalellipsis</IconButton>
-						<IconButton size={'small'} onClick={this.onCloseApp}>closex</IconButton>
+						<IconButton size={'small'} onClick={onCloseApp}>closex</IconButton>
 					</div>
 				}
 			/>
 
 			<Dropdown
 				className={css.drop}
-				defaultSelected={this.props.filterType}
-				onSelect={this.onFilter}
+				defaultSelected={props.filterType}
+				onSelect={onFilter}
 			>
 				{['Photos', 'Videos', 'Music', 'All']}
 			</Dropdown>
@@ -113,20 +108,20 @@ class MainPanel extends React.Component
 			<TabLayout
 				className={css.tab}
 				anchorTo={'start'}
-				onSelect={this.onSelectDevice}
+				onSelect={onSelectDevice}
 				dimensions={{tabs: {collapsed: 20, normal: 700}, content: {expanded: 50, normal: 50}}}
-				collapsed={this.state.collapse}
+				collapsed={collapse}
 			>
-				{this.props.devices.map((item) =>
-					this.deviceTabs(item.deviceName)
+				{props.devices.map((item) =>
+					deviceTabs(item.deviceName)
 				)}
 			</TabLayout>
 
 			<VirtualGridList
 				className={css.grid}
-				dataSize={this.updateDataSize(defaultDataSize)}
+				dataSize={updateDataSize(defaultDataSize)}
 				direction='vertical'
-				itemRenderer={this.uiRenderItem}
+				itemRenderer={uiRenderItem}
 				itemSize={{
 					minWidth: ri.scale(180),
 					minHeight: ri.scale(270)
@@ -136,7 +131,6 @@ class MainPanel extends React.Component
 			/>
 		</Panel>
 	)
-}
 }
 
 const mapStateToProps = ({deviceList,currentContentsInfo}) => ({
