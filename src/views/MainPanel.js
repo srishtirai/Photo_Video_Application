@@ -9,7 +9,7 @@ import ri from '@enact/ui/resolution';
 import {TabLayout, Tab} from '@enact/sandstone/TabLayout';
 import Dropdown from '@enact/sandstone/Dropdown';
 
-import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '../actions/listActions';
+import {listDevices, setCurrentDevice, setFilterType, listFolderContents, getUpdatedList} from '../actions/listActions';
 import {closeApp} from '../actions/commonActions';
 import USB_img from '../../Assets/mock/USB.png';
 import css from './MainPanel.module.less';
@@ -18,27 +18,31 @@ const items = [];
 const defaultDataSize = 1000;
 const longContent = 'Lorem ipsum dolor sit amet';
 
+require.context('../../Assets/mock/', false, /\.jpg$/);
+require.context('../../Assets/mock/', false, /\.png$/);
+
 const MainPanel = (props) =>
 {
 	const [collapse,setCollapse] = useState(false);
-	const { closeApp, saveCurrentDevice, setFilterType, listDevices, getListContents, filterType, devices, currentDevice, currentList }= props;
+	const { closeApp, saveCurrentDevice, getUpdatedList,setFilterType, listDevices, getListContents, filterType, devices, currentDevice, currentList }= props;
 	const dropList=['Photos', 'Videos', 'All'];
 
 	const onCloseApp = () => {
 		closeApp({id: "com.webos.app.photovideo"});
 	}
 
-	const deviceTabs = (name) => {
-		return <Tab title={name.trim()} icon={USB_img} />
+	const deviceTabs = (name, index) => {
+		return <Tab key={index} title={name.trim()} icon={USB_img} />
 	}
 
 	const onSelectDevice = (ev) => {
+		if(!collapse)
 		saveCurrentDevice(devices[ev.index].deviceName);
-		setCollapse(true);
+		(!collapse?setCollapse(true):setCollapse(false));
 	}
 
 	const onFilter = (ev) =>{
-		setFilterType([ev.index]);
+		setFilterType(ev.data);
 	}
 
 	const uiRenderItem = ({ index, ...rest }) => {
@@ -66,19 +70,18 @@ const MainPanel = (props) =>
 				count = (headingZeros + i).slice(-itemNumberDigits),
 				text = `Item ${count}${shouldAddLongContent({ index: i, modIndex: 2 })}`,
 				color = Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16),
-				source = `http://placehold.it/300x300/${color}/ffffff&text=`+currentList[i].itemName;
+				source = currentList[i].itemPath;
 
 			items.push({ text, source });
 		}
 		return dataSize;
 	};
-	
+
 	useEffect(()=>{
 		if (devices && devices.length === 0) {
 			listDevices();
 		}
 	})
-
 	getListContents(currentDevice);
 	updateDataSize(currentList.length);
 	
@@ -101,7 +104,7 @@ const MainPanel = (props) =>
 
 			<Dropdown
 				className={css.drop}
-				defaultSelected={filterType !== 'All' ? filterType === 'Photos' ? 0 : 1 : 2}
+				defaultSelected={2}
 				onSelect={onFilter}
 			>
 				{dropList}
@@ -114,8 +117,8 @@ const MainPanel = (props) =>
 				dimensions={{tabs: {collapsed: 20, normal: 700}, content: {expanded: 50, normal: 50}}}
 				collapsed={collapse}
 			>
-				{devices.map((item) =>
-					deviceTabs(item.deviceName)
+				{devices.map((item,index) =>
+					deviceTabs(item.deviceName,index)
 				)}
 			</TabLayout>
 

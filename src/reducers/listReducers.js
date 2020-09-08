@@ -1,4 +1,5 @@
 import {types} from '../actions/actionTypes';
+import update from 'react-addons-update';
 
 const initialstate = {
 	devices: [],
@@ -7,7 +8,8 @@ const initialstate = {
 
 const initialCurrentContentsState = {
 	contentList: [],
-	filterType: "All"
+	filterType: 'Photos',
+	viewList: []
 }
 
 const deviceList = (state = initialstate, action) => {
@@ -33,9 +35,10 @@ const deviceList = (state = initialstate, action) => {
 const currentContentsInfo = (state = initialCurrentContentsState, action) => {
 	switch (action.type) {
 		case types.GET_LIST_CONTENTS: {
-			let newContents = action.contents;
-			const newState = {contentList: newContents};
-			return Object.assign({}, state, newState);
+			let
+				newContents = action.contents
+			return Object.assign({}, state, { contentList: newContents });
+
 		}
 
 		case types.SET_FILTER_TYPE: {

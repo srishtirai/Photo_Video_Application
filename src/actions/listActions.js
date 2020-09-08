@@ -76,6 +76,7 @@ export const setCurrentDevice = (name) => {
 export const setFilterType = (filterType) => {
 	return {
 		type: types.SET_FILTER_TYPE,
-		filterType
+		filterType:filterType
 	};
 };
+
