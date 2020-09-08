@@ -5,8 +5,8 @@ const initialstate = {
 	id: 0
 }
 
-const initialCurrentContentsInfoState = {
-	contents: [],
+const initialCurrentContentsState = {
+	contentList: [],
 	filterType: "All"
 }
 
@@ -30,7 +30,7 @@ const deviceList = (state = initialstate, action) => {
 	}
 };
 
-const currentContentsInfo = (state = initialCurrentContentsInfoState, action) => {
+const currentContentsInfo = (state = initialCurrentContentsState, action) => {
 	switch (action.type) {
 		case types.GET_LIST_CONTENTS: {
 			let newContents = action.contents;

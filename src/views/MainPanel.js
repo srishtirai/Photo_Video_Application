@@ -9,7 +9,7 @@ import ri from '@enact/ui/resolution';
 import {TabLayout, Tab} from '@enact/sandstone/TabLayout';
 import Dropdown from '@enact/sandstone/Dropdown';
 
-import {listDevices, setCurrentDevice, setFilterType} from '../actions/listActions';
+import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '../actions/listActions';
 import {closeApp} from '../actions/commonActions';
 import USB_img from '../../Assets/mock/USB.png';
 import css from './MainPanel.module.less';
@@ -21,7 +21,7 @@ const longContent = 'Lorem ipsum dolor sit amet';
 const MainPanel = (props) =>
 {
 	const [collapse,setCollapse] = useState(false);
-	const { closeApp, saveCurrentDevice, setFilterType, listDevices, filterType, devices, currentDevice }= props;
+	const { closeApp, saveCurrentDevice, setFilterType, listDevices, getListContents, filterType, devices, currentDevice, currentList }= props;
 	const dropList=['Photos', 'Videos', 'All'];
 
 	const onCloseApp = () => {
@@ -43,14 +43,13 @@ const MainPanel = (props) =>
 
 	const uiRenderItem = ({ index, ...rest }) => {
 		const { source } = items[index];
-
-		return (
-			<UiImageItem
-				{...rest}
-				src={source}
-				style={{ width: '100%' }}
-			/>
-		);
+			return (
+				<UiImageItem
+					{...rest}
+					src={source}
+					style={{ width: '100%' }}
+				/>
+			);
 	};
 
 	const shouldAddLongContent = ({ index, modIndex }) => (
@@ -67,21 +66,22 @@ const MainPanel = (props) =>
 				count = (headingZeros + i).slice(-itemNumberDigits),
 				text = `Item ${count}${shouldAddLongContent({ index: i, modIndex: 2 })}`,
 				color = Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16),
-				source = `http://placehold.it/300x300/${color}/ffffff&text=Image ${i}`;
+				source = `http://placehold.it/300x300/${color}/ffffff&text=`+currentList[i].itemName;
 
 			items.push({ text, source });
 		}
 		return dataSize;
 	};
-
+	
 	useEffect(()=>{
 		if (devices && devices.length === 0) {
 			listDevices();
 		}
 	})
 
-	updateDataSize(defaultDataSize);
-
+	getListContents(currentDevice);
+	updateDataSize(currentList.length);
+	
 	return (
 		<Panel>
 			<Header
@@ -121,7 +121,7 @@ const MainPanel = (props) =>
 
 			<VirtualGridList
 				className={css.grid}
-				dataSize={updateDataSize(defaultDataSize)}
+				dataSize={updateDataSize(currentList.length)}
 				direction='vertical'
 				itemRenderer={uiRenderItem}
 				itemSize={{
@@ -138,13 +138,15 @@ const MainPanel = (props) =>
 const mapStateToProps = ({deviceList,currentContentsInfo}) => ({
 		devices: deviceList.devices,
 		currentDevice: deviceList.currentDevice,
-		filterType: currentContentsInfo.filterType
+		filterType: currentContentsInfo.filterType,
+		currentList: currentContentsInfo.contentList
 });
 
 const mapDispatchToProps = (dispatch) => ({
 		listDevices: () => dispatch(listDevices()),
 		saveCurrentDevice: (name) => dispatch(setCurrentDevice(name)),
 		setFilterType: (filterType)=> dispatch(setFilterType(filterType)),
+		getListContents: (data) => dispatch(listFolderContents(data)),
 		closeApp: (params) => dispatch(closeApp(params))
 });
 

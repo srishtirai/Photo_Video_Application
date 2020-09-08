@@ -30,7 +30,7 @@ export const listDevices = () => (dispatch) => {
 	});
 };
 
-export const getListContentsAction = (res, totalCount) => {
+export const getListContents = (res, totalCount) => {
 	return {
 		type: types.GET_LIST_CONTENTS,
 		contents: res,
@@ -39,9 +39,9 @@ export const getListContentsAction = (res, totalCount) => {
 };
 
 export const listFolderContents = (data) => (dispatch) => {
-	if (typeof window === 'object' && (!window.PalmSystem || window.PalmSystem.isTestMode) ){
-		let contents = listFolderContentsData.contents
-		dispatch(getListContentsAction(contents, contents.length));
+	if (typeof window === 'object' && !window.PalmSystem) {
+		let contents = listFolderContentsData.contents;
+		dispatch(getListContents(contents, contents.length));
 		return;
 	}
 	let opt = {
@@ -61,7 +61,7 @@ export const listFolderContents = (data) => (dispatch) => {
 		parameters: opt,
 		onSuccess: (res) => {
 			let returnObject = res.contents;
-			dispatch(getListContentsAction(returnObject, res.totalCount));
+			dispatch(getListContents(returnObject, res.totalCount));
 		}
 	});
 };
