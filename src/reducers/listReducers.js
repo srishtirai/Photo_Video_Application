@@ -7,7 +7,7 @@ const initialstate = {
 
 const initialCurrentContentsInfoState = {
 	contents: [],
-	filterType: 3 //"ALL"
+	filterType: "All"
 }
 
 const deviceList = (state = initialstate, action) => {
@@ -21,8 +21,8 @@ const deviceList = (state = initialstate, action) => {
 			return Object.assign({}, state, newState);
 		}
 
-		case types.SET_LAST_DEVICE: {
-			return Object.assign({}, state, {lastDevice: action.name});
+		case types.SET_CURRENT_DEVICE: {
+			return Object.assign({}, state, {currentDevice: action.name});
 		}
 
 		default:

@@ -9,7 +9,7 @@ import ri from '@enact/ui/resolution';
 import {TabLayout, Tab} from '@enact/sandstone/TabLayout';
 import Dropdown from '@enact/sandstone/Dropdown';
 
-import {listDevices, setLastDevice, setFilterType} from '../actions/listActions';
+import {listDevices, setCurrentDevice, setFilterType} from '../actions/listActions';
 import {closeApp} from '../actions/commonActions';
 import USB_img from '../../Assets/mock/USB.png';
 import css from './MainPanel.module.less';
@@ -21,7 +21,8 @@ const longContent = 'Lorem ipsum dolor sit amet';
 const MainPanel = (props) =>
 {
 	const [collapse,setCollapse] = useState(false);
-	const { saveLastDevice, closeApp, setFilterType, devices, lastDevice, listDevices, filterType } = props;
+	const { closeApp, saveCurrentDevice, setFilterType, listDevices, filterType, devices, currentDevice }= props;
+	const dropList=['Photos', 'Videos', 'All'];
 
 	const onCloseApp = () => {
 		closeApp({id: "com.webos.app.photovideo"});
@@ -32,7 +33,7 @@ const MainPanel = (props) =>
 	}
 
 	const onSelectDevice = (ev) => {
-		saveLastDevice(devices[ev.index].deviceName);
+		saveCurrentDevice(devices[ev.index].deviceName);
 		setCollapse(true);
 	}
 
@@ -87,7 +88,7 @@ const MainPanel = (props) =>
 				slots={'title'}
 				title={"Media discovery"}
 				type={'compact'}
-				subtitle={lastDevice}
+				subtitle={currentDevice}
 				marqueeOn={'render'}
 				slotAfter={
 					<div>
@@ -100,10 +101,10 @@ const MainPanel = (props) =>
 
 			<Dropdown
 				className={css.drop}
-				defaultSelected={filterType}
+				defaultSelected={filterType !== 'All' ? filterType === 'Photos' ? 0 : 1 : 2}
 				onSelect={onFilter}
 			>
-				{['Photos', 'Videos', 'Music', 'All']}
+				{dropList}
 			</Dropdown>
 
 			<TabLayout
@@ -134,22 +135,18 @@ const MainPanel = (props) =>
 	)
 }
 
-const mapStateToProps = ({deviceList,currentContentsInfo}) => {
-	return{
+const mapStateToProps = ({deviceList,currentContentsInfo}) => ({
 		devices: deviceList.devices,
-		lastDevice: deviceList.lastDevice,
+		currentDevice: deviceList.currentDevice,
 		filterType: currentContentsInfo.filterType
-	}
-}
+});
 
-const mapDispatchToProps = (dispatch) => {
-	return{
+const mapDispatchToProps = (dispatch) => ({
 		listDevices: () => dispatch(listDevices()),
-		saveLastDevice: (name) => dispatch(setLastDevice(name)),
+		saveCurrentDevice: (name) => dispatch(setCurrentDevice(name)),
 		setFilterType: (filterType)=> dispatch(setFilterType(filterType)),
 		closeApp: (params) => dispatch(closeApp(params))
-	}
-}
+});
 
 const Main = connect(mapStateToProps, mapDispatchToProps)(MainPanel);
 export default ThemeDecorator(Main);

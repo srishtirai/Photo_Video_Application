@@ -40,7 +40,7 @@ export const getListContentsAction = (res, totalCount) => {
 
 export const listFolderContents = (data) => (dispatch) => {
 	if (typeof window === 'object' && (!window.PalmSystem || window.PalmSystem.isTestMode) ){
-		let contents = listFolderContentsData.contents;
+		let contents = listFolderContentsData.contents
 		dispatch(getListContentsAction(contents, contents.length));
 		return;
 	}
@@ -66,9 +66,9 @@ export const listFolderContents = (data) => (dispatch) => {
 	});
 };
 
-export const setLastDevice = (name) => {
+export const setCurrentDevice = (name) => {
 	return{
-		type: types.SET_LAST_DEVICE,
+		type: types.SET_CURRENT_DEVICE,
 		name
 	}
 };
