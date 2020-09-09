@@ -1,5 +1,4 @@
 import {types} from '../actions/actionTypes';
-import update from 'react-addons-update';
 
 const initialstate = {
 	devices: [],

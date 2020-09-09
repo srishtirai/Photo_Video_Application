@@ -4,48 +4,48 @@
             "size": 0,
             "itemName": "High resolution Images",
             "itemType": "folder",
-            "itemPath": "../../Assets/mock/folders.jpg",
-            "thumbnailUri": ""
+            "itemPath": "/tmp/usb/sda/sda1/High resolution Images",
+            "thumbnailUri": "../../Assets/mock/folder.png"
         },
         {
             "size": 0,
             "itemName": "images",
             "itemType": "folder",
-            "itemPath": "../../Assets/mock/folders.jpg",
-            "thumbnailUri": ""
+            "itemPath": "/tmp/usb/sda/sda1/images",
+            "thumbnailUri": "../../Assets/mock/folder.png"
         },
         {
             "size": 0,
             "itemName": "LG Smart TV",
             "itemType": "folder",
-            "itemPath": "../../Assets/mock/folders.jpg",
-            "thumbnailUri": ""
+            "itemPath": "/tmp/usb/sda/sda1/LG Smart TV",
+            "thumbnailUri": "../../Assets/mock/folder.png"
         },
         {
             "size": 58252568,
             "itemName": "bunny_movie.mp4",
             "itemType": "video",
-            "itemPath": "../../Assets/mock/video.png",
-            "thumbnailUri": ""
+            "itemPath": "/tmp/usb/sda/sda1/movie.mp4",
+            "thumbnailUri": "../../Assets/mock/video.png"
         },
         {
             "size": 4096,
             "itemName": "._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3",
             "itemType": "video",
-            "itemPath": "../../Assets/mock/video.png",
-            "thumbnailUri": "/tmp/usb/sda/sda1/._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3"
+            "itemPath": "/tmp/usb/sda/sda1/._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3",
+            "thumbnailUri": "../../Assets/mock/video.png"
         },
         {
             "size": 2096,
             "itemName": "800x600_looooooooooooooooooooooong_filename.jpg",
             "itemType": "image",
-            "itemPath": "../../Assets/mock/Dummy.jpg"
+            "itemPath": "../../Assets/mock/image.png"
         },
         {
             "size": 4096,
-            "itemName": "._Alunguren Kulunguren.mp3",
+            "itemName": "._Alunguren Kulunguren",
             "itemType": "image",
-            "itemPath": "../../Assets/mock/Dummy.jpg"
+            "itemPath": "../../Assets/mock/image.png"
         },
         {
             "size": 4096,
@@ -55,37 +55,43 @@
         },
         {
             "itemName": "cryptofs",
-            "itemPath": "../../Assets/mock/folders.jpg",
+            "itemPath": "/tmp/usb/sda/sda1/cryptofs",
+            "thumbnailUri": "../../Assets/mock/folder.png",
             "itemType": "folder",
             "size": 0
         },
         {
             "itemName": "Korea",
-            "itemPath": "../../Assets/mock/folders.jpg",
+            "itemPath": "/tmp/usb/sda/sda1/Korea",
+            "thumbnailUri": "../../Assets/mock/folder.png",
             "itemType": "folder",
             "size": 0
         },
         {
             "itemName": "This is a verrrrrrry loooooong folder name",
-            "itemPath": "../../Assets/mock/folders.jpg",
+            "itemPath": "/tmp/usb/sda/sda1/This is a verrrrrrry loooooong folder name",
+            "thumbnailUri": "../../Assets/mock/folder.png",
             "itemType": "folder",
             "size": 0
         },
         {
             "itemName": "bunny_movie.mp4",
-            "itemPath": "../../Assets/mock/video.png",
+            "itemPath": "/tmp/usb/sda/sda1/bunny_movie.mp4",
+            "thumbnailUri": "../../Assets/mock/video.png",
             "itemType": "video",
             "size": 58252568
         },
         {
             "itemName": "trailer.mp4",
-            "itemPath": "../../Assets/mock/video.png",
+            "itemPath": "/tmp/usb/sda/sda1/trailer.mp4",
+            "thumbnailUri": "../../Assets/mock/video.png",
             "itemType": "video",
             "size": 4372373
         },
         {
             "itemName": "movie_300.mp4",
-            "itemPath": "../../Assets/mock/video.png",
+            "itemPath": "/tmp/usb/sda/sda1/movie_300.mp4",
+            "thumbnailUri": "../../Assets/mock/video.png",
             "itemType": "video",
             "videoProperty": {
                 "subtitleUri": "/usr/palm/applications/com.webos.app.photovideo/assets/sampleVideo/movie_300.smi"
@@ -100,14 +106,14 @@
         },
         {
             "itemName": "700x700_filename.jpg",
-            "itemPath": "../../Assets/mock/Dummy.jpg",
+            "itemPath": "../../Assets/mock/image.png",
             "itemType": "image",
             "size": 2096
         },
         {
-            "xitemName": "MVI_1807.MOV",
             "itemName": "sintel_trailer.mp4",
-            "itemPath": "../../Assets/mock/video.png",
+            "itemPath": "/tmp/usb/sda/sda1/sintel_trailer.mp4",
+            "thumbnailUri": "../../Assets/mock/video.png",
             "itemType": "video",
             "size": 58252568
         },
@@ -119,7 +125,8 @@
         },
         {
             "itemName": "._MVI_1807.MOV",
-            "itemPath": "../../Assets/mock/video.png",
+            "itemPath": "/tmp/usb/sda/sda1/._MVI_1807.MOV",
+            "thumbnailUri": "../../Assets/mock/video.png",
             "itemType": "video",
             "size": 4096
         }

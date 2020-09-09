@@ -15,10 +15,6 @@ import USB_img from '../../Assets/mock/USB.png';
 import css from './MainPanel.module.less';
 
 const items = [];
-const defaultDataSize = 1000;
-const longContent = 'Lorem ipsum dolor sit amet';
-
-require.context('../../Assets/mock/', false, /\.jpg$/);
 require.context('../../Assets/mock/', false, /\.png$/);
 
 const MainPanel = (props) =>
@@ -37,8 +33,13 @@ const MainPanel = (props) =>
 
 	const onSelectDevice = (ev) => {
 		if(!collapse)
-		saveCurrentDevice(devices[ev.index].deviceName);
-		(!collapse?setCollapse(true):setCollapse(false));
+		{
+			saveCurrentDevice(devices[ev.index].deviceName);
+			setCollapse(true);
+		}
+		else{
+			setCollapse(false);
+		}
 	}
 
 	const onFilter = (ev) =>{
@@ -56,23 +57,15 @@ const MainPanel = (props) =>
 			);
 	};
 
-	const shouldAddLongContent = ({ index, modIndex }) => (
-		index % modIndex === 0 ? ` ${longContent}` : ''
-	);
-
 	const updateDataSize = (dataSize) => {
-		const	itemNumberDigits = dataSize > 0 ? ((dataSize - 1) + '').length : 0,
-			    headingZeros = Array(itemNumberDigits).join('0');
-					items.length = 0;
-
 		for (let i = 0; i < dataSize; i++) {
-			const
-				count = (headingZeros + i).slice(-itemNumberDigits),
-				text = `Item ${count}${shouldAddLongContent({ index: i, modIndex: 2 })}`,
-				color = Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16),
+			let source = "";
+			if(currentList[i].itemType === "image")
 				source = currentList[i].itemPath;
+			else
+				source = currentList[i].thumbnailUri;
 
-			items.push({ text, source });
+			items.push({ source });
 		}
 		return dataSize;
 	};
@@ -84,7 +77,7 @@ const MainPanel = (props) =>
 	})
 	getListContents(currentDevice);
 	updateDataSize(currentList.length);
-	
+
 	return (
 		<Panel>
 			<Header
@@ -104,7 +97,7 @@ const MainPanel = (props) =>
 
 			<Dropdown
 				className={css.drop}
-				defaultSelected={2}
+				defaultSelected={filterType !== "All" ? filterType === "Photos" ? 0 : 1 : 2}
 				onSelect={onFilter}
 			>
 				{dropList}
