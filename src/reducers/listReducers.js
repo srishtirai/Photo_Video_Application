@@ -7,7 +7,7 @@ const initialstate = {
 
 const initialCurrentContentsState = {
 	contentList: [],
-	filterType: 'Photos',
+	filterType: 'All',
 	viewList: []
 }
 

@@ -8,6 +8,13 @@
             "thumbnailUri": "../../Assets/mock/folder.png"
         },
         {
+            "size": 58252568,
+            "itemName": "bunny_movie.mp4",
+            "itemType": "audio",
+            "itemPath": "/tmp/usb/sda/sda1/movie.mp4",
+            "thumbnailUri": "../../Assets/mock/music.png"
+        },
+        {
             "size": 0,
             "itemName": "images",
             "itemType": "folder",
@@ -30,10 +37,24 @@
         },
         {
             "size": 4096,
-            "itemName": "._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3",
+            "itemName": "._Aalayal Thara Venam.mp4",
             "itemType": "video",
-            "itemPath": "/tmp/usb/sda/sda1/._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3",
+            "itemPath": "/tmp/usb/sda/sda1/._Aalayal Thara Venam.mp4",
             "thumbnailUri": "../../Assets/mock/video.png"
+        },
+        {
+            "size": 4096,
+            "itemName": "._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3",
+            "itemType": "audio",
+            "itemPath": "/tmp/usb/sda/sda1/._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3",
+            "thumbnailUri": "../../Assets/mock/music.png"
+        },
+        {
+            "size": 4096,
+            "itemName": "._Alunguren Kulunguren.mp3",
+            "itemType": "audio",
+            "itemPath": "/tmp/usb/sda/sda1/._Alunguren Kulunguren.mp3",
+            "thumbnailUri": "../../Assets/mock/music.png"
         },
         {
             "size": 2096,
@@ -73,6 +94,13 @@
             "thumbnailUri": "../../Assets/mock/folder.png",
             "itemType": "folder",
             "size": 0
+        },
+        {
+            "size": 4096,
+            "itemName": "._Be Free (Original)  Pallivaalu Bhadravattakam (Vidya Mashup Cover) (ft. Vandana Iyer).mp3",
+            "itemType": "audio",
+            "itemPath": "/tmp/usb/sda/sda1/._Be Free (Original)  Pallivaalu Bhadravattakam (Vidya Mashup Cover) (ft. Vandana Iyer).mp3",
+            "thumbnailUri": "../../Assets/mock/music.png"
         },
         {
             "itemName": "bunny_movie.mp4",
@@ -115,6 +143,13 @@
             "itemPath": "/tmp/usb/sda/sda1/sintel_trailer.mp4",
             "thumbnailUri": "../../Assets/mock/video.png",
             "itemType": "video",
+            "size": 58252568
+        },
+        {
+            "itemName": "sintel_trailer.mp4",
+            "itemPath": "/tmp/usb/sda/sda1/sintel_trailer.mp4",
+            "thumbnailUri": "../../Assets/mock/music.png",
+            "itemType": "audio",
             "size": 58252568
         },
         {

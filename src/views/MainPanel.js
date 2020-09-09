@@ -3,25 +3,25 @@ import {connect} from 'react-redux';
 import IconButton from '@enact/goldstone/IconButton';
 import {Panel, Header} from '@enact/goldstone/Panels';
 import ThemeDecorator from '@enact/goldstone/ThemeDecorator';
-import { ImageItem as UiImageItem } from '@enact/ui/ImageItem';
 import { VirtualGridList } from '@enact/ui/VirtualList';
 import ri from '@enact/ui/resolution';
+import { ImageItem as UiImageItem } from '@enact/ui/ImageItem';
 import {TabLayout, Tab} from '@enact/sandstone/TabLayout';
 import Dropdown from '@enact/sandstone/Dropdown';
 
-import {listDevices, setCurrentDevice, setFilterType, listFolderContents, getUpdatedList} from '../actions/listActions';
+import {listDevices, setCurrentDevice, setFilterType, listFolderContents, getUpdatedContents} from '../actions/listActions';
 import {closeApp} from '../actions/commonActions';
 import USB_img from '../../Assets/mock/USB.png';
 import css from './MainPanel.module.less';
 
-const items = [];
 require.context('../../Assets/mock/', false, /\.png$/);
 
 const MainPanel = (props) =>
 {
-	const [collapse,setCollapse] = useState(false);
-	const { closeApp, saveCurrentDevice, getUpdatedList,setFilterType, listDevices, getListContents, filterType, devices, currentDevice, currentList }= props;
-	const dropList=['Photos', 'Videos', 'All'];
+	const items = [];
+	const [collapse, setCollapse] = useState(false);
+	const { closeApp, saveCurrentDevice, setFilterType, listDevices, getListContents, filterType, devices, currentDevice, currentList }= props;
+	const dropList=['Photos', 'Videos', 'Music', 'All'];
 
 	const onCloseApp = () => {
 		closeApp({id: "com.webos.app.photovideo"});
@@ -58,25 +58,49 @@ const MainPanel = (props) =>
 	};
 
 	const updateDataSize = (dataSize) => {
+		let count = 0;
 		for (let i = 0; i < dataSize; i++) {
 			let source = "";
-			if(currentList[i].itemType === "image")
-				source = currentList[i].itemPath;
-			else
+			if(filterType === "Photos" || filterType === "All"){
+				if(currentList[i].itemType === "image"){
+					source = currentList[i].itemPath;
+					items.push({ source });
+					count++;
+				}
+			}
+			if(filterType == "Videos" || filterType === "All"){
+				if(currentList[i].itemType === "video"){
+					source = currentList[i].thumbnailUri;
+					items.push({ source });
+					count++;
+				}
+			}
+			if(filterType == "Music" || filterType === "All"){
+				if(currentList[i].itemType === "audio"){
+					source = currentList[i].thumbnailUri;
+					items.push({ source });
+					count++;
+				}
+			}
+			if(currentList[i].itemType === "folder"){
 				source = currentList[i].thumbnailUri;
-
-			items.push({ source });
+				items.push({ source });
+				count++;
+			}
+			
 		}
-		return dataSize;
+		return count;
 	};
 
 	useEffect(()=>{
 		if (devices && devices.length === 0) {
 			listDevices();
 		}
+		
+		if (currentList.length === 0) {
+			getListContents(currentDevice);
+		}
 	})
-	getListContents(currentDevice);
-	updateDataSize(currentList.length);
 
 	return (
 		<Panel>
@@ -97,7 +121,7 @@ const MainPanel = (props) =>
 
 			<Dropdown
 				className={css.drop}
-				defaultSelected={filterType !== "All" ? filterType === "Photos" ? 0 : 1 : 2}
+				defaultSelected={filterType !== 'All' ? filterType === 'Photos' ? 0 : filterType === 'Video' ? 1 : 2 : 3}
 				onSelect={onFilter}
 			>
 				{dropList}
@@ -127,7 +151,8 @@ const MainPanel = (props) =>
 				scrollMode='native'
 				spacing={ri.scale(20)}
 			/>
-		</Panel>
+
+	    </Panel>
 	)
 }
 
