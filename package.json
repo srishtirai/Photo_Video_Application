@@ -21,7 +21,7 @@
   "enact": {
     "theme": "moonstone",
     "ri": {
-      "baseSize": 48
+      "baseSize": 72
     }
   },
   "eslintConfig": {

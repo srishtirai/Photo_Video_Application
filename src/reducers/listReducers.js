@@ -2,7 +2,8 @@ import {types} from '../actions/actionTypes';
 
 const initialstate = {
 	devices: [],
-	id: 0
+	id: 0,
+	currentDevice: []
 }
 
 const initialCurrentContentsState = {
@@ -14,16 +15,18 @@ const initialCurrentContentsState = {
 const deviceList = (state = initialstate, action) => {
 	switch (action.type) {
 		case types.GET_LIST_DEVICES: {
-			let returnObject = action.devices;
-			const newState = {devices: returnObject, deviceIndex: 0};
-			if (action.mobileTVPlusList) {
-				newState.mobileTVPlusList = action.mobileTVPlusList;
+			let newState = [];
+			if (action.TVList) {
+				newState.devices = action.TVList;
+			}
+			else{
+				newState.devices = action.devices;
 			}
 			return Object.assign({}, state, newState);
 		}
 
 		case types.SET_CURRENT_DEVICE: {
-			return Object.assign({}, state, {currentDevice: action.name});
+			return Object.assign({}, state, {currentDevice: action.device});
 		}
 
 		default:

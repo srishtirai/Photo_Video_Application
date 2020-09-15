@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux';
 import IconButton from '@enact/goldstone/IconButton';
+import Icon from '@enact/goldstone/Icon';
 import {Panel, Header} from '@enact/goldstone/Panels';
 import ThemeDecorator from '@enact/goldstone/ThemeDecorator';
 import { VirtualGridList } from '@enact/ui/VirtualList';
@@ -8,20 +9,27 @@ import ri from '@enact/ui/resolution';
 import { ImageItem as UiImageItem } from '@enact/ui/ImageItem';
 import {TabLayout, Tab} from '@enact/sandstone/TabLayout';
 import Dropdown from '@enact/sandstone/Dropdown';
+import ContextualMenuDecorator from '@enact/goldstone/ContextualMenuDecorator';
+import Button from '@enact/goldstone/Button';
 
-import {listDevices, setCurrentDevice, setFilterType, listFolderContents, getUpdatedContents} from '../actions/listActions';
+import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '../actions/listActions';
 import {closeApp} from '../actions/commonActions';
 import USB_img from '../../Assets/mock/USB.png';
 import css from './MainPanel.module.less';
 
 require.context('../../Assets/mock/', false, /\.png$/);
+const ContextualButton = ContextualMenuDecorator(Button);
+const popupProps = {
+	style: {width: '300px'}
+};
 
 const MainPanel = (props) =>
 {
 	const items = [];
 	const [collapse, setCollapse] = useState(false);
 	const { closeApp, saveCurrentDevice, setFilterType, listDevices, getListContents, filterType, devices, currentDevice, currentList }= props;
-	const dropList=['Photos', 'Videos', 'Music', 'All'];
+	const dropList = ['Photos', 'Videos', 'Music', 'All'];
+	const popup = ['View Type', 'Sort', 'Selected play', 'Delete', 'Copy', 'User guide'];
 
 	const onCloseApp = () => {
 		closeApp({id: "com.webos.app.photovideo"});
@@ -34,7 +42,7 @@ const MainPanel = (props) =>
 	const onSelectDevice = (ev) => {
 		if(!collapse)
 		{
-			saveCurrentDevice(devices[ev.index].deviceName);
+			saveCurrentDevice(devices[ev.index]);
 			setCollapse(true);
 		}
 		else{
@@ -44,6 +52,10 @@ const MainPanel = (props) =>
 
 	const onFilter = (ev) =>{
 		setFilterType(ev.data);
+	}
+
+	const onPopup = (ev) =>{
+		console.log(ev);
 	}
 
 	const uiRenderItem = ({ index, ...rest }) => {
@@ -68,14 +80,14 @@ const MainPanel = (props) =>
 					count++;
 				}
 			}
-			if(filterType == "Videos" || filterType === "All"){
+			if(filterType === "Videos" || filterType === "All"){
 				if(currentList[i].itemType === "video"){
 					source = currentList[i].thumbnailUri;
 					items.push({ source });
 					count++;
 				}
 			}
-			if(filterType == "Music" || filterType === "All"){
+			if(filterType === "Music" || filterType === "All"){
 				if(currentList[i].itemType === "audio"){
 					source = currentList[i].thumbnailUri;
 					items.push({ source });
@@ -87,7 +99,6 @@ const MainPanel = (props) =>
 				items.push({ source });
 				count++;
 			}
-			
 		}
 		return count;
 	};
@@ -96,7 +107,7 @@ const MainPanel = (props) =>
 		if (devices && devices.length === 0) {
 			listDevices();
 		}
-		
+
 		if (currentList.length === 0) {
 			getListContents(currentDevice);
 		}
@@ -108,11 +119,21 @@ const MainPanel = (props) =>
 				slots={'title'}
 				title={"Media discovery"}
 				type={'compact'}
-				subtitle={currentDevice}
+				subtitle={currentDevice.deviceName}
 				marqueeOn={'render'}
+				noCloseButton={true}
 				slotAfter={
 					<div>
 						<IconButton size={'small'}>search</IconButton>
+						{/* <ContextualButton
+							direction={'below'}
+							menuItems={popup}
+							onClick={onPopup}
+							popupProps={popupProps}
+							backgroundOpacity={'transparent'}
+						>
+							<Icon>verticalellipsis</Icon>
+						</ContextualButton> */}
 						<IconButton size={'small'}>verticalellipsis</IconButton>
 						<IconButton size={'small'} onClick={onCloseApp}>closex</IconButton>
 					</div>
@@ -123,15 +144,15 @@ const MainPanel = (props) =>
 				className={css.drop}
 				defaultSelected={filterType !== 'All' ? filterType === 'Photos' ? 0 : filterType === 'Video' ? 1 : 2 : 3}
 				onSelect={onFilter}
+				orientation={'vertical'}
 			>
 				{dropList}
 			</Dropdown>
 
 			<TabLayout
 				className={css.tab}
-				anchorTo={'start'}
 				onSelect={onSelectDevice}
-				dimensions={{tabs: {collapsed: 20, normal: 700}, content: {expanded: 50, normal: 50}}}
+				dimensions={{tabs: {collapsed: 20, normal: 1000}, content: {expanded: null, normal: null}}}
 				collapsed={collapse}
 			>
 				{devices.map((item,index) =>
@@ -151,8 +172,7 @@ const MainPanel = (props) =>
 				scrollMode='native'
 				spacing={ri.scale(20)}
 			/>
-
-	    </Panel>
+		</Panel>
 	)
 }
 
@@ -165,7 +185,7 @@ const mapStateToProps = ({deviceList,currentContentsInfo}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 		listDevices: () => dispatch(listDevices()),
-		saveCurrentDevice: (name) => dispatch(setCurrentDevice(name)),
+		saveCurrentDevice: (device) => dispatch(setCurrentDevice(device)),
 		setFilterType: (filterType)=> dispatch(setFilterType(filterType)),
 		getListContents: (data) => dispatch(listFolderContents(data)),
 		closeApp: (params) => dispatch(closeApp(params))

@@ -3,11 +3,11 @@ import LS2Request from '@enact/webos/LS2Request';
 import listDevicesData from '../../Assets/mock/listDevices.json';
 import listFolderContentsData from '../../Assets/mock/listFolderContents.json';
 
-export const getListDevicesAction = (devices, mobileTVPlusList) => {
+export const getListDevicesAction = (devices, TVList) => {
 	return {
 		type: types.GET_LIST_DEVICES,
 		devices: devices,
-		mobileTVPlusList: mobileTVPlusList
+		TVList: TVList
 	};
 };
 
@@ -24,8 +24,8 @@ export const listDevices = () => (dispatch) => {
 		},
 		onSuccess: (res) => {
 			console.table(res.devices);
-			let  mobileTVPlusList = res.devices;
-			dispatch(getListDevicesAction(mobileTVPlusList));
+			let TVList = res.devices;
+			dispatch(getListDevicesAction(TVList));
 		}
 	});
 };
@@ -47,7 +47,7 @@ export const listFolderContents = (data) => (dispatch) => {
 	let opt = {
 			path: data.path,
 			deviceId: data.deviceId,
-			offset: data.offset,
+			offset: 0,
 			limit: 100,
 			dataScope: 'full',
 			requestType: 'byItemType',
@@ -66,10 +66,10 @@ export const listFolderContents = (data) => (dispatch) => {
 	});
 };
 
-export const setCurrentDevice = (name) => {
+export const setCurrentDevice = (device) => {
 	return{
 		type: types.SET_CURRENT_DEVICE,
-		name
+		device
 	}
 };
 
