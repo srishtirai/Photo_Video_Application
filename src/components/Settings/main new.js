@@ -3,25 +3,29 @@ import {connect} from 'react-redux';
 import Button from '@enact/goldstone/Button';
 import {Panel, Header} from '@enact/goldstone/Panels';
 import ThemeDecorator from '@enact/goldstone/ThemeDecorator';
-import Dropdown from '@enact/sandstone/Dropdown';
 import SvgGridList from '@enact/goldstone/SVGGridList/components/GridList/GridList';
 import ItemImageBase from '@enact/goldstone/SVGGridList/components/ItemImage/ItemImage';
 import ri from '@enact/ui/resolution';
 import {TabLayout, Tab} from '@enact/sandstone/TabLayout';
+import Dropdown from '@enact/sandstone/Dropdown';
 
 import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '../actions/listActions';
 import {closeApp} from '../actions/commonActions';
 import css from './MainPanel.module.less';
 
+import Settings from '../components/Settings/Settings';
+import settingsReducer from '../reducers/settingsReducer';
 require.context('../../Assets/mock/', false, /\.png$/);
 
 const MainPanel = (props) =>
 {
+	const [state, dispatch] = useReducer(settingsReducer);
 	const items = [];
 	const [collapse, setCollapse] = useState(false);
 	const { closeApp, saveCurrentDevice, setFilterType, listDevices, getListContents, filterType, devices, currentDevice, currentList }= props;
 	const dropList=['Photos', 'Videos', 'Music', 'All'];
-	
+	const defaultDataSize = currentList.length;
+
 	const onCloseApp = () => {
 		closeApp({id: "com.webos.app.photovideo"});
 	}
@@ -79,13 +83,16 @@ const MainPanel = (props) =>
 		return count;
 	};
 	
+	
 	const renderItem = ({ index, ...rest }) => {
 		const { source } = items[index];
 
 		return (
-			<ItemImageBase {...rest}  src={source}/>	
+			<ItemImageBase {...rest}  src={source}/>
+			
 		);
 	};
+
 
 	useEffect(()=>{
 		if (devices && devices.length === 0) {
@@ -95,7 +102,7 @@ const MainPanel = (props) =>
 		if (currentList.length === 0) {
 			getListContents(currentDevice);
 		}
-		updateDataSize(currentList.length);
+		updateDataSize(defaultDataSize);
 	});
 
 	return (
@@ -109,13 +116,15 @@ const MainPanel = (props) =>
 				noCloseButton={true}
 				slotAfter={
 					<div>
-						<Button size={'small'} backgroundOpacity='transparent' size="small" icon='search' iconOnly />
-						<Button backgroundOpacity='transparent' size="small" icon="verticalellipsis" iconOnly /> 
+						<Button size={'small'} onClick={onCloseApp} backgroundOpacity='transparent' size="small" icon='search' iconOnly />
+						{/* <Button backgroundOpacity='transparent' onClick={() => dispatch({type: 'toggle', payload: 'settings'})} size="small" icon="verticalellipsis" iconOnly /> */}
 						<Button size={'small'} onClick={onCloseApp} backgroundOpacity='transparent' size="small" icon='closex' iconOnly />
 					</div>
 				}
 			/>
-
+			{/* {
+				state.settings.isOpen && <Settings />							
+			} */}
 			<Dropdown
 				className={css.drop}
 				defaultSelected={filterType !== 'All' ? filterType === 'Photos' ? 0 : filterType === 'Video' ? 1 : 2 : 3}
@@ -142,10 +151,10 @@ const MainPanel = (props) =>
 				direction='vertical'
 				itemRenderer={renderItem}
 				itemSize={{
-					minWidth: ri.scale(280),
+					minWidth: ri.scale(290),
 					minHeight: ri.scale(300)
 				}}
-				spacing={ri.scale(120)}
+				spacing={ri.scale(45)}
 			/>
 		</Panel>
 	)
