@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux';
 import Button from '@enact/goldstone/Button';
 import {Panel, Header} from '@enact/goldstone/Panels';
@@ -12,6 +12,7 @@ import {TabLayout, Tab} from '@enact/sandstone/TabLayout';
 import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '../actions/listActions';
 import {closeApp} from '../actions/commonActions';
 import css from './MainPanel.module.less';
+import folder from '../../Assets/mock/folder.png';
 
 require.context('../../Assets/mock/', false, /\.png$/);
 
@@ -21,7 +22,7 @@ const MainPanel = (props) =>
 	const [collapse, setCollapse] = useState(false);
 	const { closeApp, saveCurrentDevice, setFilterType, listDevices, getListContents, filterType, devices, currentDevice, currentList }= props;
 	const dropList=['Photos', 'Videos', 'Music', 'All'];
-	
+
 	const onCloseApp = () => {
 		closeApp({id: "com.webos.app.photovideo"});
 	}
@@ -71,19 +72,23 @@ const MainPanel = (props) =>
 				}
 			}
 			if(currentList[i].itemType === "folder"){
-				source = currentList[i].thumbnailUri;
+				if(currentList[i].thumbnailUri !== ""){
+					source = currentList[i].thumbnailUri;
+				}else{
+					source = folder;
+				}
 				items.push({ source });
 				count++;
 			}
 		}
 		return count;
 	};
-	
+
 	const renderItem = ({ index, ...rest }) => {
 		const { source } = items[index];
 
 		return (
-			<ItemImageBase {...rest}  src={source}/>	
+			<ItemImageBase {...rest}  src={source}/>
 		);
 	};
 
@@ -101,17 +106,17 @@ const MainPanel = (props) =>
 	return (
 		<Panel>
 			<Header
-				slots={'title'}
-				title={"Media discovery"}
-				type={'compact'}
+				slots='title'
+				title='Media discovery'
+				type='compact'
 				subtitle={currentDevice.deviceName}
-				marqueeOn={'render'}
-				noCloseButton={true}
+				marqueeOn='render'
+				noCloseButton='true'
 				slotAfter={
 					<div>
-						<Button size={'small'} backgroundOpacity='transparent' size="small" icon='search' iconOnly />
-						<Button backgroundOpacity='transparent' size="small" icon="verticalellipsis" iconOnly /> 
-						<Button size={'small'} onClick={onCloseApp} backgroundOpacity='transparent' size="small" icon='closex' iconOnly />
+						<Button size='small' backgroundOpacity='transparent' icon='search' iconOnly />
+						<Button backgroundOpacity='transparent' icon='verticalellipsis' iconOnly />
+						<Button size='small' onClick={onCloseApp} backgroundOpacity='transparent' icon='closex' iconOnly />
 					</div>
 				}
 			/>
@@ -120,7 +125,7 @@ const MainPanel = (props) =>
 				className={css.drop}
 				defaultSelected={filterType !== 'All' ? filterType === 'Photos' ? 0 : filterType === 'Video' ? 1 : 2 : 3}
 				onSelect={onFilter}
-				orientation={'vertical'}
+				orientation='vertical'
 			>
 				{dropList}
 			</Dropdown>
