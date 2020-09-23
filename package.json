@@ -34,19 +34,21 @@
   ],
   "dependencies": {
     "@enact/core": "^3.0.0",
+    "@enact/goldstone": "file:../goldstone",
     "@enact/i18n": "^3.0.0",
     "@enact/moonstone": "^3.0.0",
     "@enact/spotlight": "^3.0.0",
     "@enact/ui": "^3.0.0",
     "@enact/webos": "^3.0.0",
-    "goldstone": "file:goldstone",
     "ilib": "^14.2.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
-    "react-addons-update": "^15.6.2",
     "react-dom": "^16.7.0",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-freeze": "^0.1.7",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
