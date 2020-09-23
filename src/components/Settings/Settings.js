@@ -1,6 +1,7 @@
 import React, {useReducer} from 'react';
+import { setViewType, setSortType } from '../../actions/settingsActions';
 import settingsReducer from '../../reducers/settingsReducer';
-import Menu from '@enact/goldstone/VideoPlayer/Menu';
+import Menu from '../Menu/Menu';
 
 const initialState = {
 	heading: 'Options',
@@ -52,59 +53,25 @@ const initialState = {
 				]
 			}
 		},
-		audioTrack: {
-			name: 'Audio Track',
-			type: 'subMenu',
-			disabled: false,
-			children: {
-				heading: 'Audio Track',
-				type: 'radio',
-				index: 0,
-				items: [
-					{
-						type: 'radio',
-						name: '1 English VP8',
-						value: 'english'
-					},
-					{
-						type: 'radio',
-						name: '2 Spanish MPEG-4',
-						value: 'Spanish'
-					},
-					{
-						type: 'radio',
-						name: '3 French MPEG-4',
-						value: 'French'
-					}
-				]
-			}
+		selectPlay: {
+			name: 'Select Play',
+			type: 'button',
+			value: 'Select Play'
 		},
-		dualMonoSetting: {
-			name: 'Dual Mono Setting',
-			type: 'subMenu',
-			disabled: false,
-			children: {
-				heading: 'Dual Mono Setting',
-				type: 'radio',
-				index: 0,
-				items: [
-					{
-						type: 'radio',
-						name: 'Main',
-						value: 'main'
-					},
-					{
-						type: 'radio',
-						name: 'Sub',
-						value: 'sub'
-					},
-					{
-						type: 'radio',
-						name: 'Main + Sub',
-						value: 'main'
-					}
-				]
-			}
+		delete: {
+			name: 'Delete',
+			type: 'button',
+			value: 'Delete'
+		},
+		copy: {
+			name: 'Copy',
+			type: 'button',
+			value: 'Copy'
+		},
+		userSettings: {
+			name: 'User Guide',
+			type: 'button',
+			value: 'User Guide'
 		}
 	}
 };
@@ -118,7 +85,17 @@ const Settings = () => {
 
 	const handleSelect = (e) => {
 		dispatch({type: 'selected', payload: e.selected});
+		if(e.data==='List View'||e.data==='Thumbnail View'){
+			dispatch(setViewType(e.data));
+		}
+		else if(e.data==='Alphabetical'||e.data==='Newly Added'){
+			dispatch(setSortType(e.data));
+		}
 	};
+
+	const handleClick = () =>{
+
+	}
 
 	return (!state.disable &&
 		<Menu
@@ -127,6 +104,7 @@ const Settings = () => {
 			list={state.level !== '' ? state.items[state.level].children.items : state.items}
 			handleNavigate={handleNavigate}
 			handleSelect={handleSelect}
+			handleClick={handleClick}
 			type={state.level !== '' ? state.items[state.level].children.type : state.type}
 			radioIndex={state.level !== '' && state.items[state.level].children.index}
 		/>

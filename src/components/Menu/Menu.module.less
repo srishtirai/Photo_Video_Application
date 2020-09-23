@@ -1,0 +1,67 @@
+.menu {
+	position: absolute;
+    right: 1rem;
+	top: 0.5rem;
+	background-color: #575e66;
+	border-color:  #bbb;
+	border-radius: 0.5rem;
+	filter: drop-shadow(0 24px 32px fade(black, 75%););
+	z-index: 9999;
+	width: 18%;
+
+	.header {
+		.mainHeader {
+			margin: 0;
+			font-size: 1rem;
+		}
+		.mainSubHeader {
+			font-size: 0.6rem;
+			word-wrap: break-word;
+		}
+		padding: 50px 40px 10px ;
+		line-height: 1.3em;
+		text-align: left;
+	}
+
+	.list {
+		text-align: left;
+		padding: 20px;
+		li {
+			padding : 20px;
+			display: flex;
+			font-size: 0.8rem;
+			&:hover {
+				color:  #575e66;
+				background-color: white;
+				cursor: pointer;
+			}
+			.subHeading {
+				margin: 0;
+				font-size: 0.6rem;
+				color:  #abaeb3
+			}
+			.leftContainer {
+				flex: 3;
+			}
+			.rightContainer {
+				flex: 1;
+				text-align: right;
+				color: #abaeb3;
+			}
+		}
+	}
+}
+.sliderContent {
+	position: absolute;
+	bottom: 1rem;
+}
+
+.radio{
+	margin: 0;
+	padding: 1rem 0.5rem;
+}
+
+.button{
+	padding: 20px;
+	width: 100%;
+}

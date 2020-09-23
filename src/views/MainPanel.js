@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import {connect} from 'react-redux';
 import Button from '@enact/goldstone/Button';
 import {Panel, Header} from '@enact/goldstone/Panels';
@@ -13,15 +13,23 @@ import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '
 import {closeApp} from '../actions/commonActions';
 import css from './MainPanel.module.less';
 import folder from '../../Assets/mock/folder.png';
+import Settings from '../components/Settings/Settings';
+import settingsReducer from '../reducers/settingsReducer';
 
 require.context('../../Assets/mock/', false, /\.png$/);
 
+const initialState = {
+	settings: {
+		isOpen: false
+	}
+};
 const MainPanel = (props) =>
 {
 	const items = [];
 	const [collapse, setCollapse] = useState(false);
 	const { closeApp, saveCurrentDevice, setFilterType, listDevices, getListContents, filterType, devices, currentDevice, currentList }= props;
 	const dropList=['Photos', 'Videos', 'Music', 'All'];
+	const [state, dispatch] = useReducer(settingsReducer,initialState);
 
 	const onCloseApp = () => {
 		closeApp({id: "com.webos.app.photovideo"});
@@ -115,12 +123,14 @@ const MainPanel = (props) =>
 				slotAfter={
 					<div>
 						<Button size='small' backgroundOpacity='transparent' icon='search' iconOnly />
-						<Button backgroundOpacity='transparent' icon='verticalellipsis' iconOnly />
+						<Button backgroundOpacity='transparent' onClick={() => dispatch({type: 'toggle', payload: 'settings'})} size="small" icon="verticalellipsis" iconOnly />
 						<Button size='small' onClick={onCloseApp} backgroundOpacity='transparent' icon='closex' iconOnly />
 					</div>
 				}
 			/>
-
+			{
+				state.settings.isOpen && <Settings />
+			}
 			<Dropdown
 				className={css.drop}
 				defaultSelected={filterType !== 'All' ? filterType === 'Photos' ? 0 : filterType === 'Video' ? 1 : 2 : 3}
