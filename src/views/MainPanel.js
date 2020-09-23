@@ -7,7 +7,7 @@ import Dropdown from '@enact/sandstone/Dropdown';
 import SvgGridList from '@enact/goldstone/SVGGridList/components/GridList/GridList';
 import ItemImageBase from '@enact/goldstone/SVGGridList/components/ItemImage/ItemImage';
 import ri from '@enact/ui/resolution';
-import {TabLayout, Tab} from '@enact/sandstone/TabLayout';
+import {TabLayout, Tab} from '@enact/goldstone/TabLayout';
 
 import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '../actions/listActions';
 import {closeApp} from '../actions/commonActions';
@@ -36,7 +36,7 @@ const MainPanel = (props) =>
 	}
 
 	const deviceTabs = (name, index) => {
-		return <Tab key={index} title={name.trim()} icon="usb" />
+		return <Tab className={css.tab} key={index} title={name.trim()} icon="usb" />
 	}
 
 	const onSelectDevice = (ev) => {
@@ -141,7 +141,7 @@ const MainPanel = (props) =>
 			</Dropdown>
 
 			<TabLayout
-				className={css.tab}
+				className={css.tabLayout}
 				onSelect={onSelectDevice}
 				dimensions={{tabs: {collapsed: 20, normal: 1000}, content: {expanded: null, normal: null}}}
 				collapsed={collapse}
