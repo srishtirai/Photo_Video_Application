@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react';
 import { setViewType, setSortType } from '../../actions/settingsActions';
 import settingsReducer from '../../reducers/settingsReducer';
-import Menu from '../Menu/Menu';
+import Menu from './Menu';
 
 const initialState = {
 	heading: 'Options',
