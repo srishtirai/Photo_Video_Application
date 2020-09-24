@@ -5,7 +5,7 @@ const initialstate = {
 	sortType: 'Alphabetical'
 }
 
-const settingsReducer = (state = initialstate , action) => {
+const settingsReducer = (state = initialstate, action) => {
 	switch (action.type) {
 		case 'toggle': {
 			return {
@@ -23,7 +23,7 @@ const settingsReducer = (state = initialstate , action) => {
 				...state,
 				level: action.payload
 			};
-			case 'selected':
+		case 'selected':
 			return {
 				...state,
 				level: '',
@@ -38,22 +38,22 @@ const settingsReducer = (state = initialstate , action) => {
 					}
 				}
 			};
-			case types.SET_VIEW_TYPE:{
-				if (state.viewType === action.viewType) {
-					return state;
-				}
-				else {
-					return Object.assign({}, state, {viewType: action.viewType});
-				}
+		case types.SET_VIEW_TYPE:{
+			if (state.viewType === action.viewType) {
+				return state;
 			}
-			case types.SET_SORT_TYPE:{
-				if (state.sortType === action.sortType) {
-					return state;
-				}
-				else {
-					return Object.assign({}, state, {sortType: action.sortType});
-				}
+			else {
+				return Object.assign({}, state, {viewType: action.viewType});
 			}
+		}
+		case types.SET_SORT_TYPE:{
+			if (state.sortType === action.sortType) {
+				return state;
+			}
+			else {
+				return Object.assign({}, state, {sortType: action.sortType});
+			}
+		}
 		default:
 			return state;
 	}

@@ -1,6 +1,6 @@
 import React, {useReducer} from 'react';
-import { setViewType, setSortType } from '../../actions/settingsActions';
 import settingsReducer from '../../reducers/settingsReducer';
+
 import Menu from './Menu';
 
 const initialState = {
@@ -76,7 +76,7 @@ const initialState = {
 	}
 };
 
-const Settings = () => {
+const Settings = ({setViewType, setSortType}) => {
 
 	const [state, dispatch] = useReducer(settingsReducer, initialState);
 	const handleNavigate = (value) => {
@@ -86,10 +86,10 @@ const Settings = () => {
 	const handleSelect = (e) => {
 		dispatch({type: 'selected', payload: e.selected});
 		if(e.data==='List View'||e.data==='Thumbnail View'){
-			dispatch(setViewType(e.data));
+			setViewType(e.data);
 		}
 		else if(e.data==='Alphabetical'||e.data==='Newly Added'){
-			dispatch(setSortType(e.data));
+			setSortType(e.data);
 		}
 	};
 
@@ -100,7 +100,6 @@ const Settings = () => {
 	return (!state.disable &&
 		<Menu
 			heading={state.level !== '' ? state.items[state.level].children.heading : state.heading}
-			subHeading={state.level !== '' ? state.items[state.level].children.subHeading : ''}
 			list={state.level !== '' ? state.items[state.level].children.items : state.items}
 			handleNavigate={handleNavigate}
 			handleSelect={handleSelect}

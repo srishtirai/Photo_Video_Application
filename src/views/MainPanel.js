@@ -11,6 +11,7 @@ import {TabLayout, Tab} from '@enact/goldstone/TabLayout';
 
 import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '../actions/listActions';
 import {closeApp} from '../actions/commonActions';
+import {setViewType, setSortType} from '../actions/settingsActions';
 import css from './MainPanel.module.less';
 import folder from '../../Assets/mock/folder.png';
 import Settings from '../components/Settings/Settings';
@@ -23,11 +24,12 @@ const initialState = {
 		isOpen: false
 	}
 };
+
 const MainPanel = (props) =>
 {
 	const items = [];
 	const [collapse, setCollapse] = useState(false);
-	const { closeApp, saveCurrentDevice, setFilterType, listDevices, getListContents, filterType, devices, currentDevice, currentList }= props;
+	const { closeApp, saveCurrentDevice, setFilterType, listDevices, setViewType, setSortType, getListContents, filterType, devices, currentDevice, currentList }= props;
 	const dropList=['Photos', 'Videos', 'Music', 'All'];
 	const [state, dispatch] = useReducer(settingsReducer,initialState);
 
@@ -129,7 +131,8 @@ const MainPanel = (props) =>
 				}
 			/>
 			{
-				state.settings.isOpen && <Settings />
+				state.settings.isOpen &&
+				<Settings setViewType={setViewType} setSortType={setSortType} />
 			}
 			<Dropdown
 				className={css.drop}
@@ -178,7 +181,9 @@ const mapDispatchToProps = (dispatch) => ({
 		saveCurrentDevice: (device) => dispatch(setCurrentDevice(device)),
 		setFilterType: (filterType)=> dispatch(setFilterType(filterType)),
 		getListContents: (data) => dispatch(listFolderContents(data)),
-		closeApp: (params) => dispatch(closeApp(params))
+		closeApp: (params) => dispatch(closeApp(params)),
+		setViewType: (viewType) => dispatch(setViewType(viewType)),
+		setSortType: (sortType) => dispatch(setSortType(sortType)),
 });
 
 const Main = connect(mapStateToProps, mapDispatchToProps)(MainPanel);

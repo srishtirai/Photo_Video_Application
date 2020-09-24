@@ -1,10 +1,12 @@
 import Group from '@enact/ui/Group';
 import React from 'react';
 import Icon from '@enact/goldstone/Icon';
+import IconButton from '@enact/goldstone/IconButton';
 import RadioButton from '@enact/goldstone/RadioButton';
 import css from './Menu.module.less';
 
-const Menu = ({heading, subHeading, list, handleNavigate, handleSelect, handleClick, type, radioIndex}) => {
+const Menu = ({heading, list, handleNavigate, handleSelect, handleClick, type, radioIndex}) => {
+
 	const radioButtonGroup = ({selected, ...rest}) => (
 		<RadioButton
 			className={css.radio}
@@ -12,6 +14,7 @@ const Menu = ({heading, subHeading, list, handleNavigate, handleSelect, handleCl
 			{...rest}
 		/>
 	);
+
 	return (
 		<div className={css.menu}>
 			<div className={css.header}>
@@ -21,12 +24,11 @@ const Menu = ({heading, subHeading, list, handleNavigate, handleSelect, handleCl
 						{heading}
 					</div>
 				}
-				{
-					subHeading &&
-					<div className={css.mainSubHeader}>
-						{subHeading}
-					</div>
-				}
+				{/* <div className={css.close}>
+					<IconButton size="small" backgroundOpacity="transparent" onClick={closePopup}>
+						arrowhookleft
+					</IconButton>
+				</div> */}
 			</div>
 			<ul className={css.list}>
 				{
