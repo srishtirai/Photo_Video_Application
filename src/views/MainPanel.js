@@ -9,6 +9,7 @@ import ItemImageBase from '@enact/goldstone/SVGGridList/components/ItemImage/Ite
 import ri from '@enact/ui/resolution';
 import {TabLayout, Tab} from '@enact/goldstone/TabLayout';
 
+import {appId} from '../data/appConfig';
 import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '../actions/listActions';
 import {closeApp} from '../actions/commonActions';
 import {setViewType, setSortType} from '../actions/settingsActions';
@@ -25,21 +26,12 @@ const initialState = {
 	}
 };
 
-const MainPanel = (props) =>
+const MainPanel = ({currentDevice, currentList, devices, filterType, getDevicesList, getListContents, onCloseApp, saveCurrentDevice, setFilter, setSort, setView}) =>
 {
 	const items = [];
 	const [collapse, setCollapse] = useState(false);
-	const { closeApp, saveCurrentDevice, setFilterType, listDevices, setViewType, setSortType, getListContents, filterType, devices, currentDevice, currentList }= props;
 	const dropList=['Photos', 'Videos', 'Music', 'All'];
 	const [state, dispatch] = useReducer(settingsReducer,initialState);
-
-	const onCloseApp = () => {
-		closeApp({id: "com.webos.app.photovideo"});
-	}
-
-	const deviceTabs = (name, index) => {
-		return <Tab className={css.tab} key={index} title={name.trim()} icon="usb" />
-	}
 
 	const onSelectDevice = (ev) => {
 		if(!collapse)
@@ -53,7 +45,7 @@ const MainPanel = (props) =>
 	}
 
 	const onFilter = (ev) =>{
-		setFilterType(ev.data);
+		setFilter(ev.data);
 	}
 
 	const updateDataSize = (dataLength) => {
@@ -102,16 +94,10 @@ const MainPanel = (props) =>
 		);
 	};
 
-	useEffect(()=>{
-		if (devices && devices.length === 0) {
-			listDevices();
-		}
-
-		if (currentList.length === 0) {
-			getListContents(currentDevice);
-		}
-		updateDataSize(currentList.length);
-	});
+	useEffect(() => {
+		getDevicesList();
+		getListContents(currentDevice);
+	}, [getDevicesList, getListContents, currentDevice])
 
 	return (
 		<Panel>
@@ -121,18 +107,18 @@ const MainPanel = (props) =>
 				type='compact'
 				subtitle={currentDevice.deviceName}
 				marqueeOn='render'
-				noCloseButton='true'
+				noCloseButton
 				slotAfter={
 					<div>
 						<Button size='small' backgroundOpacity='transparent' icon='search' iconOnly />
 						<Button backgroundOpacity='transparent' onClick={() => dispatch({type: 'toggle', payload: 'settings'})} size="small" icon="verticalellipsis" iconOnly />
-						<Button size='small' onClick={onCloseApp} backgroundOpacity='transparent' icon='closex' iconOnly />
+						<Button size='small' onClick={() => onCloseApp(appId)} backgroundOpacity='transparent' icon='closex' iconOnly />
 					</div>
 				}
 			/>
 			{
 				state.settings.isOpen &&
-				<Settings setViewType={setViewType} setSortType={setSortType} />
+				<Settings setViewType={setView} setSortType={setSort} />
 			}
 			<Dropdown
 				className={css.drop}
@@ -149,8 +135,8 @@ const MainPanel = (props) =>
 				dimensions={{tabs: {collapsed: 20, normal: 1000}, content: {expanded: null, normal: null}}}
 				collapsed={collapse}
 			>
-				{devices.map((item,index) =>
-					deviceTabs(item.deviceName,index)
+				{devices.map((item, index) =>
+					<Tab className={css.tab} key={index} title={item.deviceName} icon='usb'/>
 				)}
 			</TabLayout>
 
@@ -169,23 +155,27 @@ const MainPanel = (props) =>
 	)
 }
 
-const mapStateToProps = ({deviceList,currentContentsInfo}) => ({
-		devices: deviceList.devices,
-		currentDevice: deviceList.currentDevice,
-		filterType: currentContentsInfo.filterType,
-		currentList: currentContentsInfo.contentList
-});
+const mapStateToProps = state => (
+	{
+		devices: state.devices.devices,
+		currentDevice: state.devices.currentDevice,
+		currentList: state.contentList.contentList,
+		filterType: state.contentList.filterType
+	}
+)
 
-const mapDispatchToProps = (dispatch) => ({
-		listDevices: () => dispatch(listDevices()),
-		saveCurrentDevice: (device) => dispatch(setCurrentDevice(device)),
-		setFilterType: (filterType)=> dispatch(setFilterType(filterType)),
-		getListContents: (data) => dispatch(listFolderContents(data)),
-		closeApp: (params) => dispatch(closeApp(params)),
-		setViewType: (viewType) => dispatch(setViewType(viewType)),
-		setSortType: (sortType) => dispatch(setSortType(sortType)),
-});
+const Main = connect(
+	mapStateToProps,
+	{
+		getDevicesList: listDevices,
+		onCloseApp: closeApp,
+		getListContents: listFolderContents,
+		saveCurrentDevice: setCurrentDevice,
+		setFilter: setFilterType,
+		setView: setViewType,
+		setSort: setSortType
+	}
+)(MainPanel);
 
-const Main = connect(mapStateToProps, mapDispatchToProps)(MainPanel);
 export default ThemeDecorator(Main);
 export {MainPanel, Main};

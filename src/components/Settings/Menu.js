@@ -1,7 +1,6 @@
 import Group from '@enact/ui/Group';
 import React from 'react';
 import Icon from '@enact/goldstone/Icon';
-import IconButton from '@enact/goldstone/IconButton';
 import RadioButton from '@enact/goldstone/RadioButton';
 import css from './Menu.module.less';
 

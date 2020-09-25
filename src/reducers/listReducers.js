@@ -1,28 +1,22 @@
 import {types} from '../actions/actionTypes';
 
-const initialstate = {
-	devices: [],
-	id: 0,
-	currentDevice: []
-}
-
 const initialCurrentContentsState = {
 	contentList: [],
-	filterType: 'All',
-	viewList: []
+	filterType: 'All'
+}
+const initialstate = {
+	devices: [],
+	currentDevice: {}
 }
 
-const deviceList = (state = initialstate, action) => {
+const deviceListReducer = (state = initialstate, action) => {
 	switch (action.type) {
-		case types.GET_LIST_DEVICES: {
-			let newState = [];
-			if (action.TVList) {
-				newState.devices = action.TVList;
+		case types.GET_DEVICES_LIST: {
+			const newDeviceList = (action.devices.length > 0) ? {devices: action.devices, currentDevice: action.devices[0]} : state
+			if (action.mobileTVPlusList) {
+				newDeviceList.mobileTVPlusList = action.mobileTVPlusList;
 			}
-			else{
-				newState.devices = action.devices;
-			}
-			return Object.assign({}, state, newState);
+			return {...state, ...newDeviceList};
 		}
 
 		case types.SET_CURRENT_DEVICE: {
@@ -57,10 +51,8 @@ const currentContentsInfo = (state = initialCurrentContentsState, action) => {
 	}
 };
 
-
-const listReducer = {
-	deviceList,
+const listReducer={
+	deviceListReducer,
 	currentContentsInfo
 }
-
 export default listReducer;

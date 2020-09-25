@@ -1,12 +1,9 @@
-import {applyMiddleware, compose, createStore, combineReducers} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import freeze from 'redux-freeze';
 
-import listReducer from '../reducers/listReducers';
-import settingsReducer from '../reducers/settingsReducer';
-
-const rootReducer = combineReducers(listReducer, settingsReducer);
+import rootReducer from '../reducers';
 
 export const configureStore = (initialState) => {
 	const middlewares = [thunk]

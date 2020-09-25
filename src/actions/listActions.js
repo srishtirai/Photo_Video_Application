@@ -3,18 +3,19 @@ import LS2Request from '@enact/webos/LS2Request';
 import listDevicesData from '../../Assets/mock/listDevices.json';
 import listFolderContentsData from '../../Assets/mock/listFolderContents.json';
 
-export const getListDevicesAction = (devices, TVList) => {
+export const getDevicesListAction = (devices, mobileTVPlusList) => {
+	console.log(devices, mobileTVPlusList)
 	return {
-		type: types.GET_LIST_DEVICES,
+		type: types.GET_DEVICES_LIST,
 		devices: devices,
-		TVList: TVList
+		mobileTVPlusList: mobileTVPlusList
 	};
 };
 
 export const listDevices = () => (dispatch) => {
 	if (typeof window === 'object' && !window.PalmSystem) {
-		dispatch(getListDevicesAction(listDevicesData.devices));
-		return;
+		dispatch(getDevicesListAction(listDevicesData.devices));
+		return {};
 	}
 	return new LS2Request().send({
 		service: 'luna://com.webos.service.attachedstoragemanager/',
@@ -24,8 +25,7 @@ export const listDevices = () => (dispatch) => {
 		},
 		onSuccess: (res) => {
 			console.table(res.devices);
-			let TVList = res.devices;
-			dispatch(getListDevicesAction(TVList));
+			dispatch(getDevicesListAction(res.devices));
 		}
 	});
 };
