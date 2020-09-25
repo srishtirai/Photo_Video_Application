@@ -97,7 +97,7 @@ const MainPanel = ({currentDevice, currentList, devices, filterType, getDevicesL
 	useEffect(() => {
 		getDevicesList();
 		getListContents(currentDevice);
-	}, [getDevicesList, getListContents, currentDevice])
+	}, [getDevicesList, getListContents])
 
 	return (
 		<Panel>
