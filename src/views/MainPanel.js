@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useReducer } from 'react';
 import {connect} from 'react-redux';
-import Button from '@enact/goldstone/Button';
+import IconButton from '@enact/goldstone/IconButton';
 import {Panel, Header} from '@enact/goldstone/Panels';
 import ThemeDecorator from '@enact/goldstone/ThemeDecorator';
 import Dropdown from '@enact/sandstone/Dropdown';
@@ -110,9 +110,9 @@ const MainPanel = ({currentDevice, currentList, devices, filterType, getDevicesL
 				noCloseButton
 				slotAfter={
 					<div>
-						<Button size='small' backgroundOpacity='transparent' icon='search' iconOnly />
-						<Button backgroundOpacity='transparent' onClick={() => dispatch({type: 'toggle', payload: 'settings'})} size="small" icon="verticalellipsis" iconOnly />
-						<Button size='small' onClick={() => onCloseApp(appId)} backgroundOpacity='transparent' icon='closex' iconOnly />
+						<IconButton size={'small'}>search</IconButton>
+						<IconButton size={'small'} onClick={() => dispatch({type: 'toggle', payload: 'settings'})}>verticalellipsis</IconButton>
+						<IconButton size={'small'} onClick={() => onCloseApp(appId)}>closex</IconButton>
 					</div>
 				}
 			/>
