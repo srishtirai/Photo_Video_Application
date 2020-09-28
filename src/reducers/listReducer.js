@@ -56,3 +56,4 @@ const listReducer={
 	currentContentsInfo
 }
 export default listReducer;
+export {deviceListReducer, currentContentsInfo};

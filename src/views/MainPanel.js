@@ -10,7 +10,7 @@ import ri from '@enact/ui/resolution';
 import {TabLayout, Tab} from '@enact/goldstone/TabLayout';
 
 import {appId} from '../data/appConfig';
-import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '../actions/listActions';
+import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '../actions/deviceListActions';
 import {closeApp} from '../actions/commonActions';
 import {setViewType, setSortType} from '../actions/settingsActions';
 import css from './MainPanel.module.less';
