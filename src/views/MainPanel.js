@@ -10,7 +10,7 @@ import ri from '@enact/ui/resolution';
 import {TabLayout, Tab} from '@enact/goldstone/TabLayout';
 
 import {appId} from '../data/appConfig';
-import {listDevices, setCurrentDevice, setFilterType, listFolderContents} from '../actions/deviceListActions';
+import {getDeviceProperties, listDevices, listFolderContents, setCurrentDevice, setFilterType} from '../actions/deviceListActions';
 import {closeApp} from '../actions/commonActions';
 import {setViewType, setSortType} from '../actions/settingsActions';
 import css from './MainPanel.module.less';
@@ -26,17 +26,18 @@ const initialState = {
 	}
 };
 
-const MainPanel = ({currentDevice, currentList, devices, filterType, getDevicesList, getListContents, onCloseApp, saveCurrentDevice, setFilter, setSort, setView}) =>
+const MainPanel = ({currentDevice, currentList, deviceProperties, devices, filterType, freeSpace, getDevicesList, getListContents,  onCloseApp, saveCurrentDevice, setFilter, setSort, setView, totalSpace}) =>
 {
 	const items = [];
 	const [collapse, setCollapse] = useState(false);
-	const dropList=['Photos', 'Videos', 'Music', 'All'];
+	const dropList=['All', 'Photo & Video', 'Photo', 'Video', 'Music'];
 	const [state, dispatch] = useReducer(settingsReducer,initialState);
 
 	const onSelectDevice = (ev) => {
 		if(!collapse)
 		{
 			saveCurrentDevice(devices[ev.index]);
+			deviceProperties(devices[ev.index]);
 			setCollapse(true);
 		}
 		else{
@@ -52,14 +53,26 @@ const MainPanel = ({currentDevice, currentList, devices, filterType, getDevicesL
 		let count = 0;
 		for (let i = 0; i < dataLength ; i++) {
 			let source = "";
-			if(filterType === "Photos" || filterType === "All"){
+			if(currentList[i].itemType === "folder"){
+				if(currentList[i].thumbnailUri !== ""){
+					source = currentList[i].thumbnailUri;
+				}else{
+					source = folder;
+				}
+				items.push({ source });
+				count++;
+			}
+		}
+		for (let i = 0; i < dataLength ; i++) {
+			let source = "";
+			if(filterType === "Photo" || filterType === "Photo & Video" ||filterType === "All"){
 				if(currentList[i].itemType === "image"){
 					source = currentList[i].itemPath;
 					items.push({ source });
 					count++;
 				}
 			}
-			if(filterType === "Videos" || filterType === "All"){
+			if(filterType === "Video" || filterType === "Photo & Video" || filterType === "All"){
 				if(currentList[i].itemType === "video"){
 					source = currentList[i].thumbnailUri;
 					items.push({ source });
@@ -73,15 +86,6 @@ const MainPanel = ({currentDevice, currentList, devices, filterType, getDevicesL
 					count++;
 				}
 			}
-			if(currentList[i].itemType === "folder"){
-				if(currentList[i].thumbnailUri !== ""){
-					source = currentList[i].thumbnailUri;
-				}else{
-					source = folder;
-				}
-				items.push({ source });
-				count++;
-			}
 		}
 		return count;
 	};
@@ -90,13 +94,14 @@ const MainPanel = ({currentDevice, currentList, devices, filterType, getDevicesL
 		const { source } = items[index];
 
 		return (
-			<ItemImageBase {...rest}  src={source}/>
+			<ItemImageBase {...rest}  src={source} />
 		);
 	};
 
 	useEffect(() => {
 		getDevicesList();
 		getListContents(currentDevice);
+		deviceProperties(currentDevice);
 	}, [getDevicesList, getListContents])
 
 	return (
@@ -105,7 +110,7 @@ const MainPanel = ({currentDevice, currentList, devices, filterType, getDevicesL
 				slots='title'
 				title='Media discovery'
 				type='compact'
-				subtitle={currentDevice.deviceName}
+				subtitle={currentDevice.deviceName+" : "+freeSpace+" Free / "+totalSpace}
 				marqueeOn='render'
 				noCloseButton
 				slotAfter={
@@ -122,7 +127,7 @@ const MainPanel = ({currentDevice, currentList, devices, filterType, getDevicesL
 			}
 			<Dropdown
 				className={css.drop}
-				defaultSelected={filterType !== 'All' ? filterType === 'Photos' ? 0 : filterType === 'Video' ? 1 : 2 : 3}
+				defaultSelected={filterType !== 'All' ? filterType === 'Photo & Video' ? 1 : filterType === 'Photo' ? 2 : filterType === 'Video' ? 3 : 4 : 0}
 				onSelect={onFilter}
 				orientation='vertical'
 			>
@@ -134,6 +139,7 @@ const MainPanel = ({currentDevice, currentList, devices, filterType, getDevicesL
 				onSelect={onSelectDevice}
 				dimensions={{tabs: {collapsed: 20, normal: 1000}, content: {expanded: null, normal: null}}}
 				collapsed={collapse}
+				onTabAnimationEnd
 			>
 				{devices.map((item, index) =>
 					<Tab className={css.tab} key={index} title={item.deviceName} icon='usb'/>
@@ -160,7 +166,9 @@ const mapStateToProps = state => (
 		devices: state.devices.devices,
 		currentDevice: state.devices.currentDevice,
 		currentList: state.contentList.contentList,
-		filterType: state.contentList.filterType
+		filterType: state.contentList.filterType,
+		freeSpace: state.devices.freeSpace,
+		totalSpace: state.devices.totalSpace
 	}
 )
 
@@ -173,7 +181,8 @@ const Main = connect(
 		saveCurrentDevice: setCurrentDevice,
 		setFilter: setFilterType,
 		setView: setViewType,
-		setSort: setSortType
+		setSort: setSortType,
+		deviceProperties: getDeviceProperties
 	}
 )(MainPanel);
 

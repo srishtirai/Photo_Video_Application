@@ -2,6 +2,7 @@ import {types} from './actionTypes';
 import LS2Request from '@enact/webos/LS2Request';
 import listDevicesData from '../../Assets/mock/listDevices.json';
 import listFolderContentsData from '../../Assets/mock/listFolderContents.json';
+import AppLog from '../components/AppLog/AppLog';
 
 export const getDevicesListAction = (devices, mobileTVPlusList) => {
 	console.log(devices, mobileTVPlusList)
@@ -80,3 +81,55 @@ export const setFilterType = (filterType) => {
 	};
 };
 
+export const getDevicePropertiesAction = (freeSpace, totalSpace) => {
+	return {
+		type: types.GET_DEVICE_PROPERTIES,
+		freeSpace,
+		totalSpace
+	};
+};
+
+const getSpaceInfoFormat = (inFree) => {
+	let result = {},
+		unit = ['MB', 'GB', 'TB'],
+		unitIndex = 0;
+	while (inFree > 1024) {
+		inFree = (inFree / 1024);
+		unitIndex++;
+	}
+	if (inFree < 10) {
+		inFree = inFree.toFixed(2);
+	} else if (inFree < 100) {
+		inFree = inFree.toFixed(1);
+	} else {
+		inFree = inFree.toFixed(0);
+	}
+	result = inFree+unit[unitIndex];
+	return result;
+};
+
+export const getDeviceProperties = (device) => (dispatch) => {
+	if (typeof window === 'object' && !window.PalmSystem) {
+		let freeSpace = getSpaceInfoFormat(25217);
+		let totalSpace = getSpaceInfoFormat(356738);
+		dispatch(getDevicePropertiesAction(freeSpace, totalSpace));
+		return;
+	}
+	return new LS2Request().send({
+		service: 'luna://com.webos.service.attachedstoragemanager/',
+		method: 'getProperties',
+		parameters: {
+			deviceId: device.deviceId,
+			subDeviceId: device.subDevices ? device.subDevices[0].deviceId : ''
+		},
+		onSuccess: (res) => {
+			AppLog(res);
+			let freeSpace = getSpaceInfoFormat(res.freeSpace);
+			let totalSpace = getSpaceInfoFormat(res.totalSpace);
+			dispatch(getDevicePropertiesAction(freeSpace, totalSpace));
+		},
+		onFailure: (res) => {
+			AppLog(res);
+		}
+	});
+};

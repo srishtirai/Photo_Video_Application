@@ -6,7 +6,9 @@ const initialCurrentContentsState = {
 }
 const initialstate = {
 	devices: [],
-	currentDevice: {}
+	currentDevice: {},
+	freeSpace: 0,
+	totalSpace: 0
 }
 
 const deviceListReducer = (state = initialstate, action) => {
@@ -23,6 +25,10 @@ const deviceListReducer = (state = initialstate, action) => {
 			return Object.assign({}, state, {currentDevice: action.device});
 		}
 
+		case types.GET_DEVICE_PROPERTIES: {
+			return Object.assign({}, state, {freeSpace: action.freeSpace, totalSpace: action.totalSpace});
+		}
+
 		default:
 			return state
 	}
@@ -31,10 +37,7 @@ const deviceListReducer = (state = initialstate, action) => {
 const currentContentsInfo = (state = initialCurrentContentsState, action) => {
 	switch (action.type) {
 		case types.GET_LIST_CONTENTS: {
-			let
-				newContents = action.contents
-			return Object.assign({}, state, { contentList: newContents });
-
+			return Object.assign({}, state, { contentList: action.contents});
 		}
 
 		case types.SET_FILTER_TYPE: {
