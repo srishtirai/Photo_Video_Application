@@ -7,9 +7,8 @@ import folder from '../../../Assets/mock/folder.png';
 import css from './GridList.module.less';
 
 const Filter = ({currentList, filterType}) => {
-    
     const items = [];
-    
+
     const updateDataSize = (dataLength) => {
 		let count = 0;
 		for (let i = 0; i < dataLength ; i++) {
@@ -58,8 +57,8 @@ const Filter = ({currentList, filterType}) => {
 			<ItemImageBase {...rest}  src={source} />
 		);
     };
-    
-    return (
+
+    return(
         <SvgGridList
 			className={css.grid}
 			dataSize={updateDataSize(currentList.length)}

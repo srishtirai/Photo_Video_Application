@@ -28,6 +28,9 @@ const MainPanel = ({currentDevice, currentList, deviceProperties, devices, filte
 	const [collapse, setCollapse] = useState(false);
 	const [state, dispatch] = useReducer(settingsReducer,initialState);
 
+	getListContents(currentDevice);
+	deviceProperties(currentDevice);
+
 	const onSelectDevice = (ev) => {
 		if(!collapse)
 		{
@@ -42,9 +45,7 @@ const MainPanel = ({currentDevice, currentList, deviceProperties, devices, filte
 
 	useEffect(() => {
 		getDevicesList();
-		getListContents(currentDevice);
-		deviceProperties(currentDevice);
-	}, [getDevicesList, getListContents])
+	}, [getDevicesList])
 
 	return (
 		<Panel>
@@ -67,7 +68,7 @@ const MainPanel = ({currentDevice, currentList, deviceProperties, devices, filte
 				state.settings.isOpen &&
 				<Settings setViewType={setView} setSortType={setSort} />
 			}
-			
+
 			<Filter filterType={filterType} setFilter={setFilter} />
 
 			<TabLayout
@@ -83,7 +84,7 @@ const MainPanel = ({currentDevice, currentList, deviceProperties, devices, filte
 			</TabLayout>
 
 			<GridList currentList={currentList} filterType={filterType}/>
-			
+
 		</Panel>
 	)
 }
