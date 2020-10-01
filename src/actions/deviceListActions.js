@@ -2,6 +2,7 @@ import {types} from './actionTypes';
 import LS2Request from '@enact/webos/LS2Request';
 import listDevicesData from '../../Assets/mock/listDevices.json';
 import listFolderContentsData from '../../Assets/mock/listFolderContents.json';
+import listProperties from '../../Assets/mock/listProperties.json';
 import AppLog from '../components/AppLog/AppLog';
 
 export const getDevicesListAction = (devices, mobileTVPlusList) => {
@@ -110,8 +111,8 @@ const getSpaceInfoFormat = (inFree) => {
 
 export const getDeviceProperties = (device) => (dispatch) => {
 	if (typeof window === 'object' && !window.PalmSystem) {
-		let freeSpace = getSpaceInfoFormat(25217);
-		let totalSpace = getSpaceInfoFormat(356738);
+		let freeSpace = getSpaceInfoFormat(listProperties.freeSpace);
+		let totalSpace = getSpaceInfoFormat(listProperties.totalSpace);
 		dispatch(getDevicePropertiesAction(freeSpace, totalSpace));
 		return;
 	}

@@ -15,7 +15,7 @@ import Filter from '../components/Filter/Filter';
 import GridList from '../components/Grid List/GridList';
 import settingsReducer from '../reducers/settingsReducer';
 
-require.context('../../Assets/mock/', false, /\.png$/);
+require.context('../../Assets/Thumbnails/', false, /\.png$/);
 
 const initialState = {
 	settings: {
