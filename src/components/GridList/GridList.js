@@ -14,37 +14,35 @@ const GridList = ({currentList, filterType}) => {
 		for (let i = 0; i < dataLength ; i++) {
 			let source = "";
 			if(currentList[i].itemType === "folder"){
-				if(currentList[i].thumbnailUri !== ""){
-					source = currentList[i].thumbnailUri;
-				}else{
-					source = folder;
-				}
+				source = currentList[i].thumbnailUri !== "" ? currentList[i].thumbnailUri : folder;
 				items.push({ source });
 				count++;
 			}
 		}
 		for (let i = 0; i < dataLength ; i++) {
-			let source = "";
-			if(filterType === "Photo" || filterType === "Photo & Video" ||filterType === "All"){
-				if(currentList[i].itemType === "image"){
-					source = currentList[i].itemPath;
-					items.push({ source });
-					count++;
+			let source = "",
+				itemType = currentList[i].itemType,
+				path = currentList[i].itemPath,
+				thumbnail = currentList[i].thumbnailUri;
+
+			if(filterType === "All" || filterType === "Photo" || filterType === "Photo & Video"){
+				if(itemType === "image"){
+					source = path;
 				}
 			}
-			if(filterType === "Video" || filterType === "Photo & Video" || filterType === "All"){
-				if(currentList[i].itemType === "video"){
-					source = currentList[i].thumbnailUri;
-					items.push({ source });
-					count++;
+			if(filterType === "All" || filterType === "Video" || filterType === "Photo & Video"){
+				if(itemType === "video"){
+					source = thumbnail;
 				}
 			}
-			if(filterType === "Music" || filterType === "All"){
-				if(currentList[i].itemType === "audio"){
-					source = currentList[i].thumbnailUri;
-					items.push({ source });
-					count++;
+			if(filterType === "All" || filterType === "Music"){
+				if(itemType === "audio"){
+					source = thumbnail;
 				}
+			}
+			if(source !== ""){
+				items.push({ source });
+				count++;
 			}
 		}
 		return count;
@@ -53,7 +51,7 @@ const GridList = ({currentList, filterType}) => {
 	const renderItem = ({ index, ...rest }) => {
 		const { source } = items[index];
 		return (
-			<ItemImageBase {...rest}  src={source} />
+			<ItemImageBase {...rest}  src={source} key={index}/>
 		);
     };
 

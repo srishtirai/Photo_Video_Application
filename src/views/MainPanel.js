@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import {connect} from 'react-redux';
+import Dropdown from '@enact/sandstone/Dropdown';
 import IconButton from '@enact/goldstone/IconButton';
 import {Panel, Header} from '@enact/goldstone/Panels';
 import ThemeDecorator from '@enact/goldstone/ThemeDecorator';
-import {TabLayout, Tab} from '@enact/goldstone/TabLayout';
 
 import {appId} from '../data/appConfig';
-import {getDeviceProperties, listDevices, listFolderContents, setCurrentDevice, setFilterType} from '../actions/deviceListActions';
 import {closeApp} from '../actions/commonActions';
+import {getDeviceProperties, listDevices, listFolderContents, setCurrentDevice, setFilterType} from '../actions/deviceListActions';
 import {setViewType, setSortType} from '../actions/settingsActions';
-import css from './MainPanel.module.less';
-import Settings from '../components/Settings/Settings';
-import Filter from '../components/Filter/Filter';
+import DeviceTabs from '../components/DeviceTabs/DeviceTabs';
 import GridList from '../components/GridList/GridList';
+import Settings from '../components/Settings/Settings';
 import settingsReducer from '../reducers/settingsReducer';
+import css from './MainPanel.module.less';
 
 require.context('../../Assets/Thumbnails/', false, /\.png$/);
 
@@ -25,23 +25,11 @@ const initialState = {
 
 const MainPanel = ({currentDevice, currentList, deviceProperties, devices, filterType, freeSpace, getDevicesList, getListContents,  onCloseApp, saveCurrentDevice, setFilter, setSort, setView, totalSpace}) =>
 {
-	const [collapse, setCollapse] = useState(false);
+	const dropList=['All', 'Photo & Video', 'Photo', 'Video', 'Music'];
 	const [state, dispatch] = useReducer(settingsReducer,initialState);
 
 	getListContents(currentDevice);
 	deviceProperties(currentDevice);
-
-	const onSelectDevice = (ev) => {
-		if(!collapse)
-		{
-			saveCurrentDevice(devices[ev.index]);
-			deviceProperties(devices[ev.index]);
-			setCollapse(true);
-		}
-		else{
-			setCollapse(false);
-		}
-	}
 
 	useEffect(() => {
 		getDevicesList();
@@ -69,19 +57,18 @@ const MainPanel = ({currentDevice, currentList, deviceProperties, devices, filte
 				<Settings setViewType={setView} setSortType={setSort} />
 			}
 
-			<Filter filterType={filterType} setFilter={setFilter} />
-
-			<TabLayout
-				className={css.tabLayout}
-				onSelect={onSelectDevice}
-				dimensions={{tabs: {collapsed: 20, normal: 1000}, content: {expanded: null, normal: null}}}
-				collapsed={collapse}
-				onTabAnimationEnd
+			<Dropdown
+				className={css.drop}
+				defaultSelected={filterType !== 'All' ? filterType === 'Photo & Video' ? 1 : filterType === 'Photo' ? 2 : filterType === 'Video' ? 3 : 4 : 0}
+				onSelect={(ev) => setFilter(ev.data)}
+				orientation='vertical'
 			>
-				{devices.map((item, index) =>
-					<Tab className={css.tab} key={index} title={item.deviceName} icon='usb'/>
-				)}
-			</TabLayout>
+				{dropList}
+			</Dropdown>
+
+			<DeviceTabs
+				devices={devices} setDevice={saveCurrentDevice} space={deviceProperties}
+			/>
 
 			<GridList currentList={currentList} filterType={filterType}/>
 
