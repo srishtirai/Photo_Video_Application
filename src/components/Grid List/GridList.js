@@ -3,13 +3,12 @@ import SvgGridList from '@enact/goldstone/SVGGridList/components/GridList/GridLi
 import ItemImageBase from '@enact/goldstone/SVGGridList/components/ItemImage/ItemImage';
 import ri from '@enact/ui/resolution';
 
-import folder from '../../../Assets/mock/folder.png';
+import folder from '../../../Assets/Thumbnails/folder.png';
 import css from './GridList.module.less';
 
 const Filter = ({currentList, filterType}) => {
-    
     const items = [];
-    
+
     const updateDataSize = (dataLength) => {
 		let count = 0;
 		for (let i = 0; i < dataLength ; i++) {
@@ -58,8 +57,8 @@ const Filter = ({currentList, filterType}) => {
 			<ItemImageBase {...rest}  src={source} />
 		);
     };
-    
-    return (
+
+    return(
         <SvgGridList
 			className={css.grid}
 			dataSize={updateDataSize(currentList.length)}
