@@ -6,7 +6,7 @@ import ri from '@enact/ui/resolution';
 import folder from '../../../Assets/Thumbnails/folder.png';
 import css from './GridList.module.less';
 
-const Filter = ({currentList, filterType}) => {
+const GridList = ({currentList, filterType}) => {
     const items = [];
 
     const updateDataSize = (dataLength) => {
@@ -52,7 +52,6 @@ const Filter = ({currentList, filterType}) => {
 
 	const renderItem = ({ index, ...rest }) => {
 		const { source } = items[index];
-
 		return (
 			<ItemImageBase {...rest}  src={source} />
 		);
@@ -73,4 +72,4 @@ const Filter = ({currentList, filterType}) => {
 	);
 };
 
-export default Filter;
+export default GridList;

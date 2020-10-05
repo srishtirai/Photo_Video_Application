@@ -12,7 +12,7 @@ import {setViewType, setSortType} from '../actions/settingsActions';
 import css from './MainPanel.module.less';
 import Settings from '../components/Settings/Settings';
 import Filter from '../components/Filter/Filter';
-import GridList from '../components/Grid List/GridList';
+import GridList from '../components/GridList/GridList';
 import settingsReducer from '../reducers/settingsReducer';
 
 require.context('../../Assets/Thumbnails/', false, /\.png$/);
