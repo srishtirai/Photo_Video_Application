@@ -27,6 +27,9 @@ const MainPanel = ({currentDevice, currentList, deviceProperties, devices, filte
 {
 	const dropList=['All', 'Photo & Video', 'Photo', 'Video', 'Music'];
 	const [state, dispatch] = useReducer(settingsReducer,initialState);
+	const onClose = () => onCloseApp(appId);
+	const optionPopup = () => dispatch({type: 'toggle', payload: 'settings'});
+	const onSelectDevice = (ev) => setFilter(ev.data);
 
 	getListContents(currentDevice);
 	deviceProperties(currentDevice);
@@ -47,8 +50,8 @@ const MainPanel = ({currentDevice, currentList, deviceProperties, devices, filte
 				slotAfter={
 					<div>
 						<IconButton size={'small'}>search</IconButton>
-						<IconButton size={'small'} onClick={() => dispatch({type: 'toggle', payload: 'settings'})}>verticalellipsis</IconButton>
-						<IconButton size={'small'} onClick={() => onCloseApp(appId)}>closex</IconButton>
+						<IconButton size={'small'} onClick={optionPopup}>verticalellipsis</IconButton>
+						<IconButton size={'small'} onClick={onClose}>closex</IconButton>
 					</div>
 				}
 			/>
@@ -60,7 +63,7 @@ const MainPanel = ({currentDevice, currentList, deviceProperties, devices, filte
 			<Dropdown
 				className={css.drop}
 				defaultSelected={filterType !== 'All' ? filterType === 'Photo & Video' ? 1 : filterType === 'Photo' ? 2 : filterType === 'Video' ? 3 : 4 : 0}
-				onSelect={(ev) => setFilter(ev.data)}
+				onSelect={onSelectDevice}
 				orientation='vertical'
 			>
 				{dropList}

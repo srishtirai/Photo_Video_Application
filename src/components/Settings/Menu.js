@@ -23,11 +23,6 @@ const Menu = ({heading, list, handleNavigate, handleSelect, handleClick, type, r
 						{heading}
 					</div>
 				}
-				{/* <div className={css.close}>
-					<IconButton size="small" backgroundOpacity="transparent" onClick={closePopup}>
-						arrowhookleft
-					</IconButton>
-				</div> */}
 			</div>
 			<ul className={css.list}>
 				{
