@@ -5,8 +5,9 @@ import listFolderContentsData from '../../Assets/mock/listFolderContents.json';
 import listProperties from '../../Assets/mock/listProperties.json';
 import AppLog from '../components/AppLog/AppLog';
 
+// Action to get list of available storage devices list.
+
 export const getDevicesListAction = (devices, mobileTVPlusList) => {
-	console.log(devices, mobileTVPlusList)
 	return {
 		type: types.GET_DEVICES_LIST,
 		devices: devices,
@@ -32,6 +33,8 @@ export const listDevices = () => (dispatch) => {
 	});
 };
 
+// Action to get selected storage device contents.
+
 export const getListContents = (res, totalCount) => {
 	return {
 		type: types.GET_LIST_CONTENTS,
@@ -47,15 +50,15 @@ export const listFolderContents = (data) => (dispatch) => {
 		return;
 	}
 	let opt = {
-			path: data.path,
-			deviceId: data.deviceId,
-			offset: 0,
-			limit: 100,
-			dataScope: 'full',
-			requestType: 'byItemType',
-			itemType: ['all'],
-			sortType: 'modifiedTime'
-		};
+		path: data.deviceUri,
+		deviceId: data.deviceId,
+		offset: 0,
+		limit: 100,
+		dataScope: 'full',
+		requestType: 'byItemType',
+		itemType: ['all'],
+		sortType: 'modifiedTime'
+	};
 
 	return new LS2Request().send({
 		service: 'luna://com.webos.service.attachedstoragemanager/',
@@ -64,23 +67,34 @@ export const listFolderContents = (data) => (dispatch) => {
 		onSuccess: (res) => {
 			let returnObject = res.contents;
 			dispatch(getListContents(returnObject, res.totalCount));
+			return res;
+		},
+		onFailure: (res) => {
+			AppLog(res);
 		}
 	});
 };
 
+// Action to set the selected device as the current device.
+
 export const setCurrentDevice = (device) => {
-	return{
+	return {
 		type: types.SET_CURRENT_DEVICE,
 		device
 	}
 };
 
+// Action to set filter type and obtain filtered items.
+
 export const setFilterType = (filterType) => {
 	return {
 		type: types.SET_FILTER_TYPE,
-		filterType:filterType
+		filterType: filterType
 	};
 };
+
+
+// Action to get selected storage devices properties.
 
 export const getDevicePropertiesAction = (freeSpace, totalSpace) => {
 	return {
@@ -105,7 +119,7 @@ const getSpaceInfoFormat = (inFree) => {
 	} else {
 		inFree = inFree.toFixed(0);
 	}
-	result = inFree+unit[unitIndex];
+	result = inFree + unit[unitIndex];
 	return result;
 };
 
@@ -125,8 +139,8 @@ export const getDeviceProperties = (device) => (dispatch) => {
 		},
 		onSuccess: (res) => {
 			AppLog(res);
-			let freeSpace = getSpaceInfoFormat(res.freeSpace);
-			let totalSpace = getSpaceInfoFormat(res.totalSpace);
+			let freeSpace = getSpaceInfoFormat(res.freeSpace || 0);
+			let totalSpace = getSpaceInfoFormat(res.totalSpace || 0);
 			dispatch(getDevicePropertiesAction(freeSpace, totalSpace));
 		},
 		onFailure: (res) => {

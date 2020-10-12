@@ -5,13 +5,13 @@
             "itemName": "High resolution Images",
             "itemType": "folder",
             "itemPath": "/tmp/usb/sda/sda1/High resolution Images",
-            "thumbnailUri": ""
+            "thumbnailUri": "../../Assets/Thumbnails/folder.png"
         },
         {
             "size": 58252568,
-            "itemName": "bunny_movie.mp4",
+            "itemName": "bunny_movie.mp3",
             "itemType": "audio",
-            "itemPath": "/tmp/usb/sda/sda1/movie.mp4",
+            "itemPath": "/tmp/usb/sda/sda1/movie.mp3",
             "thumbnailUri": "../../Assets/Thumbnails/music.png"
         },
         {
@@ -44,7 +44,7 @@
         },
         {
             "size": 4096,
-            "itemName": "._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3",
+            "itemName": "._Aalayal Thara Venam - Masala Coffee.mp3",
             "itemType": "audio",
             "itemPath": "/tmp/usb/sda/sda1/._Aalayal Thara Venam - Masala Coffee - Official Video HD.mp3",
             "thumbnailUri": "../../Assets/Thumbnails/music.png"
@@ -147,7 +147,7 @@
         },
         {
             "itemName": "sintel_trailer.mp4",
-            "itemPath": "/tmp/usb/sda/sda1/sintel_trailer.mp4",
+            "itemPath": "/tmp/usb/sda/sda1/sintel_trailer.mp3",
             "thumbnailUri": "../../Assets/Thumbnails/music.png",
             "itemType": "audio",
             "size": 58252568

@@ -1,9 +1,5 @@
 import {types} from '../actions/actionTypes';
 
-const initialCurrentContentsState = {
-	contentList: [],
-	filterType: 'All'
-}
 const initialstate = {
 	devices: [],
 	currentDevice: {},
@@ -11,10 +7,11 @@ const initialstate = {
 	totalSpace: 0
 }
 
-const deviceListReducer = (state = initialstate, action) => {
+export const deviceListReducer = (state = initialstate, action) => {
+	const devices = action.devices
 	switch (action.type) {
 		case types.GET_DEVICES_LIST: {
-			const newDeviceList = (action.devices.length > 0) ? {devices: action.devices, currentDevice: action.devices[0]} : state
+			const newDeviceList = (devices.length > 0) ? {devices: devices, currentDevice: devices[0]} : state
 			if (action.mobileTVPlusList) {
 				newDeviceList.mobileTVPlusList = action.mobileTVPlusList;
 			}
@@ -34,29 +31,57 @@ const deviceListReducer = (state = initialstate, action) => {
 	}
 };
 
-const currentContentsInfo = (state = initialCurrentContentsState, action) => {
+// Selected device file list & filtered list.
+const initialCurrentContentsState = {
+	contentList: [],
+	filterType: 'All',
+	filteredList: []
+}
+
+export const currentDeviceFileListReducer = (state = initialCurrentContentsState, action) => {
+	console.log('action.contents')
+	console.log(action)
 	switch (action.type) {
 		case types.GET_LIST_CONTENTS: {
-			return Object.assign({}, state, { contentList: action.contents});
+			return {...state, contentList: action.contents, filteredList: action.contents};
 		}
 
 		case types.SET_FILTER_TYPE: {
-			if (state.filterType === action.filterType) {
-				return state;
+			const
+				contentList= state.contentList,
+				filterType = action.filterType,
+				items = [] ;
+
+			for (let i = 0; i < contentList.length ; i++) {
+				if(contentList[i].itemType === "folder"){
+					;
+					items.push(contentList[i]);
+				}
 			}
-			else {
-				return Object.assign({}, state, {filterType: action.filterType});
+			for (let i = 0; i < contentList.length ; i++) {
+				let itemType = contentList[i].itemType;
+
+				if(filterType === "All" || filterType === "Photo" || filterType === "Photo & Video"){
+					if(itemType === "image"){
+						items.push(contentList[i]);
+					}
+				}
+				if(filterType === "All" || filterType === "Video" || filterType === "Photo & Video"){
+					if(itemType === "video"){
+						items.push(contentList[i]);
+					}
+				}
+				if(filterType === "All" || filterType === "Music"){
+					if(itemType === "audio"){
+						items.push(contentList[i]);
+					}
+				}
 			}
+
+			return Object.assign({}, state, {filterType: action.filterType, filteredList: items});
 		}
 
 		default:
 			return state
 	}
 };
-
-const listReducer={
-	deviceListReducer,
-	currentContentsInfo
-}
-export default listReducer;
-export {deviceListReducer, currentContentsInfo};

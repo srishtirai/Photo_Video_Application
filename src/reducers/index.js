@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import {deviceListReducer, currentContentsInfo} from './listReducer';
+import {deviceListReducer, currentDeviceFileListReducer} from './listReducer';
 
 export default combineReducers({
   devices: deviceListReducer,
-  contentList: currentContentsInfo
+  currentDeviceFileList: currentDeviceFileListReducer
 })
