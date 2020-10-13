@@ -9,9 +9,9 @@
         },
         {
             "size": 58252568,
-            "itemName": "bunny_movie.mp3",
+            "itemName": "bunny_movie",
             "itemType": "audio",
-            "itemPath": "/tmp/usb/sda/sda1/movie.mp3",
+            "itemPath": "/tmp/usb/sda/sda1/movie",
             "thumbnailUri": "../../Assets/Thumbnails/music.png"
         },
         {
@@ -30,9 +30,9 @@
         },
         {
             "size": 58252568,
-            "itemName": "bunny_movie.mp4",
+            "itemName": "bunny_movie",
             "itemType": "video",
-            "itemPath": "/tmp/usb/sda/sda1/movie.mp4",
+            "itemPath": "/tmp/usb/sda/sda1/movie",
             "thumbnailUri": "../../Assets/Thumbnails/video.png"
         },
         {

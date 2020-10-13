@@ -18,9 +18,7 @@ const GridList = ({deviceFileList, filteredList, filterType}) => {
 		return (
 			<ImageItem
 				src={thumbPath}
-			>
-				{deviceFileList[index].itemName}
-			</ImageItem>
+			/>
 		);
 	};
 
@@ -32,8 +30,9 @@ const GridList = ({deviceFileList, filteredList, filterType}) => {
 				itemRenderer={renderItem}
 				itemSize={{
 					minWidth: ri.scale(500),
-					minHeight: ri.scale(500)
+					minHeight: ri.scale(400)
 				}}
+				spacing={50}
 			/>
 		</Scroller>
 	);
