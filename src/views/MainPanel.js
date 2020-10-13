@@ -11,6 +11,7 @@ import {setViewType, setSortType} from '../actions/settingsActions';
 import DeviceTabLayout from '../components/DeviceTabLayout/DeviceTabLayout';
 import Settings from '../components/Settings/Settings';
 import settingsReducer from '../reducers/settingsReducer';
+import FilterSelection from '../components/Filter/FilterSelection';
 
 require.context('../../Assets/Thumbnails/', false, /\.png$/);
 
@@ -51,7 +52,8 @@ const MainPanel = ({currentDevice, freeSpace, getDevicesList, onCloseApp, setSor
 				state.settings.isOpen &&
 				<Settings setViewType={setView} setSortType={setSort} />
 			}
-			<DeviceTabLayout />
+			<FilterSelection/>
+			<DeviceTabLayout/>
 		</Panel>
 	)
 }

@@ -1,24 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {TabLayout, Tab} from '@enact/goldstone/TabLayout';
-import {getDeviceProperties, setCurrentDevice} from '../../actions/deviceListActions';
+import {getDeviceProperties, setCurrentDevice, setFilterType} from '../../actions/deviceListActions';
 import FileGridList from '../FileGridList/FileGridList'
 import css from './DeviceTabLayout.module.less';
 import {listFolderContents} from '../../actions/deviceListActions'
-import FilterSelection from '../Filter/FilterSelection';
 
-const DeviceTabs = ({devices, deviceProperties, getlistFolderContents, setCurrentDevice}) => {
+const DeviceTabs = ({devices, deviceProperties, getlistFolderContents, setCurrentDevice, setFilterType}) => {
 
     const onSelectDevice = ({index}) => {
         const selectedDevice = devices[index];
         setCurrentDevice(selectedDevice);
         deviceProperties(selectedDevice);
-        getlistFolderContents(selectedDevice)
+        getlistFolderContents(selectedDevice);
+        setFilterType("All");
     }
 
     return (
-        <>
-        <FilterSelection />
         <TabLayout
             onSelect={onSelectDevice}
         >
@@ -28,7 +26,6 @@ const DeviceTabs = ({devices, deviceProperties, getlistFolderContents, setCurren
                 </Tab>
             )}
         </TabLayout>
-        </>
     );
 };
 
@@ -41,7 +38,8 @@ const DeviceTabLayout = connect(
     {
         getlistFolderContents: listFolderContents,
         setCurrentDevice,
-        deviceProperties: getDeviceProperties
+        deviceProperties: getDeviceProperties,
+        setFilterType
     }
 )(DeviceTabs);
 

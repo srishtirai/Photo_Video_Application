@@ -6,16 +6,10 @@ import ri from '@enact/ui/resolution';
 import Scroller from '@enact/goldstone/Scroller/Scroller';
 
 const GridList = ({deviceFileList, filteredList, filterType}) => {
-	console.log(filteredList.length)
 
 	const renderItem = ({index}) => {
-		let thumbPath  = "";
-		if(filterType!="All"){
-			thumbPath = filteredList[index].itemType==="image"?filteredList[index].itemPath:filteredList[index].thumbnailUri;
-		}
-		else{
-		 	thumbPath =  filteredList[index].itemType==="image"?filteredList[index].itemPath:filteredList[index].thumbnailUri;
-		}
+
+		let thumbPath  = filteredList[index].itemType==="image" ? filteredList[index].itemPath : filteredList[index].thumbnailUri;
 		let encodedPath = encodeURIComponent(thumbPath);
 
 		if (thumbPath && thumbPath.substring(0, 1) === '/') {
@@ -23,7 +17,7 @@ const GridList = ({deviceFileList, filteredList, filterType}) => {
 		}
 		return (
 			<ImageItem
-				src={encodedPath}
+				src={thumbPath}
 			>
 				{deviceFileList[index].itemName}
 			</ImageItem>
@@ -42,7 +36,6 @@ const GridList = ({deviceFileList, filteredList, filterType}) => {
 				}}
 			/>
 		</Scroller>
-
 	);
 };
 
