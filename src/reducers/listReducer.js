@@ -62,7 +62,7 @@ export const currentDeviceFileListReducer = (state = initialCurrentContentsState
 				let itemType = contentList[i].itemType;
 				switch(filterType){
 					case "All":
-						if(itemType != "folder"){
+						if(itemType !== "folder"){
 							items.push(contentList[i]);
 						}
 						break;

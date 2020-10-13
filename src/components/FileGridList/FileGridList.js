@@ -26,7 +26,7 @@ const GridList = ({deviceFileList, filteredList, filterType}) => {
 		<Scroller>
 			<VirtualGridList
 				direction='vertical'
-				dataSize={filterType=="All"?deviceFileList.length:filteredList.length}
+				dataSize={filterType === "All" ? deviceFileList.length : filteredList.length}
 				itemRenderer={renderItem}
 				itemSize={{
 					minWidth: ri.scale(500),

@@ -9,7 +9,7 @@ const Filter = ({filterType, setFilter}) => {
     const dropList = ['All', 'Photo & Video', 'Photo', 'Video', 'Music'];
     const onSelect = (ev) => setFilter(ev.data);
 
-    return ( 
+    return (
         <Dropdown
 			className={css.drop}
 			defaultSelected={filterType !== 'All' ? filterType === 'Photo & Video' ? 1 : filterType === 'Photo' ? 2 : filterType === 'Video' ? 3 : 4 : 0}

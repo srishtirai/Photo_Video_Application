@@ -6,14 +6,14 @@ import FileGridList from '../FileGridList/FileGridList'
 import css from './DeviceTabLayout.module.less';
 import {listFolderContents} from '../../actions/deviceListActions'
 
-const DeviceTabs = ({devices, deviceProperties, getlistFolderContents, setCurrentDevice, setFilterType}) => {
+const DeviceTabs = ({devices, deviceProperties, getlistFolderContents, setSelectedDevice, setFilter}) => {
 
     const onSelectDevice = ({index}) => {
         const selectedDevice = devices[index];
-        setCurrentDevice(selectedDevice);
+        setSelectedDevice(selectedDevice);
         deviceProperties(selectedDevice);
         getlistFolderContents(selectedDevice);
-        setFilterType("All");
+        setFilter("All");
     }
 
     return (
@@ -37,9 +37,9 @@ const DeviceTabLayout = connect(
     mapStateToProps,
     {
         getlistFolderContents: listFolderContents,
-        setCurrentDevice,
+        setSelectedDevice: setCurrentDevice,
         deviceProperties: getDeviceProperties,
-        setFilterType
+        setFilter: setFilterType
     }
 )(DeviceTabs);
 

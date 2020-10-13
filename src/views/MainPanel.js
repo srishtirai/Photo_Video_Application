@@ -22,14 +22,14 @@ const initialState = {
 };
 
 const MainPanel = ({currentDevice, freeSpace, getDevicesList, onCloseApp, setSort, setView, totalSpace}) => {
-	
+
 	const [state, dispatch] = useReducer(settingsReducer, initialState);
 	const onClose = () => onCloseApp(appId);
 	const optionPopup = () => dispatch({type: 'toggle', payload: 'settings'});
 
 	useEffect(() => {
 		getDevicesList();
-	}, [])
+	})
 
 	return (
 		<Panel>
