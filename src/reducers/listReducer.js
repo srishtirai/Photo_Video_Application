@@ -60,35 +60,25 @@ export const currentDeviceFileListReducer = (state = initialCurrentContentsState
 			}
 			for (let i = 0; i < contentList.length ; i++) {
 				let itemType = contentList[i].itemType;
-				switch(filterType){
-					case "All":
-						if(itemType !== "folder"){
+				switch(itemType){
+					case "image":
+						if(filterType === "All" || filterType === "Photo" || filterType === "Photo & Video"){
 							items.push(contentList[i]);
 						}
 						break;
-					case "Photo":
-						if(itemType === "image"){
+					case "video":
+						if(filterType === "All" || filterType === "Video" || filterType === "Photo & Video"){
 							items.push(contentList[i]);
 						}
 						break;
-					case "Photo & Video":
-						if(itemType === "image"||itemType === "video"){
-							items.push(contentList[i]);
-						}
-						break;
-					case "Video":
-						if(itemType === "video"){
-							items.push(contentList[i]);
-						}
-						break;
-					case "Music":
-						if(itemType === "audio"){
+					case "audio":
+						if(filterType === "All" || filterType === "Music"){
 							items.push(contentList[i]);
 						}
 						break;
 				}
 			}
-
+			
 			return Object.assign({}, state, {filterType: action.filterType, filteredList: items});
 		}
 
