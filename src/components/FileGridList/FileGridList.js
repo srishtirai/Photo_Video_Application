@@ -1,11 +1,25 @@
 import React from 'react';
+import {render} from 'react-dom';
 import {connect} from 'react-redux';
 import {VirtualGridList} from '@enact/goldstone/VirtualList';
 import ImageItem from '@enact/goldstone/ImageItem';
 import ri from '@enact/ui/resolution';
 import Scroller from '@enact/goldstone/Scroller/Scroller';
+import PhotoPlayer from '@enact/goldstone/PhotoPlayer/PhotoPlayer';
+import {listPhotos} from '../../actions/photoViewerAction';
 
-const GridList = ({deviceFileList, filteredList, filterType}) => {
+const GridList = ({filteredList, getImagesList, images}) => {
+
+	getImagesList();
+
+	const selectItem = (index) =>{
+		if(filteredList[index].itemType === "image"){
+			render(
+				<PhotoPlayer slides={images} slideDirection="left"/>,
+			  		document.getElementById('root')
+				);
+		}
+	}
 
 	const renderItem = ({index}) => {
 
@@ -17,7 +31,7 @@ const GridList = ({deviceFileList, filteredList, filterType}) => {
 		}
 		return (
 			<ImageItem
-				src={thumbPath}
+				src={thumbPath} onClick={()=>selectItem(index)}
 			/>
 		);
 	};
@@ -26,7 +40,7 @@ const GridList = ({deviceFileList, filteredList, filterType}) => {
 		<Scroller>
 			<VirtualGridList
 				direction='vertical'
-				dataSize={filterType === "All" ? deviceFileList.length : filteredList.length}
+				dataSize={filteredList.length}
 				itemRenderer={renderItem}
 				itemSize={{
 					minWidth: ri.scale(500),
@@ -38,12 +52,16 @@ const GridList = ({deviceFileList, filteredList, filterType}) => {
 	);
 };
 
-const mapStateToProps = ({currentDeviceFileList}) => ({
-	deviceFileList: currentDeviceFileList.contentList,
+const mapStateToProps = ({currentDeviceFileList, imagesList}) => ({
 	filteredList: currentDeviceFileList.filteredList,
-	filterType: currentDeviceFileList.filterType
+	images: imagesList.images
+
 })
 
-const FileGridList = connect(mapStateToProps, {})(GridList)
+const FileGridList = connect(
+	mapStateToProps,
+    {
+		getImagesList: listPhotos
+	})(GridList)
 export default FileGridList;
 

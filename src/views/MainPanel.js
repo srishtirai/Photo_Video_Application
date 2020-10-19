@@ -14,6 +14,9 @@ import settingsReducer from '../reducers/settingsReducer';
 import FilterSelection from '../components/Filter/FilterSelection';
 
 require.context('../../Assets/Thumbnails/', false, /\.png$/);
+require.context('../../Assets/samplePhoto/', false, /\.jpg$/);
+require.context('../../Assets/SamplePhoto/', false, /\.png$/)
+
 
 const initialState = {
 	settings: {

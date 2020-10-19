@@ -1,0 +1,153 @@
+{
+	"returnValue": true,
+	"count": 20,
+	"results": [
+		{
+			"_id": "IqUZsWm14sR",
+			"_kind": "com.webos.service.cbox.image:1",
+			"deviceType": "usb",
+			"fileName": "IMG_1937.JPG",
+			"fullPath": "\/usr\/palm\/applications\/com.webos.app.photovideo\/assets\/samplePhoto\/mushroom.jpg",
+			"mediaType": "image",
+			"size": 2447739,
+			"photoInfo": {"sourceInfo": {"header": {"width": 1024, "height": 768}}},
+			"text": "IMG_1937.JPG",
+			"thumbnails": "../../Assets/samplePhoto/Dresden From the Right Bank of the Elbe Below the Augustus Bridge.jpg",
+			"thumbnail": {
+				"appId": "com.webos.app.connectionwizard 1004",
+				"requestId" : "10/IqUZsWm14sR",
+				"returnValue": true,
+				"thumbnailUrl": "assets\/ImageThumbnail.gif"
+			},
+			"udn": "USB_30383336303030303030303035434642",
+			"url": "\/tmp\/tnm\/thumb\/media4.338x242_2944837454.tnm",
+			"thumbnailUrl": "assets\/ImageThumbnail.gif"
+		},
+		{
+			"_id": "IqUZsWr3Bho",
+			"_kind": "com.webos.service.cbox.image:1",
+			"deviceType": "usb",
+			"fileName": "IMG_1939.JPG",
+			"fullPath": "\/usr\/palm\/applications\/com.webos.app.photovideo\/assets\/samplePhoto\/mountain.jpg",
+			"mediaType": "image",
+			"size": 2724331,
+			"photoInfo": {"sourceInfo": {"header": {"width": 1024, "height": 768}}},
+			"text": "IMG_1939.JPG",
+			"thumbnails": "../../Assets/samplePhoto/Germany Berlin Cathedral.jpg",
+			"thumbnail": {
+				"appId": "com.webos.app.connectionwizard 1004",
+				"requestId" : "12/IqUZsWr3Bho",
+				"returnValue": true,
+				"thumbnailUrl":  "assets\/VideoThumbnail.gif"
+			},
+			"udn": "USB_30383336303030303030303035434642",
+			"url": "\/tmp\/tnm\/thumb\/media6.338x242_2540550499.tnm",
+			"thumbnailUrl": "assets\/ImageThumbnail.gif"
+		},
+		{
+			"_id": "IqUZsWxtMOs",
+			"_kind": "com.webos.service.cbox.image:1",
+			"deviceType": "usb",
+			"fileName": "IMG_1944.JPG",
+			"fullPath": "\/usr\/palm\/applications\/com.webos.app.photovideo\/assets\/samplePhoto\/mushroom.jpg",
+			"mediaType": "image",
+			"size": 2689499,
+			"photoInfo": {"sourceInfo": {"header": {"width": 1024, "height": 768}}},
+			"text": "IMG_1944.JPG",
+			"thumbnails": "../../Assets/samplePhoto/Irises.jpg",
+			"thumbnail": {
+				"appId": "com.webos.app.connectionwizard 1004",
+				"requestId" : "17/IqUZsWxtMOs",
+				"returnValue": true,
+				"thumbnailUrl": "assets\/AudioThumbnail.gif"
+			},
+			"udn": "USB_30383336303030303030303035434642",
+			"url": "\/tmp\/tnm\/thumb\/media11.338x242_298677658.tnm",
+			"thumbnailUrl": "assets\/ImageThumbnail.gif"
+		},
+		{
+			"_id": "IqUZsX4KN8J",
+			"_kind": "com.webos.service.cbox.image:1",
+			"deviceType": "usb",
+			"fileName": "IMG_1947.JPG",
+			"fullPath": "\/usr\/palm\/applications\/com.webos.app.photovideo\/assets\/samplePhoto\/nigela.png",
+			"mediaType": "image",
+			"size": 3044674,
+			"photoInfo": {"sourceInfo": {"header": {"width": 1024, "height": 768}}},
+			"text": "IMG_1947.JPG",
+			"thumbnails": "../../Assets/samplePhoto/Pine Trees in Fog.jpg",
+			"thumbnail": {
+				"appId": "com.webos.app.connectionwizard 1004",
+				"requestId" : "20/IqUZsX4KN8J",
+				"returnValue": true,
+				"thumbnailUrl": "assets\/ImageThumbnail.gif"
+			},
+			"udn": "USB_30383336303030303030303035434642",
+			"url": "\/tmp\/tnm\/thumb\/media14.338x242_3150026086.tnm",
+			"thumbnailUrl": "assets\/ImageThumbnail.gif"
+		},
+		{
+			"_id": "IqUZsWm14sR",
+			"_kind": "com.webos.service.cbox.image:1",
+			"deviceType": "usb",
+			"fileName": "IMG_1937.JPG",
+			"fullPath": "\/usr\/palm\/applications\/com.webos.app.photovideo\/assets\/samplePhoto\/mountain.jpg",
+			"mediaType": "image",
+			"size": 2447739,
+			"photoInfo": {"sourceInfo": {"header": {"width": 1024, "height": 768}}},
+			"text": "IMG_1937.JPG",
+			"thumbnails": "../../Assets/samplePhoto/Almond Blossoms.jpg",
+			"thumbnail": {
+				"appId": "com.webos.app.connectionwizard 1004",
+				"requestId" : "10/IqUZsWm14sR",
+				"returnValue": true,
+				"thumbnailUrl": "assets\/VideoThumbnail.gif"
+			},
+			"udn": "USB_30383336303030303030303035434642",
+			"url": "\/tmp\/tnm\/thumb\/media4.338x242_2944837454.tnm",
+			"thumbnailUrl": "assets\/ImageThumbnail.gif"
+		},
+		{
+			"_id": "IqUZsWkU5wN",
+			"_kind": "com.webos.service.cbox.image:1",
+			"deviceType": "usb",
+			"fileName": "IMG_1936.JPG",
+			"fullPath": "\/usr\/palm\/applications\/com.webos.app.photovideo\/assets\/samplePhoto\/mushroom.jpg",
+			"mediaType": "image",
+			"size": 2407967,
+			"photoInfo": {"sourceInfo": {"header": {"width": 1024, "height": 768}}},
+			"text": "IMG_1936.JPG",
+			"thumbnails": "../../Assets/samplePhoto/Tahiti Borabora Island.jpg",
+			"thumbnail": {
+				"appId": "com.webos.app.connectionwizard 1004",
+				"requestId" : "9/IqUZsWkU5wN",
+				"returnValue": true,
+				"thumbnailUrl":  "assets\/AudioThumbnail.gif"
+			},
+			"udn": "USB_30383336303030303030303035434642",
+			"url": "\/tmp\/tnm\/thumb\/media3.338x242_4239784082.tnm",
+			"thumbnailUrl": "assets\/ImageThumbnail.gif"
+		},
+		{
+			"_id": "IqUZsWkU5wN",
+			"_kind": "com.webos.service.cbox.image:1",
+			"deviceType": "usb",
+			"fileName": "IMG_1936_first.JPG",
+			"fullPath": "\/usr\/palm\/applications\/com.webos.app.photovideo\/assets\/samplePhoto\/my-dog.jpg",
+			"mediaType": "image",
+			"size": 2407967,
+			"photoInfo": {"sourceInfo": {"header": {"width": 1024, "height": 768}}},
+			"text": "IMG_1936_first.JPG",
+			"thumbnails": "../../Assets/samplePhoto/Austria Hallstatt.jpg",
+			"thumbnail": {
+				"appId": "com.webos.app.connectionwizard 1004",
+				"requestId": "9/IqUZsWkU5wN",
+				"returnValue": true,
+				"thumbnailUrl": "assets\/AudioThumbnail.gif"
+			},
+			"udn": "USB_30383336303030303030303035434642",
+			"url": "\/tmp\/tnm\/thumb\/media3.338x242_4239784082.tnm",
+			"thumbnailUrl": "assets\/ImageThumbnail.gif"
+		}
+	]
+}
