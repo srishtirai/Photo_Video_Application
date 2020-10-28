@@ -86,10 +86,11 @@ export const setCurrentDevice = (device) => {
 
 // Action to set filter type and obtain filtered items.
 
-export const setFilterType = (filterType) => {
+export const setFilterType = (filterType, sortType) => {
 	return {
 		type: types.SET_FILTER_TYPE,
-		filterType: filterType
+		filterType: filterType,
+		sortType: sortType
 	};
 };
 

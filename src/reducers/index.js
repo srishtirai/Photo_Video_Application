@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux';
 import {deviceListReducer, currentDeviceFileListReducer} from './listReducer';
 import {imageListReducer} from './photosReducer';
+import {settingsReducer} from './settingsReducer';
 
 export default combineReducers({
-  devices: deviceListReducer,
   currentDeviceFileList: currentDeviceFileListReducer,
-  imagesList: imageListReducer
+  devices: deviceListReducer,
+  imagesList: imageListReducer,
+  options: settingsReducer
 })

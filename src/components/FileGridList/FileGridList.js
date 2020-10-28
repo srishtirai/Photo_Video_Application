@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {render} from 'react-dom';
 import {connect} from 'react-redux';
 import {VirtualGridList} from '@enact/goldstone/VirtualList';
@@ -10,14 +10,16 @@ import {listPhotos} from '../../actions/photoViewerAction';
 
 const GridList = ({filteredList, getImagesList, images}) => {
 
-	getImagesList();
+	useEffect(() => {
+		getImagesList();
+	})
 
 	const selectItem = (index) =>{
 		if(filteredList[index].itemType === "image"){
 			render(
 				<PhotoPlayer slides={images} slideDirection="left"/>,
 			  		document.getElementById('root')
-				);
+			);
 		}
 	}
 
@@ -32,7 +34,9 @@ const GridList = ({filteredList, getImagesList, images}) => {
 		return (
 			<ImageItem
 				src={thumbPath} onClick={()=>selectItem(index)}
-			/>
+				>
+				{filteredList[index].itemName}
+			</ImageItem>
 		);
 	};
 
@@ -55,7 +59,6 @@ const GridList = ({filteredList, getImagesList, images}) => {
 const mapStateToProps = ({currentDeviceFileList, imagesList}) => ({
 	filteredList: currentDeviceFileList.filteredList,
 	images: imagesList.images
-
 })
 
 const FileGridList = connect(
@@ -63,5 +66,6 @@ const FileGridList = connect(
     {
 		getImagesList: listPhotos
 	})(GridList)
+
 export default FileGridList;
 

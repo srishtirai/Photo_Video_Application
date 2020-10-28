@@ -5,7 +5,7 @@ const initialstate = {
 	sortType: 'Alphabetical'
 }
 
-const settingsReducer = (state = initialstate, action) => {
+export const settingsReducer = (state = initialstate, action) => {
 	switch (action.type) {
 		case 'toggle': {
 			return {
@@ -58,5 +58,3 @@ const settingsReducer = (state = initialstate, action) => {
 			return state;
 	}
 };
-
-export default settingsReducer;

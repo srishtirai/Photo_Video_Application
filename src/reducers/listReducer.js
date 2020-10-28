@@ -49,31 +49,44 @@ export const currentDeviceFileListReducer = (state = initialCurrentContentsState
 		case types.SET_FILTER_TYPE: {
 			const
 				contentList= state.contentList,
-				filterType = action.filterType;
+				filterType = action.filterType,
+				sortType = action.sortType;
 
-			let items = contentList.filter((content) => content.itemType === "folder");
+			let folders = contentList.filter((content) => content.itemType === "folder");
 
+			if(sortType === "Alphabetical"){
+			folders.sort((a, b) => 
+				a.itemName.toLowerCase() > b.itemName.toLowerCase() ? 1 : -1
+			);}
+
+			let otherItems = [];  
 			contentList.map((content) => {
 				let itemType = content.itemType;
 				switch(itemType){
 					case "image":
 						if(filterType === "All" || filterType === "Photo" || filterType === "Photo & Video"){
-							items.push(content);
+							otherItems.push(content);
 						}
 						break;
 					case "video":
 						if(filterType === "All" || filterType === "Video" || filterType === "Photo & Video"){
-							items.push(content);
+							otherItems.push(content);
 						}
 						break;
 					case "audio":
 						if(filterType === "All" || filterType === "Music"){
-							items.push(content);
+							otherItems.push(content);
 						}
 						break;
 				}
 			});
 
+			if(sortType === "Alphabetical"){
+			otherItems.sort((a, b) => 
+				a.itemName.toLowerCase() > b.itemName.toLowerCase() ? 1 : -1
+			);}
+
+			let items = [...folders, ...otherItems];
 			return Object.assign({}, state, {filterType: action.filterType, filteredList: items});
 		}
 

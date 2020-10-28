@@ -1,7 +1,10 @@
 import React, {useReducer} from 'react';
-import settingsReducer from '../../reducers/settingsReducer';
+import {connect} from 'react-redux';
+import {settingsReducer} from '../../reducers/settingsReducer';
+import {setFilterType} from '../../actions/deviceListActions';
 
 import Menu from './Menu';
+import { setSortType, setViewType } from '../../actions/settingsActions';
 
 const initialState = {
 	heading: 'Options',
@@ -76,7 +79,7 @@ const initialState = {
 	}
 };
 
-const Settings = ({setViewType, setSortType}) => {
+const SettingsOption = ({filterType, setFilter, setSortType, setViewType}) => {
 
 	const [state, dispatch] = useReducer(settingsReducer, initialState);
 	const handleNavigate = (value) => {
@@ -89,7 +92,9 @@ const Settings = ({setViewType, setSortType}) => {
 			setViewType(e.data);
 		}
 		else if(e.data==='Alphabetical'||e.data==='Newly Added'){
+			console.log("sort type"+e.data)
 			setSortType(e.data);
+			setFilter(filterType,e.data);
 		}
 	};
 
@@ -109,5 +114,18 @@ const Settings = ({setViewType, setSortType}) => {
 		/>
 	);
 };
+
+const mapStateToProps = ({currentDeviceFileList}) => ({
+    filterType: currentDeviceFileList.filterType
+})
+
+const Settings = connect(
+    mapStateToProps,
+    {
+		setFilter: setFilterType,
+		setSortType: setSortType,
+		setViewType: setViewType
+    }
+)(SettingsOption);
 
 export default Settings;
