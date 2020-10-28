@@ -18,7 +18,7 @@ const GridList = ({filteredList, getImagesList, images}) => {
 		if(filteredList[index].itemType === "image"){
 			render(
 				<PhotoPlayer slides={images} slideDirection="left"/>,
-			  		document.getElementById('root')
+				document.getElementById('root')
 			);
 		}
 	}

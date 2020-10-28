@@ -79,7 +79,7 @@ const initialState = {
 	}
 };
 
-const SettingsOption = ({filterType, setFilter, setSortType, setViewType, sortType, viewType}) => {
+const SettingsOption = ({filterType, setFilter, setSort, setView, sortType, viewType}) => {
 
 	const [state, dispatch] = useReducer(settingsReducer, initialState);
 	const handleNavigate = (value) => {
@@ -89,10 +89,10 @@ const SettingsOption = ({filterType, setFilter, setSortType, setViewType, sortTy
 	const handleSelect = (e) => {
 		dispatch({type: 'selected', payload: e.selected});
 		if(e.data==='List View'||e.data==='Thumbnail View'){
-			setViewType(e.data);
+			setView(e.data);
 		}
 		else if(e.data==='Alphabetical'||e.data==='Newly Added'){
-			setSortType(e.data);
+			setSort(e.data);
 			setFilter(filterType,e.data);
 		}
 	};
@@ -124,8 +124,8 @@ const Settings = connect(
     mapStateToProps,
     {
 		setFilter: setFilterType,
-		setSortType: setSortType,
-		setViewType: setViewType
+		setSort: setSortType,
+		setView: setViewType
     }
 )(SettingsOption);
 

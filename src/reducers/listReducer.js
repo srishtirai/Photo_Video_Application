@@ -53,13 +53,13 @@ export const currentDeviceFileListReducer = (state = initialCurrentContentsState
 				sortType = action.sortType;
 
 			let folders = contentList.filter((content) => content.itemType === "folder");
-
 			if(sortType === "Alphabetical"){
-			folders.sort((a, b) => 
-				a.itemName.toLowerCase() > b.itemName.toLowerCase() ? 1 : -1
-			);}
+				folders.sort((a, b) =>
+					a.itemName.toLowerCase() > b.itemName.toLowerCase() ? 1 : -1
+				);
+			}
 
-			let otherItems = [];  
+			let otherItems = [];
 			contentList.map((content) => {
 				let itemType = content.itemType;
 				switch(itemType){
@@ -82,7 +82,7 @@ export const currentDeviceFileListReducer = (state = initialCurrentContentsState
 			});
 
 			if(sortType === "Alphabetical"){
-			otherItems.sort((a, b) => 
+			otherItems.sort((a, b) =>
 				a.itemName.toLowerCase() > b.itemName.toLowerCase() ? 1 : -1
 			);}
 

@@ -1,8 +1,10 @@
 import {types} from '../actions/actionTypes';
 
 const initialstate = {
-	viewType: 'Thumbnail View',
-	sortType: 'Alphabetical'
+	// viewType: 'Thumbnail View',
+	// sortType: 'Alphabetical'
+	viewType: '',
+	sortType: ''
 }
 
 export const settingsReducer = (state = initialstate, action) => {
