@@ -14,7 +14,7 @@ const DeviceTabs = ({devices, deviceProperties, getlistFolderContents, setSelect
         setSelectedDevice(selectedDevice);
         deviceProperties(selectedDevice);
         getlistFolderContents(selectedDevice);
-        setView("Thumbnail");
+        setView("Thumbnail View");
         setSort("Alphabetical");
         setFilter("All", sortType);
         setSort
