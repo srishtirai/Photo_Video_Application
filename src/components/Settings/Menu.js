@@ -1,10 +1,11 @@
 import Group from '@enact/ui/Group';
 import React from 'react';
+import {connect} from 'react-redux';
 import Icon from '@enact/goldstone/Icon';
 import RadioButton from '@enact/goldstone/RadioButton';
 import css from './Menu.module.less';
 
-const Menu = ({heading, list, handleNavigate, handleSelect, handleClick, type, radioIndex}) => {
+const MenuOption = ({heading, list, handleNavigate, handleSelect, handleClick, type, radioIndex, sortType, viewType}) => {
 
 	const radioButtonGroup = ({selected, ...rest}) => (
 		<RadioButton
@@ -35,7 +36,7 @@ const Menu = ({heading, list, handleNavigate, handleSelect, handleClick, type, r
 									<div className={css.leftContainer}>
 										{list[item].name}
 										<div className={css.subHeading}>
-											{list[item].children.items[list[item].children.index].name}
+											{list[item].children.heading=== 'Sort'? sortType  : viewType}
 										</div>
 									</div>
 									{
@@ -76,5 +77,14 @@ const Menu = ({heading, list, handleNavigate, handleSelect, handleClick, type, r
 		</div>
 	)
 }
+
+const mapStateToProps = ({options}) => ({
+	sortType: options.sortType,
+	viewType: options.viewType
+})
+
+const Menu = connect(
+    mapStateToProps,
+)(MenuOption);
 
 export default Menu;

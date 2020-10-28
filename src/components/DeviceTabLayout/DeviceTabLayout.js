@@ -5,16 +5,17 @@ import {getDeviceProperties, setCurrentDevice, setFilterType} from '../../action
 import FileGridList from '../FileGridList/FileGridList'
 import css from './DeviceTabLayout.module.less';
 import {listFolderContents} from '../../actions/deviceListActions'
-import {setSortType} from '../../actions/settingsActions';
+import {setSortType, setViewType} from '../../actions/settingsActions';
 
-const DeviceTabs = ({devices, deviceProperties, getlistFolderContents, setSelectedDevice, setFilter, setSort, sortType}) => {
+const DeviceTabs = ({devices, deviceProperties, getlistFolderContents, setSelectedDevice, setFilter, setSort, sortType, setView}) => {
 
     const onSelectDevice = ({index}) => {
         const selectedDevice = devices[index];
         setSelectedDevice(selectedDevice);
         deviceProperties(selectedDevice);
         getlistFolderContents(selectedDevice);
-        setSort();
+        setView("Thumbnail");
+        setSort("Alphabetical");
         setFilter("All", sortType);
         setSort
     }
@@ -44,7 +45,8 @@ const DeviceTabLayout = connect(
         setSelectedDevice: setCurrentDevice,
         deviceProperties: getDeviceProperties,
         setFilter: setFilterType,
-        setSort: setSortType
+        setSort: setSortType,
+        setView: setViewType
     }
 )(DeviceTabs);
 

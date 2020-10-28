@@ -79,7 +79,7 @@ const initialState = {
 	}
 };
 
-const SettingsOption = ({filterType, setFilter, setSortType, setViewType}) => {
+const SettingsOption = ({filterType, setFilter, setSortType, setViewType, sortType, viewType}) => {
 
 	const [state, dispatch] = useReducer(settingsReducer, initialState);
 	const handleNavigate = (value) => {
@@ -92,7 +92,6 @@ const SettingsOption = ({filterType, setFilter, setSortType, setViewType}) => {
 			setViewType(e.data);
 		}
 		else if(e.data==='Alphabetical'||e.data==='Newly Added'){
-			console.log("sort type"+e.data)
 			setSortType(e.data);
 			setFilter(filterType,e.data);
 		}
@@ -110,13 +109,15 @@ const SettingsOption = ({filterType, setFilter, setSortType, setViewType}) => {
 			handleSelect={handleSelect}
 			handleClick={handleClick}
 			type={state.level !== '' ? state.items[state.level].children.type : state.type}
-			radioIndex={state.level !== '' && state.items[state.level].children.index}
+			radioIndex={state.level !== '' && state.items[state.level].children.heading === 'Sort'? sortType === 'Alphabetical' ? 0 : 1 : viewType === 'Thumbnail View' ? 0 : 1 }
 		/>
 	);
 };
 
-const mapStateToProps = ({currentDeviceFileList}) => ({
-    filterType: currentDeviceFileList.filterType
+const mapStateToProps = ({currentDeviceFileList, options}) => ({
+	filterType: currentDeviceFileList.filterType,
+	sortType: options.sortType,
+	viewType: options.viewType
 })
 
 const Settings = connect(
