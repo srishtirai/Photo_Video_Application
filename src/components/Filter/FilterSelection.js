@@ -4,10 +4,10 @@ import Dropdown from '@enact/sandstone/Dropdown';
 import {setFilterType} from '../../actions/deviceListActions';
 import css from './FilterSelection.module.less';
 
-const Filter = ({filterType, setFilter}) => {
+const Filter = ({filterType, setFilter, sortType}) => {
 
     const dropList = ['All', 'Photo & Video', 'Photo', 'Video', 'Music'];
-    const onSelect = (ev) => setFilter(ev.data);
+    const onSelect = (ev) => setFilter(ev.data, sortType);
 
     return (
         <Dropdown
@@ -21,8 +21,9 @@ const Filter = ({filterType, setFilter}) => {
     );
 };
 
-const mapStateToProps = ({currentDeviceFileList}) => ({
-    filterType: currentDeviceFileList.filterType
+const mapStateToProps = ({currentDeviceFileList, options}) => ({
+    filterType: currentDeviceFileList.filterType,
+    sortType: options.sortType
 })
 
 const FilterSelection = connect(

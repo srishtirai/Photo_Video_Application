@@ -4,20 +4,16 @@ import {TabLayout, Tab} from '@enact/goldstone/TabLayout';
 import {getDeviceProperties, setCurrentDevice, setFilterType} from '../../actions/deviceListActions';
 import FileGridList from '../FileGridList/FileGridList'
 import css from './DeviceTabLayout.module.less';
-import {listFolderContents} from '../../actions/deviceListActions'
-import {setSortType, setViewType} from '../../actions/settingsActions';
+import {listFolderContents} from '../../actions/deviceListActions';
 
-const DeviceTabs = ({devices, deviceProperties, getlistFolderContents, setSelectedDevice, setFilter, setSort, sortType, setView}) => {
+const DeviceTabs = ({devices, deviceProperties, getlistFolderContents, setSelectedDevice, setFilter, sortType}) => {
 
     const onSelectDevice = ({index}) => {
         const selectedDevice = devices[index];
         setSelectedDevice(selectedDevice);
         deviceProperties(selectedDevice);
         getlistFolderContents(selectedDevice);
-        setView("Thumbnail View");
-        setSort("Alphabetical");
         setFilter("All", sortType);
-        setSort
     }
 
     return (
@@ -44,9 +40,7 @@ const DeviceTabLayout = connect(
         getlistFolderContents: listFolderContents,
         setSelectedDevice: setCurrentDevice,
         deviceProperties: getDeviceProperties,
-        setFilter: setFilterType,
-        setSort: setSortType,
-        setView: setViewType
+        setFilter: setFilterType
     }
 )(DeviceTabs);
 
