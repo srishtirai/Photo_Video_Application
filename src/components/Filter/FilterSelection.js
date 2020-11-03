@@ -12,7 +12,7 @@ const Filter = ({filterType, setFilter, sortType}) => {
     return (
         <Dropdown
 			className={css.dropDown}
-			defaultSelected={filterType !== 'All' ? filterType === 'Photo & Video' ? 1 : filterType === 'Photo' ? 2 : filterType === 'Video' ? 3 : 4 : 0}
+            selected={filterType !== 'All' ? filterType === 'Photo & Video' ? 1 : filterType === 'Photo' ? 2 : filterType === 'Video' ? 3 : 4 : 0}
 			onSelect={onSelect}
 			orientation='vertical'
 		>

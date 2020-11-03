@@ -35,20 +35,34 @@ export const deviceListReducer = (state = initialstate, action) => {
 const initialCurrentContentsState = {
 	contentList: [],
 	filterType: 'All',
-	filteredList: []
+	filteredList: [],
+	deviceContentList: {},
+	deviceId: "",
+	deviceUri: "",
+	photoUrls: []
 }
 
 export const currentDeviceFileListReducer = (state = initialCurrentContentsState, action) => {
-	console.log('action.contents')
-	console.log(action)
 	switch (action.type) {
 		case types.GET_LIST_CONTENTS: {
-			return {...state, contentList: action.contents, filteredList: action.contents};
+			let deviceUriData = []
+			deviceUriData = {[action.deviceId]: {[action.deviceUri]: action.contents}}
+
+			return {
+				...state,
+				contentList: action.contents,
+				filteredList: action.contents,
+				deviceId: action.deviceId,
+				deviceUri: action.deviceUri,
+				deviceContentList: {
+					...state.deviceContentList, ...deviceUriData
+				}
+			};
 		}
 
 		case types.SET_FILTER_TYPE: {
 			const
-				contentList= state.contentList,
+				contentList = state.contentList,
 				filterType = action.filterType,
 				sortType = action.sortType;
 
@@ -58,7 +72,7 @@ export const currentDeviceFileListReducer = (state = initialCurrentContentsState
 					a.itemName.toLowerCase() > b.itemName.toLowerCase() ? 1 : -1
 				);
 			}
-
+	
 			let otherItems = [];
 			contentList.map((content) => {
 				let itemType = content.itemType;
@@ -80,14 +94,30 @@ export const currentDeviceFileListReducer = (state = initialCurrentContentsState
 						break;
 				}
 			});
-
+	
 			if(sortType === "Alphabetical"){
-			otherItems.sort((a, b) =>
-				a.itemName.toLowerCase() > b.itemName.toLowerCase() ? 1 : -1
+				otherItems.sort((a, b) =>
+					a.itemName.toLowerCase() > b.itemName.toLowerCase() ? 1 : -1
 			);}
-
+	
 			let items = [...folders, ...otherItems];
-			return Object.assign({}, state, {filterType: action.filterType, filteredList: items});
+			let deviceUriData = {[state.deviceId]: {[state.deviceUri]: items}}
+
+			return {
+				...state,
+				filterType: action.filterType, 
+				filteredList: items,
+				deviceContentList: {
+					...state.deviceContentList, ...deviceUriData
+				}
+			}
+		}
+
+		case 'SET_PHOTO_URL': {
+			return {
+				...state,
+				photoUrls: action.photoUrls
+			}
 		}
 
 		default:

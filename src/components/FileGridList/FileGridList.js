@@ -1,71 +1,101 @@
-import React, {useEffect} from 'react';
-import {render} from 'react-dom';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {VirtualGridList} from '@enact/goldstone/VirtualList';
 import ImageItem from '@enact/goldstone/ImageItem';
 import ri from '@enact/ui/resolution';
-import Scroller from '@enact/goldstone/Scroller/Scroller';
-import PhotoPlayer from '@enact/goldstone/PhotoPlayer/PhotoPlayer';
-import {listPhotos} from '../../actions/photoViewerAction';
+import {listFolderContents, navigate, setFilterType} from '../../actions/deviceListActions';
+import {pushPanel, popPanel, popPanelByIndex} from '../../actions/panelActions';
+import folderImg from '../../../Assets/Thumbnails/folder.png';
+import imageImg from '../../../Assets/Thumbnails/image.png';
+import musicImg from '../../../Assets/Thumbnails/music.png';
+import videoImg from '../../../Assets/Thumbnails/video.png';
 
-const GridList = ({filteredList, getImagesList, images}) => {
+const GridList = ({currentDevice, device, deviceFileList, deviceUri, filteredList, getlistFolderContents, onNavigate, setFilter}) => {
+	const [deviceFolderList, setDeviceFolderList] = useState([])
 
 	useEffect(() => {
-		getImagesList();
-	})
+		if (Object.keys(deviceFileList).includes(device.deviceId)) {
+			setDeviceFolderList(deviceFileList[device.deviceId][deviceUri])
+		}
+	}, [deviceFileList])
 
-	const selectItem = (index) =>{
-		if(filteredList[index].itemType === "image"){
-			render(
-				<PhotoPlayer slides={images} slideDirection="left"/>,
-				document.getElementById('root')
-			);
+	const defaultIcon = {
+		folder: folderImg,
+		image: imageImg,
+		video: videoImg,
+		audio: musicImg
+	}
+
+	// const getScrollTo = (scrollTo) => {
+	// 	scrollTo({animate: false, focus: true, index: 1})
+	// }
+
+	const getContentFileWithPath = (itemPath, itemType) => {
+		if (itemType === 'image') {
+			onNavigate('photoPlayer')
+		}
+
+		if (itemType === 'folder') {
+			getlistFolderContents(currentDevice, itemPath);
+			setFilter("All");
+			// onNavigate('subfolder')
+			pushPanel(filteredList);
 		}
 	}
 
-	const renderItem = ({index}) => {
-
-		let thumbPath  = filteredList[index].itemType==="image" ? filteredList[index].itemPath : filteredList[index].thumbnailUri;
+	const renderItem = ({index, ...rest}) => {
+		let thumbPath = deviceFolderList[index].thumbnailUri
 		let encodedPath = encodeURIComponent(thumbPath);
 
 		if (thumbPath && thumbPath.substring(0, 1) === '/') {
 			encodedPath = 'file:///' + encodedPath;
 		}
+		if (encodedPath === '' || deviceFolderList[index].itemType === 'audio') {
+			encodedPath = defaultIcon[deviceFolderList[index].itemType]
+		}
+
 		return (
 			<ImageItem
-				src={thumbPath} onClick={()=>selectItem(index)}
-				>
-				{filteredList[index].itemName}
+				{...rest}
+				src={thumbPath}
+				placeholder={imageImg}
+				onClick={() => getContentFileWithPath(deviceFolderList[index].itemPath, deviceFolderList[index].itemType)}
+			>
+				{deviceFolderList[index].itemName}
 			</ImageItem>
 		);
 	};
 
 	return (
-		<Scroller>
+		deviceFolderList.length === 0 ?
+			<p>No Data</p> :
 			<VirtualGridList
+				// cbScrollTo={(scrollTo) => getScrollTo(scrollTo)}
 				direction='vertical'
-				dataSize={filteredList.length}
+				dataSize={deviceFolderList.length}
 				itemRenderer={renderItem}
 				itemSize={{
 					minWidth: ri.scale(500),
-					minHeight: ri.scale(400)
+					minHeight: ri.scale(500)
 				}}
-				spacing={50}
 			/>
-		</Scroller>
 	);
 };
 
-const mapStateToProps = ({currentDeviceFileList, imagesList}) => ({
+const mapStateToProps = ({currentDeviceFileList, devices, panels, path}) => ({
 	filteredList: currentDeviceFileList.filteredList,
-	images: imagesList.images
-})
+	currentDevice: devices.currentDevice,
+	path,
+	panels
+});
 
-const FileGridList = connect(
-	mapStateToProps,
-    {
-		getImagesList: listPhotos
-	})(GridList)
+const FileGridList = connect(mapStateToProps,
+	{
+		getlistFolderContents: listFolderContents,
+		onNavigate: navigate,
+		pushPanel,
+		setFilter: setFilterType
+	}
+)(GridList);
 
 export default FileGridList;
-
