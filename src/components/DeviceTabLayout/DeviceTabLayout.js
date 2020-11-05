@@ -43,7 +43,7 @@ const mapStateToProps = ({currentDeviceFileList, devices, options, path}) => ({
 	devices: devices.devices,
 	deviceContentList: currentDeviceFileList.deviceContentList,
 	path,
-    sortType: options.sortType
+	sortType: options.sortType
 })
 
 const DeviceTabLayout = connect(

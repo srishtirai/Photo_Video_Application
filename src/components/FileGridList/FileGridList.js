@@ -57,7 +57,7 @@ const GridList = ({currentDevice, device, deviceFileList, deviceUri, filteredLis
 		return (
 			<ImageItem
 				{...rest}
-				src={thumbPath}
+				src={encodedPath}
 				placeholder={imageImg}
 				onClick={() => getContentFileWithPath(deviceFolderList[index].itemPath, deviceFolderList[index].itemType)}
 			>

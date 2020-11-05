@@ -72,7 +72,7 @@ export const currentDeviceFileListReducer = (state = initialCurrentContentsState
 					a.itemName.toLowerCase() > b.itemName.toLowerCase() ? 1 : -1
 				);
 			}
-	
+
 			let otherItems = [];
 			contentList.map((content) => {
 				let itemType = content.itemType;
@@ -94,18 +94,18 @@ export const currentDeviceFileListReducer = (state = initialCurrentContentsState
 						break;
 				}
 			});
-	
+
 			if(sortType === "Alphabetical"){
 				otherItems.sort((a, b) =>
 					a.itemName.toLowerCase() > b.itemName.toLowerCase() ? 1 : -1
 			);}
-	
+
 			let items = [...folders, ...otherItems];
 			let deviceUriData = {[state.deviceId]: {[state.deviceUri]: items}}
 
 			return {
 				...state,
-				filterType: action.filterType, 
+				filterType: action.filterType,
 				filteredList: items,
 				deviceContentList: {
 					...state.deviceContentList, ...deviceUriData
