@@ -8,14 +8,15 @@ import {navigate} from '../../actions/deviceListActions';
 import css from './SelectContentType.module.less';
 import { setSelectMode } from '../../actions/settingsActions';
 
-const SelectModes = ({onNavigate, setSelectMode, selectMode, ...rest}) => {
+const SelectModes = ({onNavigate, setMode, selectMode, ...rest}) => {
 
 	const onModeSelect = () =>{
-		if(selectMode === 'Select Play')
+		if(selectMode === 'Select Play'){
 			onNavigate('photoPlayer');
+		}
 	}
 	const returnHome = () => {
-		setSelectMode('');
+		setMode('');
 		onNavigate("home");
 	}
 	const onSelectAll = () =>{
@@ -45,7 +46,7 @@ const SelectModes = ({onNavigate, setSelectMode, selectMode, ...rest}) => {
 				Select All
 			</CheckboxItem>
 
-			<DeviceTabLayout collapsed={true} selectMode={'SelectPlay'}/>
+			<DeviceTabLayout collapsed='true' selectMode={'SelectPlay'}/>
 		</Panel>
 	)
 }
@@ -61,7 +62,7 @@ const SelectMode = connect(
 	mapStateToProps,
 	{
 		onNavigate: navigate,
-		setSelectMode: setSelectMode
+		setMode: setSelectMode
 	}
 )(SelectModes);
 

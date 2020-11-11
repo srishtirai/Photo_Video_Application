@@ -10,7 +10,7 @@ import imageImg from '../../../Assets/Thumbnails/image.png';
 import musicImg from '../../../Assets/Thumbnails/music.png';
 import videoImg from '../../../Assets/Thumbnails/video.png';
 
-const GridList = ({currentDevice, device, deviceFileList, deviceUri, getlistFolderContents, filteredList, listDevicePhotoList, onNavigate, selectMode,  setFilter, sortType, panels, popPanel}) => {
+const GridList = ({currentDevice, device, deviceFileList, deviceUri, getlistFolderContents, filteredList, listPhotoList, onNavigate, selectMode,  setFilter, sortType, panels, panelPop}) => {
 	const [deviceFolderList, setDeviceFolderList] = useState([])
 
 	useEffect(() => {
@@ -39,12 +39,12 @@ const GridList = ({currentDevice, device, deviceFileList, deviceUri, getlistFold
 
 	const getContentFileWithPath = (itemPath, itemType) => {
 		if (itemType === 'image') {
-			listDevicePhotoList()
+			listPhotoList()
 			onNavigate('photoPlayer')
 		}
 
 		if (itemType === 'goBack') {
-			popPanel()
+			panelPop()
 		}
 
 		if (itemType === 'folder') {
@@ -106,9 +106,9 @@ const FileGridList = connect(mapStateToProps,
 	getlistFolderContents: listFolderContents,
 	onNavigate: navigate,
 	setFilter: setFilterType,
-	listDevicePhotoList,
+	listPhotoList: listDevicePhotoList,
 	pushPanel,
-	popPanel
+	panelPop: popPanel
 }
 )(GridList);
 

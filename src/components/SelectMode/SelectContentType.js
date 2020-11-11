@@ -12,9 +12,9 @@ const SelectType = ({onNavigate, setFilter, sortType}) => {
         setFilter(type , sortType)
         onNavigate('selectMode');
     }
-  
-	return (
-        <div className={css.menu}> 
+
+    return (
+        <div className={css.menu}>
             <h4 className={css.text}>Select the content type to play</h4>
             <div className={css.button_group}>
                 {contentTypes.map((type) => {

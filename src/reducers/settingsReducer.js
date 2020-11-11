@@ -14,7 +14,7 @@ export const settingsReducer = (state = initialstate, action) => {
 				settings: {
 					isOpen: false
 				},
-				selectPlayPopup: { 
+				selectPlayPopup: {
 					isOpen: false
 				},
 				[action.payload]: {

@@ -99,9 +99,14 @@ const SettingsOption = ({filterType, onNavigate, optionPopup, popup, setFilter, 
 	};
 
 	const handleClick = (e) =>{
-		if(e!='User Guide'){
+		if(e !== 'User Guide'){
 			setMode(e);
-			e === 'Select Play' ? popup() : onNavigate('selectMode');
+			if(e === 'Select Play'){
+				popup();
+			}
+			 else{
+				onNavigate('selectMode');
+			}
 		}
 	}
 

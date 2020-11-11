@@ -6,13 +6,11 @@ import {Panel, Header} from '@enact/goldstone/Panels';
 import {appId} from '../data/appConfig';
 import {closeApp} from '../actions/commonActions';
 import {listDevices, listDevicePhotoList} from '../actions/deviceListActions';
-import {setViewType, setSortType, setSelectMode} from '../actions/settingsActions';
 import DeviceTabLayout from '../components/DeviceTabLayout/DeviceTabLayout';
 import Settings from '../components/Settings/Settings';
 import {settingsReducer} from '../reducers/settingsReducer';
 import FilterSelection from '../components/Filter/FilterSelection';
-import SelectContentType from '../components/SelectMode/SelectContentType'
-import SelectMode from '../components/SelectMode/SelectMode';
+import SelectContentType from '../components/SelectMode/SelectContentType';
 
 require.context('../../Assets/Thumbnails/', false, /\.png$/);
 require.context('../../Assets/samplePhoto_fhd/', false, /\.jpg$/);
@@ -26,12 +24,12 @@ const initialState = {
 	}
 }
 
-const MainPanel = ({currentDevice, freeSpace, getDevicesList, onCloseApp, selectMode, setSort, getListDevicePhotoList, setView, totalSpace, ...rest}) => {
+const MainPanel = ({currentDevice, freeSpace, getDevicesList, onCloseApp, getListDevicePhotoList, totalSpace, ...rest}) => {
 	const [state, dispatch] = useReducer(settingsReducer, initialState);
 	const onClose = () => onCloseApp(appId);
 	const optionPopup = () => dispatch({type: 'toggle', payload: 'settings'});
 	const selectPlay = () => dispatch({type: 'toggle', payload: 'selectPlayPopup'});
-	
+
 	useEffect(() => {
 		getDevicesList();
 		getListDevicePhotoList();
@@ -59,9 +57,10 @@ const MainPanel = ({currentDevice, freeSpace, getDevicesList, onCloseApp, select
 				<Settings popup={selectPlay} optionPopup={optionPopup} />
 			}
 			{
-				state.selectPlayPopup.isOpen && 
-				<SelectContentType /> 
+				state.selectPlayPopup.isOpen &&
+				<SelectContentType />
 			}
+
 			<FilterSelection />
 			<DeviceTabLayout />
 
@@ -73,8 +72,7 @@ const mapStateToProps = state => (
 	{
 		currentDevice: state.devices.currentDevice,
 		freeSpace: state.devices.freeSpace,
-		totalSpace: state.devices.totalSpace,
-		selectMode: state.options.selectMode
+		totalSpace: state.devices.totalSpace
 	}
 )
 
@@ -83,8 +81,6 @@ const Main = connect(
 	{
 		getDevicesList: listDevices,
 		onCloseApp: closeApp,
-		setView: setViewType,
-		setSort: setSortType,
 		getListDevicePhotoList: listDevicePhotoList
 	}
 )(MainPanel);

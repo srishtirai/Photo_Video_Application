@@ -9,7 +9,7 @@ import {navigate} from '../actions/deviceListActions';
 
 const RoutablePanels = Routable({navigate: 'onBack'}, Panels);
 
-const MainApp = ({onNavigate, path, panels, photoResults, ...rest}) => {
+const MainApp = ({path, photoResults, ...rest}) => {
 	return (
 		<RoutablePanels {...rest} path={path}>
 			<Route path="home" component={MainPanel} title="Home Page" />
