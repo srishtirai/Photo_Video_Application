@@ -8,18 +8,19 @@ import {navigate} from '../../actions/deviceListActions';
 import css from './SelectContentType.module.less';
 import { setSelectMode } from '../../actions/settingsActions';
 
-const SelectModes = ({filterType,onNavigate, setMode, selectMode, ...rest}) => {
+const SelectModes = ({filterType, onNavigate, setMode, selectMode, ...rest}) => {
 
 	const onModeSelect = () =>{
 		if(selectMode === 'Select Play'){
 			if(filterType === 'Photo'){
 				onNavigate('photoPlayer');
-			} 
+			}
 			else if(filterType === 'Video'){
 				onNavigate('videoPlayer');
 			}
 		}
 	}
+
 	const returnHome = () => {
 		setMode('');
 		onNavigate("home");
@@ -56,9 +57,8 @@ const SelectModes = ({filterType,onNavigate, setMode, selectMode, ...rest}) => {
 	)
 }
 
-const mapStateToProps = ({currentDeviceFileList,devices,options}) => (
+const mapStateToProps = ({currentDeviceFileList,options}) => (
 	{
-		currentDevice: devices.currentDevice,
 		filterType: currentDeviceFileList.filterType,
 		selectMode: options.selectMode
 	}

@@ -6,23 +6,31 @@ import {getDeviceProperties, setCurrentDevice, setFilterType} from '../../action
 import {listFolderContents} from '../../actions/deviceListActions';
 import css from './DeviceTabLayout.module.less';
 
-const DeviceTabs = ({collapsed, devices, deviceProperties, deviceContentList, getlistFolderContents, selectMode, setSelectedDevice, setFilter, sortType}) => {
+const DeviceTabs = ({currentDevice, collapsed, devices, deviceProperties, deviceContentList, getlistFolderContents, setSelectedDevice, setFilter, sortType}) => {
+
 	useEffect(() => {
-		if (devices && devices[0] && selectMode !== 'Select Play') {
-			getlistFolderContents(devices[0]);
+		if (devices && devices[0]) {
+			if(typeof currentDevice.deviceName === 'undefined'){
+				getlistFolderContents(devices[0]);
+				setSelectedDevice(devices[0]);
+				deviceProperties(devices[0]);
+			}
+			else{
+				getlistFolderContents(currentDevice);
+			}
 			setFilter("All", sortType);
 		}
 	}, [devices])
 
-	const onSelectDevice = ({index}) => {
-		const selectedDevice = devices[index];
+	const onSelectDevice = (e) => {
+		const selectedDevice = devices[e.index];
 		setSelectedDevice(selectedDevice);
 		deviceProperties(selectedDevice);
 		getlistFolderContents(selectedDevice);
 		setFilter("All", sortType);
 	}
 
-	return (
+	return(
 		<TabLayout
 			onSelect={onSelectDevice}
 			collapsed={collapsed}
@@ -43,9 +51,9 @@ const DeviceTabs = ({collapsed, devices, deviceProperties, deviceContentList, ge
 const mapStateToProps = ({currentDeviceFileList, devices, options, path}) => ({
 	devices: devices.devices,
 	deviceContentList: currentDeviceFileList.deviceContentList,
+	currentDevice: devices.currentDevice,
 	path,
-	sortType: options.sortType,
-	selectMode: options.selectMode
+	sortType: options.sortType
 })
 
 const DeviceTabLayout = connect(

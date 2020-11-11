@@ -38,7 +38,6 @@ export const listDevices = () => (dispatch) => {
 		},
 		onSuccess: (res) => {
 			let devices = res.devices.map(device => ({...device, rootContentList: []}))
-			console.table(devices)
 			dispatch(getDevicesListAction(devices));
 		}
 	});
@@ -128,7 +127,7 @@ export const listFolderContents = (deviceInfo, subFolderpath = '') => (dispatch,
 export const setCurrentDevice = (device) => {
 	return {
 		type: types.SET_CURRENT_DEVICE,
-		device
+		device: device
 	}
 };
 

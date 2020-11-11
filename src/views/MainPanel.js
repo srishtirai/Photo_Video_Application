@@ -24,7 +24,7 @@ const initialState = {
 	}
 }
 
-const MainPanel = ({currentDevice, freeSpace, getDevicesList, onCloseApp, getListDevicePhotoList, totalSpace, ...rest}) => {
+const MainPanel = ({currentDevice, freeSpace, getListDevicePhotoList, getDevicesList, onCloseApp, totalSpace, ...rest}) => {
 	const [state, dispatch] = useReducer(settingsReducer, initialState);
 	const onClose = () => onCloseApp(appId);
 	const optionPopup = () => dispatch({type: 'toggle', payload: 'settings'});
@@ -68,11 +68,11 @@ const MainPanel = ({currentDevice, freeSpace, getDevicesList, onCloseApp, getLis
 	)
 }
 
-const mapStateToProps = state => (
+const mapStateToProps = ({devices}) => (
 	{
-		currentDevice: state.devices.currentDevice,
-		freeSpace: state.devices.freeSpace,
-		totalSpace: state.devices.totalSpace
+		currentDevice: devices.currentDevice,
+		freeSpace: devices.freeSpace,
+		totalSpace: devices.totalSpace
 	}
 )
 

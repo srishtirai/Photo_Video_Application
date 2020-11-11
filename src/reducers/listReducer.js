@@ -11,7 +11,7 @@ export const deviceListReducer = (state = initialstate, action) => {
 	const devices = action.devices
 	switch (action.type) {
 		case types.GET_DEVICES_LIST: {
-			const newDeviceList = (devices.length > 0) ? {devices: devices, currentDevice: devices[0]} : state
+			const newDeviceList = (devices.length > 0) ? {devices: devices, currentDevice: state.currentDevice} : state
 			if (action.mobileTVPlusList) {
 				newDeviceList.mobileTVPlusList = action.mobileTVPlusList;
 			}
