@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import {TabLayout, Tab} from '@enact/goldstone/TabLayout';
 import FileGridList from '../FileGridList/FileGridList';
 import {getDeviceProperties, setCurrentDevice, setFilterType} from '../../actions/deviceListActions';
-import {listFolderContents, navigate} from '../../actions/deviceListActions';
+import {listFolderContents} from '../../actions/deviceListActions';
 import css from './DeviceTabLayout.module.less';
 
-const DeviceTabs = ({devices, deviceProperties, deviceContentList, getlistFolderContents, onNavigate, path, setSelectedDevice, setFilter, sortType}) => {
+const DeviceTabs = ({collapsed, devices, deviceProperties, deviceContentList, getlistFolderContents, selectMode, setSelectedDevice, setFilter, sortType}) => {
 	useEffect(() => {
-		if (devices && devices[0]) {
+		if (devices && devices[0] && selectMode !== 'Select Play') {
 			getlistFolderContents(devices[0]);
 			setFilter("All", sortType);
 		}
@@ -25,6 +25,7 @@ const DeviceTabs = ({devices, deviceProperties, deviceContentList, getlistFolder
 	return (
 		<TabLayout
 			onSelect={onSelectDevice}
+			collapsed={collapsed}
 		>
 			{devices.map((device, index) => {
 				const deviceUri = device.subDevices ? device.subDevices[0].deviceUri : device.deviceUri
@@ -43,7 +44,8 @@ const mapStateToProps = ({currentDeviceFileList, devices, options, path}) => ({
 	devices: devices.devices,
 	deviceContentList: currentDeviceFileList.deviceContentList,
 	path,
-	sortType: options.sortType
+	sortType: options.sortType,
+	selectMode: options.selectMode
 })
 
 const DeviceTabLayout = connect(
@@ -52,8 +54,7 @@ const DeviceTabLayout = connect(
 		getlistFolderContents: listFolderContents,
 		setSelectedDevice: setCurrentDevice,
 		deviceProperties: getDeviceProperties,
-		setFilter: setFilterType,
-		onNavigate: navigate
+		setFilter: setFilterType
 	}
 )(DeviceTabs);
 

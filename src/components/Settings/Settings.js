@@ -2,9 +2,9 @@ import React, {useReducer} from 'react';
 import {connect} from 'react-redux';
 import {settingsReducer} from '../../reducers/settingsReducer';
 import {setFilterType} from '../../actions/deviceListActions';
-
 import Menu from './Menu';
-import { setSortType, setViewType } from '../../actions/settingsActions';
+import { setSortType, setViewType, setSelectMode } from '../../actions/settingsActions';
+import {navigate} from '../../actions/deviceListActions';
 
 const initialState = {
 	heading: 'Options',
@@ -79,7 +79,7 @@ const initialState = {
 	}
 };
 
-const SettingsOption = ({filterType, setFilter, setSort, setView, sortType, viewType}) => {
+const SettingsOption = ({filterType, onNavigate, optionPopup, popup, setFilter, setMode, setSort, setView, sortType, viewType}) => {
 
 	const [state, dispatch] = useReducer(settingsReducer, initialState);
 	const handleNavigate = (value) => {
@@ -88,6 +88,7 @@ const SettingsOption = ({filterType, setFilter, setSort, setView, sortType, view
 
 	const handleSelect = (e) => {
 		dispatch({type: 'selected', payload: e.selected});
+		optionPopup();
 		if(e.data==='List View'||e.data==='Thumbnail View'){
 			setView(e.data);
 		}
@@ -97,8 +98,11 @@ const SettingsOption = ({filterType, setFilter, setSort, setView, sortType, view
 		}
 	};
 
-	const handleClick = () =>{
-
+	const handleClick = (e) =>{
+		if(e!='User Guide'){
+			setMode(e);
+			e === 'Select Play' ? popup() : onNavigate('selectMode');
+		}
 	}
 
 	return (!state.disable &&
@@ -117,7 +121,8 @@ const SettingsOption = ({filterType, setFilter, setSort, setView, sortType, view
 const mapStateToProps = ({currentDeviceFileList, options}) => ({
 	filterType: currentDeviceFileList.filterType,
 	sortType: options.sortType,
-	viewType: options.viewType
+	viewType: options.viewType,
+	selectMode: options.selectMode
 })
 
 const Settings = connect(
@@ -125,7 +130,9 @@ const Settings = connect(
     {
 		setFilter: setFilterType,
 		setSort: setSortType,
-		setView: setViewType
+		setView: setViewType,
+		setMode: setSelectMode,
+		onNavigate: navigate
     }
 )(SettingsOption);
 

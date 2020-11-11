@@ -13,3 +13,10 @@ export const setSortType = (sortType) => {
 		sortType:sortType
 	};
 };
+
+export const setSelectMode = (selectMode) =>{
+	return {
+		type: types.SET_SELECT_MODE,
+		selectMode:selectMode
+	};
+}

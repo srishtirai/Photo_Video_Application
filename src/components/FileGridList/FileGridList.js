@@ -3,21 +3,28 @@ import {connect} from 'react-redux';
 import {VirtualGridList} from '@enact/goldstone/VirtualList';
 import ImageItem from '@enact/goldstone/ImageItem';
 import ri from '@enact/ui/resolution';
-import {listFolderContents, navigate, setFilterType} from '../../actions/deviceListActions';
-import {pushPanel, popPanel, popPanelByIndex} from '../../actions/panelActions';
+import {listFolderContents, listDevicePhotoList, navigate, setFilterType} from '../../actions/deviceListActions';
+import {pushPanel, popPanel} from '../../actions/panelActions';
 import folderImg from '../../../Assets/Thumbnails/folder.png';
 import imageImg from '../../../Assets/Thumbnails/image.png';
 import musicImg from '../../../Assets/Thumbnails/music.png';
 import videoImg from '../../../Assets/Thumbnails/video.png';
 
-const GridList = ({currentDevice, device, deviceFileList, deviceUri, filteredList, getlistFolderContents, onNavigate, setFilter}) => {
+const GridList = ({currentDevice, device, deviceFileList, deviceUri, getlistFolderContents, filteredList, listDevicePhotoList, onNavigate, selectMode,  setFilter, sortType, panels, popPanel}) => {
 	const [deviceFolderList, setDeviceFolderList] = useState([])
 
 	useEffect(() => {
-		if (Object.keys(deviceFileList).includes(device.deviceId)) {
-			setDeviceFolderList(deviceFileList[device.deviceId][deviceUri])
+		if(selectMode === 'SelectPlay'){
+			setDeviceFolderList(filteredList);
 		}
-	}, [deviceFileList])
+		if (panels.length > 0) {
+			setDeviceFolderList(panels[panels.length - 1])
+		} else {
+			if (Object.keys(deviceFileList).includes(device.deviceId)) {
+				setDeviceFolderList(deviceFileList[device.deviceId][deviceUri])
+			}
+		}
+	}, [deviceFileList, panels])
 
 	const defaultIcon = {
 		folder: folderImg,
@@ -32,14 +39,17 @@ const GridList = ({currentDevice, device, deviceFileList, deviceUri, filteredLis
 
 	const getContentFileWithPath = (itemPath, itemType) => {
 		if (itemType === 'image') {
+			listDevicePhotoList()
 			onNavigate('photoPlayer')
 		}
 
+		if (itemType === 'goBack') {
+			popPanel()
+		}
+
 		if (itemType === 'folder') {
-			getlistFolderContents(currentDevice, itemPath);
-			setFilter("All");
-			// onNavigate('subfolder')
-			pushPanel(filteredList);
+			getlistFolderContents(currentDevice, itemPath)
+			setFilter("All",sortType);
 		}
 	}
 
@@ -68,34 +78,38 @@ const GridList = ({currentDevice, device, deviceFileList, deviceUri, filteredLis
 
 	return (
 		deviceFolderList.length === 0 ?
-			<p>No Data</p> :
-			<VirtualGridList
-				// cbScrollTo={(scrollTo) => getScrollTo(scrollTo)}
-				direction='vertical'
-				dataSize={deviceFolderList.length}
-				itemRenderer={renderItem}
-				itemSize={{
-					minWidth: ri.scale(500),
-					minHeight: ri.scale(500)
-				}}
-			/>
-	);
+		<h3>No Photo, Video or folders exist in storage device</h3 > :
+		<VirtualGridList
+			// cbScrollTo={(scrollTo) => getScrollTo(scrollTo)}
+			direction='vertical'
+			dataSize={deviceFolderList.length}
+			itemRenderer={renderItem}
+			itemSize={{
+				minWidth: ri.scale(500),
+				minHeight: ri.scale(500)
+			}}
+		/>
+);
 };
 
-const mapStateToProps = ({currentDeviceFileList, devices, panels, path}) => ({
+const mapStateToProps = ({currentDeviceFileList, devices, options, panels, path}) => ({
 	filteredList: currentDeviceFileList.filteredList,
 	currentDevice: devices.currentDevice,
 	path,
-	panels
+	panels,
+	sortType: options.sortType,
+	selectMode: options.selectMode
 });
 
 const FileGridList = connect(mapStateToProps,
-	{
-		getlistFolderContents: listFolderContents,
-		onNavigate: navigate,
-		pushPanel,
-		setFilter: setFilterType
-	}
+{
+	getlistFolderContents: listFolderContents,
+	onNavigate: navigate,
+	setFilter: setFilterType,
+	listDevicePhotoList,
+	pushPanel,
+	popPanel
+}
 )(GridList);
 
 export default FileGridList;

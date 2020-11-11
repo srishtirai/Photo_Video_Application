@@ -2,7 +2,8 @@ import {types} from '../actions/actionTypes';
 
 const initialstate = {
 	viewType: 'Thumbnail View',
-	sortType: 'Alphabetical'
+	sortType: 'Alphabetical',
+	selectMode: ''
 }
 
 export const settingsReducer = (state = initialstate, action) => {
@@ -11,6 +12,9 @@ export const settingsReducer = (state = initialstate, action) => {
 			return {
 				...state,
 				settings: {
+					isOpen: false
+				},
+				selectPlayPopup: { 
 					isOpen: false
 				},
 				[action.payload]: {
@@ -52,6 +56,14 @@ export const settingsReducer = (state = initialstate, action) => {
 			}
 			else {
 				return Object.assign({}, state, {sortType: action.sortType});
+			}
+		}
+		case types.SET_SELECT_MODE: {
+			if (state.selectMode === action.selectMode) {
+				return state;
+			}
+			else {
+				return Object.assign({}, state, {selectMode: action.selectMode});
 			}
 		}
 		default:

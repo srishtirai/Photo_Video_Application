@@ -51,7 +51,7 @@ const MenuOption = ({heading, list, handleNavigate, handleSelect, handleClick, t
 							}
 							{
 										list[item].type === 'button' &&
-										<li onClick={() => handleClick()}>
+										<li onClick={() => handleClick(list[item].name)}>
 										<div className={css.leftContainer}>
 											{list[item].name}
 										</div>

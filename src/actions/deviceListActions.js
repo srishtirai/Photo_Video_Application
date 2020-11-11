@@ -1,14 +1,15 @@
 import {types} from './actionTypes';
 import LS2Request from '@enact/webos/LS2Request';
 import AppLog from '../components/AppLog/AppLog';
+import {pushPanel} from './panelActions';
 import listDevicesData from '../../Assets/mock/listDevices.json';
 import listFolderContentsData from '../../Assets/mock/listFolderContents.json';
 import listProperties from '../../Assets/mock/listProperties.json';
 import photoListProperties from '../../Assets/mock/listPhotos.json';
+import backFolder from '../../Assets/Thumbnails/backfolder.png';
 
 // Action to get list of available storage devices list.
 
-// need to delete
 export const navigate = (path) => {
 	return {
 		type: 'NAVIGATE',
@@ -54,9 +55,8 @@ export const getListContents = (deviceId, deviceUri, res, totalCount) => {
 	};
 };
 
-export const listFolderContents = (deviceInfo, subFolderpath) => (dispatch, getState) => {
+export const listFolderContents = (deviceInfo, subFolderpath = '') => (dispatch, getState) => {
 	const getDeviceContentList = getState().currentDeviceFileList.deviceContentList;
-	const path = getState().path;
 	let deviceUri;
 
 	if (subFolderpath) {
@@ -99,7 +99,7 @@ export const listFolderContents = (deviceInfo, subFolderpath) => (dispatch, getS
 		};
 	}
 
-	if (Object.keys(getDeviceContentList).includes(deviceInfo.deviceId) && path === "home") {
+	if (Object.keys(getDeviceContentList).includes(deviceInfo.deviceId) && subFolderpath.length === 0) {
 		return {}
 	}
 
@@ -109,7 +109,13 @@ export const listFolderContents = (deviceInfo, subFolderpath) => (dispatch, getS
 		parameters: opt,
 		onSuccess: (res) => {
 			let returnObject = res.contents;
-			dispatch(getListContents(deviceInfo.deviceId, deviceUri, returnObject, res.totalCount));
+			if (subFolderpath.length === 0) {
+				dispatch(getListContents(deviceInfo.deviceId, deviceUri, returnObject, res.totalCount));
+			} else {
+				returnObject.unshift({size: 0, itemName: "", itemType: "goBack", itemPath: "", thumbnailUri: backFolder})
+				dispatch(pushPanel(returnObject))
+			}
+
 			return res;
 		},
 		onFailure: (res) => {
